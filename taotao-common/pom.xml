@@ -9,7 +9,7 @@
 	<groupId>com.taotao</groupId>
 	<artifactId>taotao-common</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-
+	<!-- 公共依赖管理 -->
 	<dependencies>
 		<!-- 时间操作组件 -->
 		<dependency>
