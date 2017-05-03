@@ -13,3 +13,5 @@ buildNumber.properties
 .DS_Store
 .idea
 .iml
+.bak
+mybatis-generator/*
