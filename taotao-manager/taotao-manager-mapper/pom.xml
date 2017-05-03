@@ -41,5 +41,5 @@
 			<artifactId>druid</artifactId>
 		</dependency>
 	</dependencies>
-	<build />
+	<build/>
 </project>

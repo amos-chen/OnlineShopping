@@ -1,0 +1,129 @@
+/*设置背景*/
+body{
+    background: #222;
+}
+/*取消导航栏的默认圆角*/
+.navbar-default{
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+}
+/*顶部导航栏底部margin:0*/
+.navbar-static-top{
+    margin-bottom: 0px;
+}
+/*取消li的圆点*/
+li{
+    list-style: none;
+}
+/*使li横向排列*/
+.taotao-top-nav>li{
+    float: left;
+}
+.taotao-top-nav>li>a{
+    color: #9d9d9d;
+    height: 50px;
+    /*li里的a元素居中*/
+    line-height: 20px;
+    padding: 15px 15px;
+}
+/*a的聚焦颜色*/
+.taotao-top-nav>li>a:hover{
+    color: white;
+}
+.taotao-top-nav>li>a:hover,
+.taotao-top-nav>li>a:visited{
+    background: #383838 !important;
+}
+
+@media (min-width: 768px) {
+    .dropdown-menu-caret:before{
+        position: absolute;
+        top: -7px;
+        right: 9px;
+        display: inline-block;
+        border-bottom: 7px solid #ccc;
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+        content: "";
+    }
+    .dropdown-menu-caret:after{
+        position: absolute;
+        top: -6px;
+        right: 10px;
+        display: inline-block;
+        border-bottom: 6px solid #fff;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        content: "";
+    }
+}
+
+@media (max-width: 768px) {
+    .dropdown-menu-caret:before{
+        position: absolute;
+        top: -7px;
+        left: 9px;
+        display: inline-block;
+        border-bottom: 7px solid #ccc;
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+        content: "";
+    }
+    .dropdown-menu-caret:after{
+        position: absolute;
+        top: -6px;
+        left: 10px;
+        display: inline-block;
+        border-bottom: 6px solid #fff;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        content: "";
+    }
+}
+
+@media(min-width: 768px){
+    .navbar-collapse{
+        width: 225px;
+        position: absolute;
+        margin-top: 51px;
+    }
+}
+.metisFolder a{
+    color: #9d9d9d;
+}
+.metisFolder a:hover{
+    color: #ffffff;
+}
+.metisFolder>li a:hover,
+.metisFolder>li a:visited{
+    background: #383838 !important;
+}
+.sidebar-search{
+    padding: 15px;
+}
+.active>a>.fa-folder:before{
+    content: "\f07c";
+}
+.arrow{
+    float: right;
+}
+.active>a>.arrow:before{
+    content:"\f107";
+}
+.arrow:before{
+    content:"\f104";
+}
+
+.page-wrapper{
+    padding: 0 15px;
+    background: white;
+    min-height: 752px;
+}
+@media(min-width: 768px) {
+    .page-wrapper{
+        margin:0 0 0 225px;
+        position: inherit;
+        padding: 0 30px;
+    }
+}
+
