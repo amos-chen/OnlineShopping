@@ -28,6 +28,7 @@
         <property name="dataSource" ref="dataSource"/>
         <!--配置mapper.xml地址-->
         <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">

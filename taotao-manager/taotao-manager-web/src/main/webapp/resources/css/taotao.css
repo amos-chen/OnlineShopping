@@ -2,6 +2,11 @@
 body{
     background: #222;
 }
+
+.navbar-right{
+    margin-right: 0px;
+}
+
 /*取消导航栏的默认圆角*/
 .navbar-default{
     -webkit-border-radius: 0px;
@@ -15,9 +20,15 @@ body{
 li{
     list-style: none;
 }
+
+.taotao-top-nav li:last-child{
+    margin-right: 15px;
+}
+
 /*使li横向排列*/
 .taotao-top-nav>li{
     float: left;
+    display: inline-block;
 }
 .taotao-top-nav>li>a{
     color: #9d9d9d;
@@ -88,6 +99,9 @@ li{
         margin-top: 51px;
     }
 }
+.navbar-collapse{
+    border: solid black 1px;
+}
 .metisFolder a{
     color: #9d9d9d;
 }
@@ -126,4 +140,40 @@ li{
         padding: 0 30px;
     }
 }
+.bread-navbar{
+    margin: 0 -15px;
+    min-height: 41px;
+    line-height: 40px;
+    background: #222;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border: solid black 1px;
+}
+.bread-navbar>li a{
+    color: #9d9d9d;
+}
+.bread-navbar>.active{
+    color: white;
+    text-decoration: none;
+}
+@media(min-width: 768px) {
+    .bread-navbar{
+        margin: 0 -30px;
+    }
+}
 
+.wrapper-content{
+    margin-top: 30px;
+}
+@media (max-width: 768px) {
+    .wrapper-table{
+        margin-top: 15px;
+    }
+}
+.panel{
+    margin-bottom : 0px;
+}
+
+.jstree-open>a>i.fa-folder:before{
+    content: '\f07c';
+}

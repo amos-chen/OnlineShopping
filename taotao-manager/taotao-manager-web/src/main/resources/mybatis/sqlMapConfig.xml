@@ -17,6 +17,13 @@
         <setting name="useGeneratedKeys" value="true"/>
     </settings>
 
+
+    <!--pageHelper分页插件配置-->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <property name="helperDialect" value="mysql"/>
+        </plugin>
+    </plugins>
     <!-- Continue going here -->
 
 </configuration>

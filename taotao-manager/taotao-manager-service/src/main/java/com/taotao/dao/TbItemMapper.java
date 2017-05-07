@@ -1,6 +1,9 @@
 package com.taotao.dao;
 
 import com.taotao.pojo.TbItem;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface TbItemMapper {
     int deleteByPrimaryKey(Long id);
@@ -14,4 +17,6 @@ public interface TbItemMapper {
     int updateByPrimaryKeySelective(TbItem record);
 
     int updateByPrimaryKey(TbItem record);
+
+    List<TbItem> queryList(@Param("search") String search);
 }

@@ -83,7 +83,7 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav metisFolder" id="menu">
                     <div class="input-group sidebar-search">
-                        <input type="text"class="form-control" placeholder="search.."/>
+                        <input type="text" class="form-control" placeholder="search.."/>
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default">
                                 <span class="fa fa-search"></span>
@@ -93,18 +93,21 @@
                     <li class="active">
                         <a href="#" aria-expanded="true">
                             <span class="fa fa-folder fa-fw"></span>商品管理
-                        <span class="fa arrow"></span></a>
+                            <span class="fa arrow"></span></a>
                         <ul class="nav">
                             <li><a href="/taotao/manager/itemAdd">&nbsp;&nbsp;&nbsp;&nbsp;<span class="fa fa-plus fa-fw"></span>添加商品</a></li>
-                            <li><a href="/taotao/manager/list">&nbsp;&nbsp;&nbsp;&nbsp;<span class="fa fa-search fa-fw"></span>查询商品</a></li>
-                            <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;<span class="fa fa-align-left fa-fw"></span>参数规格</a></li>
+                            <li><a href="/taotao/manager/list">&nbsp;&nbsp;&nbsp;&nbsp;<span class="fa fa-search fa-fw"></span>查询商品</a>
+                            </li>
+                            <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;<span class="fa fa-align-left fa-fw"></span>参数规格</a>
+                            </li>
                         </ul>
                     </li>
                     <li>
                         <a href="#" aria-expanded="false">
                             <span class="fa fa-folder fa-fw"></span>网站内容管理<span class="fa arrow"></span></a>
                         <ul class="nav">
-                            <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;<span class="fa fa-th-list fa-fw"></span>内容分类管理</a></li>
+                            <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;<span class="fa fa-th-list fa-fw"></span>内容分类管理</a>
+                            </li>
                             <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;<span class="fa fa-book fa-fw"></span>内容管理</a></li>
                         </ul>
                     </li>
@@ -115,9 +118,39 @@
     <div class="page-wrapper">
         <ol class="breadcrumb bread-navbar">
             <li>
-                <a href="#"><span class="fa fa-home fa-lg fa-fw"></span>首页</a>
+                <a href="/taotao/manager/index"><span class="fa fa-home fa-lg fa-fw"></span>首页</a>
             </li>
+            <li><a href="#">商品管理</a></li>
+            <li class="active">查询商品</li>
         </ol>
+        <div class="wrapper-content">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">商品列表</h3>
+                            </div>
+                            <div class="toolbar">
+                                <div class="btn-group">
+                                    <button id="btn-add" type="button" class="btn btn-default">
+                                        <span class="fa fa-plus fa-fw"></span>新增</button>
+                                    <button id="btn-edit" type="button" class="btn btn-default">
+                                        <span class="fa fa-edit fa-fw"></span>修改</button>
+                                    <button id="btn-remove" type="button" class="btn btn-default">
+                                        <span class="fa fa-trash fa-fw"></span>删除</button>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-content">
+                                    <table id="Items-table"></table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -126,6 +159,7 @@
     $("#menu").metisMenu({
 //        toggle: false
     });
+    table.showTabale();
 
 </script>
 </body>
