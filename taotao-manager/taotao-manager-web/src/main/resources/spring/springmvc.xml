@@ -8,11 +8,18 @@
 
 
     <mvc:annotation-driven/>
+    <!--加载静态资源-->
     <mvc:default-servlet-handler/>
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/JSP/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
-
+    <!--定义文件上传解析器,需要依赖common.io和common.fileupload包-->
+    <bean id="MultipartFileResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="utf-8"/>
+        <!--最大文件上传内存，5MB-->
+        <property name="maxUploadSize" value="5242880"/>
+    </bean>
+    
     <context:component-scan base-package="com.taotao.web"/>
 </beans>

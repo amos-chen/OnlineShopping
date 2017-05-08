@@ -194,7 +194,12 @@
                                             <input class="form-control" type="text" id="barcode"/>
                                         </div>
                                     </div>
-
+                                    <div class="form-group">
+                                        <label for="barcode" class="col-sm-2 control-label">上传图片:</label>
+                                        <div class="col-sm-4">
+                                            <input id="imageInputFile" type="file" multiple class="file-loading">
+                                        </div>
+                                    </div>
 
                                     <div class="form-group">
                                         <div class="col-sm-10 col-sm-offset-2">
@@ -218,6 +223,7 @@
 //        toggle: false
     });
     JSTree.initTree();
+    FileInput.initFileInput();
 
 </script>
 </body>

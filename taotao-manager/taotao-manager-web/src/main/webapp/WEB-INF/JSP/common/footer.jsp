@@ -15,8 +15,13 @@
 <%--JSTree.js--%>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 
+<%--FileInput.js--%>
+<script src="https://cdn.bootcss.com/bootstrap-fileinput/4.3.9/js/fileinput.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-fileinput/4.3.9/js/locales/zh.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-fileinput/4.3.9/js/locales/fa.min.js"></script>
 
 <!-- 自定义js文件 -->
 <script type="text/javascript" src="/resources/js/taotao.js"></script>
 <script type="text/javascript" src="/resources/js/table.js"></script>
 <script type="text/javascript" src="/resources/js/JSTree.js"></script>
+<script type="text/javascript" src="/resources/js/FileInput.js"></script>
