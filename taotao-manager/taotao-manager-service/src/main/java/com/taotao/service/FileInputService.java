@@ -9,4 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
 public interface FileInputService {
 
 	FileInput uploadFile(MultipartFile multipartFile);
+
+	boolean deleteFile(String filePath,String fileName);
 }

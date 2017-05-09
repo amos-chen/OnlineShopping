@@ -177,3 +177,8 @@ li{
 .jstree-open>a>i.fa-folder:before{
     content: '\f07c';
 }
+
+.file-preview-image{
+    height: 160px;
+    width: auto;
+}

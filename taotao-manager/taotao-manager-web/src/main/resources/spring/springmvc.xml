@@ -15,7 +15,8 @@
         <property name="suffix" value=".jsp"/>
     </bean>
     <!--定义文件上传解析器,需要依赖common.io和common.fileupload包-->
-    <bean id="MultipartFileResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    <!--id名字一定要是multipartResolver-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="defaultEncoding" value="utf-8"/>
         <!--最大文件上传内存，5MB-->
         <property name="maxUploadSize" value="5242880"/>

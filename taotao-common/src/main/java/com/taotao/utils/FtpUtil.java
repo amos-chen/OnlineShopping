@@ -134,6 +134,20 @@ public class FtpUtil {
 		}
 		return result;
 	}
+
+	public static boolean deleteFile(String host,int port,String userName,String password,
+							  String filePath,String fileName){
+		boolean flag = false;
+		try {
+			FTPClient ftpClient = new FTPClient();
+			ftpClient.connect(host,port);
+			ftpClient.login(userName,password);
+			flag = ftpClient.deleteFile(filePath+fileName);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return flag;
+	}
 	
 	public static void main(String[] args) {
 		try {  

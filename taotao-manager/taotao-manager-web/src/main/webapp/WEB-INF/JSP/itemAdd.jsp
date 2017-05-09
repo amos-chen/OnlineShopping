@@ -197,7 +197,7 @@
                                     <div class="form-group">
                                         <label for="barcode" class="col-sm-2 control-label">上传图片:</label>
                                         <div class="col-sm-4">
-                                            <input id="imageInputFile" type="file" multiple class="file-loading">
+                                            <input name="imageInputFile" id="imageInputFile" type="file" multiple class="file-loading">
                                         </div>
                                     </div>
 
