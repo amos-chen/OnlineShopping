@@ -42,7 +42,8 @@ li{
     color: white;
 }
 .taotao-top-nav>li>a:hover,
-.taotao-top-nav>li>a:visited{
+.taotao-top-nav>li>a:focus,
+.taotao-top-nav>li.open>a{
     background: #383838 !important;
 }
 
@@ -109,7 +110,9 @@ li{
     color: #ffffff;
 }
 .metisFolder>li a:hover,
-.metisFolder>li a:visited{
+.metisFolder>li a:visited,
+.metisFolder>li.active>a,
+.metisFolder>li a:focus{
     background: #383838 !important;
 }
 .sidebar-search{
@@ -181,4 +184,7 @@ li{
 .file-preview-image{
     height: 160px;
     width: auto;
+}
+.note-editable.panel-body li{
+    list-style: inherit;
 }

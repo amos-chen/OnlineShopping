@@ -20,8 +20,13 @@
 <script src="https://cdn.bootcss.com/bootstrap-fileinput/4.3.9/js/locales/zh.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap-fileinput/4.3.9/js/locales/fa.min.js"></script>
 
+<%--summernote.js--%>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.js"></script>
+<script src="https://cdn.bootcss.com/summernote/0.8.3/lang/summernote-zh-CN.min.js"></script>
+
 <!-- 自定义js文件 -->
 <script type="text/javascript" src="/resources/js/taotao.js"></script>
 <script type="text/javascript" src="/resources/js/table.js"></script>
 <script type="text/javascript" src="/resources/js/JSTree.js"></script>
 <script type="text/javascript" src="/resources/js/FileInput.js"></script>
+<script type="text/javascript" src="/resources/js/HTMLEditor.js"></script>

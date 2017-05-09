@@ -167,37 +167,45 @@
                                     <div class="form-group">
                                         <label for="title" class="col-sm-2 control-label">商品标题:</label>
                                         <div class="col-sm-6">
-                                            <input class="form-control" type="text" id="title"/>
+                                            <input name="title" class="form-control" type="text" id="title"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="sell_point" class="col-sm-2 control-label">商品卖点:</label>
                                         <div class="col-sm-6">
-                                            <textarea class="form-control" id="sell_point" rows="3"></textarea>
+                                            <textarea name="sell_point" class="form-control" id="sell_point" rows="3"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="price" class="col-sm-2 control-label">商品价格:</label>
                                         <div class="col-sm-4">
-                                            <input class="form-control" type="text" id="price"/>
+                                            <input name="price" class="form-control" type="text" id="price"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="num" class="col-sm-2 control-label">库存数量:</label>
                                         <div class="col-sm-4">
-                                            <input class="form-control" type="text" id="num"/>
+                                            <input name="num" class="form-control" type="text" id="num"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="barcode" class="col-sm-2 control-label">条形码:</label>
                                         <div class="col-sm-4">
-                                            <input class="form-control" type="text" id="barcode"/>
+                                            <input name="barcode" class="form-control" type="text" id="barcode"/>
                                         </div>
                                     </div>
+                                    <%--图片上传功能--%>
                                     <div class="form-group">
                                         <label for="barcode" class="col-sm-2 control-label">上传图片:</label>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-6">
                                             <input name="imageInputFile" id="imageInputFile" type="file" multiple class="file-loading">
+                                        </div>
+                                    </div>
+                                    <%--富文本编辑器--%>
+                                    <div class="form-group">
+                                        <label for="barcode" class="col-sm-2 control-label">详细描述:</label>
+                                        <div class="col-sm-6">
+                                            <div name="description" id="summernote"></div>
                                         </div>
                                     </div>
 
@@ -224,6 +232,7 @@
     });
     JSTree.initTree();
     FileInput.initFileInput();
+    HTMLEditor.initEditor();
 
 </script>
 </body>
