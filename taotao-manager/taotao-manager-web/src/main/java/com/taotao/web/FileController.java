@@ -1,5 +1,6 @@
 package com.taotao.web;
 
+import com.taotao.dto.ExecuteJsonResult;
 import com.taotao.dto.FileInput;
 import com.taotao.service.FileInputService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Map;
 
 /**
  * Created by chenlunwei on 2017/5/8.
@@ -29,5 +32,11 @@ public class FileController {
 	@ResponseBody
 	public boolean deleteFile(String key,String baseroot){
 		return fileInputService.deleteFile(baseroot,key);
+	}
+
+	@RequestMapping("/HTMLEditor/Add/Image")
+	@ResponseBody
+	public ExecuteJsonResult<Map<String,String>> uploadEditorFile(MultipartFile EditorImage){
+		return fileInputService.uploadFileByEditor(EditorImage);
 	}
 }

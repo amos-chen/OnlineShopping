@@ -205,7 +205,7 @@
                                     <div class="form-group">
                                         <label for="barcode" class="col-sm-2 control-label">详细描述:</label>
                                         <div class="col-sm-6">
-                                            <div name="description" id="summernote"></div>
+                                            <div name="description" class="summernote" id="summernote"></div>
                                         </div>
                                     </div>
 

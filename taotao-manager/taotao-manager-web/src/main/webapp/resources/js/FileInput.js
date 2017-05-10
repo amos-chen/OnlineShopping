@@ -9,7 +9,6 @@ var FileInput = {
     },
 
     initFileInput:function () {
-            console.log(FileInput.URL.picture());
         $("#imageInputFile").fileinput({
             //ajax上传的地址
             uploadUrl:FileInput.URL.picture(),
