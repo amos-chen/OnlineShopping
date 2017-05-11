@@ -133,14 +133,15 @@
                                 <h3 class="panel-title">添加商品</h3>
                             </div>
                             <div class="panel-body container-fluid">
-                                <form action="" method="post" class="form-horizontal" role="form">
+                                <form action="" method="post" class="form-horizontal" id="itemAddForm" role="form">
                                     <div class="form-group">
                                         <label for="cid" class="col-sm-2 control-label"></span>商品类目:</label>
                                         <div class="col-sm-10">
-                                            <a class="btn btn-default" id="cid" data-toggle="modal" href="#modal-id">选择类目</a>
-                                            <strong id="cid_choosed"></strong>
+                                            <a class="btn btn-default" id="cid" data-toggle="modal" href="#mymodal">选择类目</a>
+                                            <%--<span id="cid_choosed" name="itemCat"></span>--%>
+                                            <input type="text" id="cid_choosed" readonly="readonly" name="itemCat"/>
                                             <%--商品类目跳出框--%>
-                                            <div class="modal fade" id="modal-id">
+                                            <div class="modal fade" id="mymodal">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -153,10 +154,11 @@
                                                             <div id="jstree"></div>
                                                         </div>
                                                         <div class="modal-footer">
+                                                            <span id="jstreeMsg"></span>
                                                             <button type="button" class="btn btn-default"
                                                                     data-dismiss="modal">关闭
                                                             </button>
-                                                            <button data-dismiss="modal" id="jstreeChoosed" type="button" class="btn btn-primary">确定
+                                                            <button id="jstreeChoosed" type="button" class="btn btn-primary">确定
                                                             </button>
                                                         </div>
                                                     </div><!-- /.modal-content -->
@@ -233,7 +235,7 @@
     JSTree.initTree();
     FileInput.initFileInput();
     HTMLEditor.initEditor();
-
+    FormValidator.initValidator();
 </script>
 </body>
 </html>

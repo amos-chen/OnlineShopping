@@ -19,4 +19,5 @@ public interface TbItemCatMapper {
     int updateByPrimaryKey(TbItemCat record);
 
     List<TbItemCat> queryListByParentId(@Param("id") long id);
+
 }

@@ -18,6 +18,8 @@
 <%--summernote.css--%>
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.css" rel="stylesheet">
 
+<%--bootstrapValidator.css--%>
+<link href="https://cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet">
 <!-- 自定义的css -->
 <link rel="stylesheet" href="/resources/css/taotao.css">
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->

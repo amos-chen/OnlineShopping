@@ -35,22 +35,25 @@ public class ItemsServiceImpl implements ItemsService {
 	}
 
 	@Override
-	public List<JSTree> queryJSTrees(String id) {
-
+	public List<JSTree> queryJSTrees(String id) {	//根据id查询所有子类
+													//因为jstree初始化之后会发起一个get请求，id参数为‘#’
 		if (id == null || "".equals(id.trim()) || "#".equals(id)) {
-			id = "0";
+			id="0";
 		}
+		//把String参数转成int型
 		int parentId = Integer.parseInt(id);
+		//根据id查询此Id所对应的所有子类
 		List<TbItemCat> tbItemCats = tbItemCatMapper.queryListByParentId(parentId);
+		//把子类信息转成JStree所需要的POJO
 		List<JSTree> jsTrees = new ArrayList<>();
-		for (TbItemCat tbItemCat : tbItemCats) {
-			boolean state = tbItemCat.getIsParent();
+		for (TbItemCat ItemCat : tbItemCats) {
+			boolean state = ItemCat.getIsParent();
 			JSTree jsTree;
 			if (state) {
-				jsTree = new JSTree(tbItemCat.getId().toString(), tbItemCat.getName(),
+				jsTree = new JSTree(ItemCat.getId().toString(), ItemCat.getName(),
 						"fa fa-folder fw", state);
 			} else {
-				jsTree = new JSTree(tbItemCat.getId().toString(), tbItemCat.getName(),
+				jsTree = new JSTree(ItemCat.getId().toString(),ItemCat.getName(),
 						"fa fa-file fw", state);
 			}
 			jsTrees.add(jsTree);

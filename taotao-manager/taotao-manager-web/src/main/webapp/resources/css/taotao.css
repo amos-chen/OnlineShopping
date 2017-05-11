@@ -188,3 +188,8 @@ li{
 .note-editable.panel-body li{
     list-style: inherit;
 }
+
+
+#cid_choosed{
+    border: none;
+}

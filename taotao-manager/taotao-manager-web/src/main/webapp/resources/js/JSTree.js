@@ -7,6 +7,12 @@ var JSTree = {
 
     },
     initTree: function () {
+        //当关闭模态弹窗时隐藏警告信息
+        $('#mymodal').on('hidden.bs.modal', function (e) {
+            console.log('test');
+            $('#jstreeMsg').hide();
+        }),
+
         //这个是关键，如果不清空实例，jstree不会重新生成
         $('#jstree').data('jstree', false).empty();
         $("#jstree").jstree({
@@ -20,11 +26,25 @@ var JSTree = {
                     }
                 }
             }
-        });
+        })
+
         $("#jstreeChoosed").click(function () {
-            var value = $(".jstree-clicked").text();
-            $("#cid_choosed").html(value);
-            console.log(value);
+            //value为所选节点的ID
+            // var tree = $("#jstree").jstree(true);
+            // var value = tree.get_top_selected().join(':');
+            //获取选中的节点
+            var node = $("a.jstree-clicked").children("i").get(0);
+            //获取选中节点的class值
+            var choosedText = $(node).attr("class");
+            //判断class值中是否含有folder
+            if (choosedText.indexOf("folder")>0) {
+                $('#jstreeMsg').hide().html('<label class="label label-danger label-lg">请选择子节点！</label>').show(300);
+            } else {
+                var value = $(".jstree-clicked").text();
+                $("#cid_choosed").val(value);
+                $('#jstreeMsg').hide();
+                $('#mymodal').modal('hide');
+            }
         });
 
     }
