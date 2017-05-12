@@ -26,12 +26,11 @@ var JSTree = {
                     }
                 }
             }
-        })
-
+        });
         $("#jstreeChoosed").click(function () {
             //value为所选节点的ID
-            // var tree = $("#jstree").jstree(true);
-            // var value = tree.get_top_selected().join(':');
+            var tree = $("#jstree").jstree(true);
+            var id = tree.get_top_selected().join(':');
             //获取选中的节点
             var node = $("a.jstree-clicked").children("i").get(0);
             //获取选中节点的class值
@@ -41,12 +40,18 @@ var JSTree = {
                 $('#jstreeMsg').hide().html('<label class="label label-danger label-lg">请选择子节点！</label>').show(300);
             } else {
                 var value = $(".jstree-clicked").text();
-                $("#cid_choosed").val(value);
+                $("#cid_choosed").html(value);
+                $("#itemId").attr('value',id);
                 $('#jstreeMsg').hide();
                 $('#mymodal').modal('hide');
+
+                //当span的HTML发生改变时，重新验证span(validator里的内容)
+                $('#itemAddForm').bootstrapValidator('revalidateField', 'itemCat');
+
             }
         });
 
-    }
+    },
+    
 
 }

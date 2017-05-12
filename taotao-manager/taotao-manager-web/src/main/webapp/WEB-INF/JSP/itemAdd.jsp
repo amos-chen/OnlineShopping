@@ -135,11 +135,12 @@
                             <div class="panel-body container-fluid">
                                 <form action="" method="post" class="form-horizontal" id="itemAddForm" role="form">
                                     <div class="form-group">
-                                        <label for="cid" class="col-sm-2 control-label"></span>商品类目:</label>
+                                        <label for="cid" class="col-sm-2 control-label">商品类目<span class="text-danger">*</span>:</label>
                                         <div class="col-sm-10">
                                             <a class="btn btn-default" id="cid" data-toggle="modal" href="#mymodal">选择类目</a>
                                             <%--<span id="cid_choosed" name="itemCat"></span>--%>
-                                            <input type="text" id="cid_choosed" readonly="readonly" name="itemCat"/>
+                                            <span type="text" id="cid_choosed" value="" name="itemCat"></span>
+                                            <input type="hidden" id="cid"/>
                                             <%--商品类目跳出框--%>
                                             <div class="modal fade" id="mymodal">
                                                 <div class="modal-dialog">
@@ -167,31 +168,31 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="title" class="col-sm-2 control-label">商品标题:</label>
+                                        <label for="title" class="col-sm-2 control-label">商品标题<span class="text-danger">*</span>:</label>
                                         <div class="col-sm-6">
                                             <input name="title" class="form-control" type="text" id="title"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="sell_point" class="col-sm-2 control-label">商品卖点:</label>
+                                        <label for="sellPoint" class="col-sm-2 control-label">商品卖点<span class="text-danger">*</span>:</label>
                                         <div class="col-sm-6">
-                                            <textarea name="sell_point" class="form-control" id="sell_point" rows="3"></textarea>
+                                            <textarea name="sellPoint" class="form-control" id="sell_point" rows="3"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="price" class="col-sm-2 control-label">商品价格:</label>
+                                        <label for="price" class="col-sm-2 control-label">商品价格<span class="text-danger">*</span>:</label>
                                         <div class="col-sm-4">
                                             <input name="price" class="form-control" type="text" id="price"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="num" class="col-sm-2 control-label">库存数量:</label>
+                                        <label for="num" class="col-sm-2 control-label">库存数量<span class="text-danger">*</span>:</label>
                                         <div class="col-sm-4">
                                             <input name="num" class="form-control" type="text" id="num"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="barcode" class="col-sm-2 control-label">条形码:</label>
+                                        <label for="barcode" class="col-sm-2 control-label">条形码<span class="text-danger">*</span>:</label>
                                         <div class="col-sm-4">
                                             <input name="barcode" class="form-control" type="text" id="barcode"/>
                                         </div>
@@ -201,6 +202,7 @@
                                         <label for="barcode" class="col-sm-2 control-label">上传图片:</label>
                                         <div class="col-sm-6">
                                             <input name="imageInputFile" id="imageInputFile" type="file" multiple class="file-loading">
+                                            <input type="hidden" id="image" name="image"/>
                                         </div>
                                     </div>
                                     <%--富文本编辑器--%>
@@ -210,7 +212,11 @@
                                             <div name="description" class="summernote" id="summernote"></div>
                                         </div>
                                     </div>
-
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2">
+                                    <p class="help-block"><span class="text-danger">*</span>为必填项</p>
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <div class="col-sm-10 col-sm-offset-2">
                                             <button type="submit" class="btn btn-primary">保存</button>

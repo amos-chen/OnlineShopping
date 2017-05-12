@@ -5,22 +5,20 @@ var HTMLEditor = {
             return "/taotao/manager/HTMLEditor/Add/Image";
         }
     },
-
+    //TODO 删除服务器图片的方法
     initEditor: function () {
         //页面完成后加载
         $(function () {
             //默认accpt为'image/*',所以验证会很慢
             $('.note-image-input').attr("accept", "image/jpg," +
                 "image/jpeg,image/png,image/gif");
-            // var name = $(".note-image-input").attr('name');
-            // console.log(name);
         })
 
         $('#summernote').summernote({
             lang: 'zh-CN',
             minHeight: 200,
             placeholder: '请填写商品类目的详细信息...',
-            // //对话框功能
+            //对话框功能
             dialogsFade: true,
             dialogsInBody: true,
             disableDragAndDrop: false,
@@ -31,6 +29,7 @@ var HTMLEditor = {
                 onImageUpload: function (files) {
                     //遍历选取的每一张图片
                     for (var i = 0; i < files.length; i++) {
+                        console.log('test');
                         //FormData，新的form表单封装
                         var data = new FormData();
                         //把图片加入FormData中，后台接收到的文件名为imageFile
@@ -60,12 +59,12 @@ var HTMLEditor = {
                             }
 
                         })
-
                     }
                 },
             }
 
-        });
+        })
+        ;
     },
 
 

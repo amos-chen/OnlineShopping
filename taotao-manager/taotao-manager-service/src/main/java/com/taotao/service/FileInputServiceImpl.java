@@ -56,12 +56,13 @@ public class FileInputServiceImpl implements FileInputService {
             if (result) {
                 String deleteURL = DELETE_URL;
                 String Captain = newName;
-                String initialPreview = "<img src='http://" + IMAGE_URL + imagePath + newName + "' class='file-preview-image' alt='" + newName + "' title='" + newName + "'>";
+                String initialPreview = "<img src='" + IMAGE_URL + imagePath + newName + "' class='file-preview-image' alt='" + newName + "' title='" + newName + "'>";
                 FileConfiguration fileConfiguration = new FileConfiguration();
                 fileConfiguration.setCaption(newName);
                 fileConfiguration.setUrl(deleteURL);
                 Map<String, String> extra = new HashMap<>();
                 extra.put("baseroot", FTP_BASEPATH + imagePath);
+                extra.put("imageURL", IMAGE_URL + imagePath + newName);
                 fileConfiguration.setExtra(extra);
                 fileConfiguration.setKey(newName);
                 fileConfiguration.setWidth("160px");

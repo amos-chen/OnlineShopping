@@ -21,7 +21,7 @@
 <script src="https://cdn.bootcss.com/bootstrap-fileinput/4.3.9/js/locales/fa.min.js"></script>
 
 <%--summernote.js--%>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.min.js"></script>
 <script src="https://cdn.bootcss.com/summernote/0.8.3/lang/summernote-zh-CN.min.js"></script>
 
 <%--bootstrapValidator.js--%>

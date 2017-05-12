@@ -2,9 +2,22 @@ var FormValidator = {
 
 
     initValidator: function () {
+        $.fn.bootstrapValidator.validators.spanHTML = {
+            validate: function (validator, $field, options) {
+                var value = $field.html();
+                if (value == "") {
+                    return {
+                        valid: false,
+                        message: '商品类目不能为空'
+                    };
+                }
+                return true;
+            }
+        };
+
+
         $('#itemAddForm').bootstrapValidator({
-            excluded:[],
-            container: 'tooltip',
+            // container: 'tooltip',
             message: 'This value is not valid',
             feedbackIcons: {
                 valid: 'glyphicon glyphicon-ok',
@@ -12,11 +25,10 @@ var FormValidator = {
                 validating: 'glyphicon glyphicon-refresh'
             },
             fields: {
-                itemCat:{
-                    message: '商品类目验证失败',
+                itemCat: {
                     validators: {
-                        notEmpty: {
-                            message: '商品类目不能为空'
+                        spanHTML: {
+                            message: '商品类目验证失败'
                         }
                     }
                 },
@@ -28,7 +40,7 @@ var FormValidator = {
                         }
                     }
                 },
-                sell_point: {
+                sellPoint: {
                     message: '商品卖点验证失败',
                     validators: {
                         notEmpty: {
@@ -86,8 +98,9 @@ var FormValidator = {
                 }
 
             }
-        })
-    }
+        });
+
+    },
 
 
 }
