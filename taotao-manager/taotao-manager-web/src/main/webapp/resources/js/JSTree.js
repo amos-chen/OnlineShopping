@@ -41,7 +41,7 @@ var JSTree = {
             } else {
                 var value = $(".jstree-clicked").text();
                 $("#cid_choosed").html(value);
-                $("#itemId").attr('value',id);
+                $('#cid').val(id);
                 $('#jstreeMsg').hide();
                 $('#mymodal').modal('hide');
 

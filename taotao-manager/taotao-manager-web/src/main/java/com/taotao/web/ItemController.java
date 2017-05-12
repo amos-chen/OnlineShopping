@@ -3,7 +3,10 @@ package com.taotao.web;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.taotao.dto.ExecuteItemsJsonResult;
+import com.taotao.dto.ExecuteJsonResult;
 import com.taotao.dto.JSTree;
+import com.taotao.exception.DataInsertFailException;
+import com.taotao.exception.TaotaoException;
 import com.taotao.pojo.TbItem;
 import com.taotao.service.ItemsService;
 import org.slf4j.Logger;
@@ -37,7 +40,7 @@ public class ItemController {
 		return tbItem;
 	}
 
-	@RequestMapping("/item/list")
+	@RequestMapping(value = "/item/list",method = RequestMethod.GET)
 	@ResponseBody
 	public ExecuteItemsJsonResult<List<TbItem>> queryList(int offset, int limit, String search, String sort,
 														  String order){
@@ -56,10 +59,30 @@ public class ItemController {
 		return result;
 	}
 
-	@RequestMapping("/itemCat")
+	@RequestMapping(value = "/itemCat",method = RequestMethod.GET)
 	@ResponseBody
 	public List<JSTree> queryJSTrees(String id){
 		return itemsService.queryJSTrees(id);
 	}
 
+
+	@RequestMapping(value = "/add/item",method = RequestMethod.POST)
+	@ResponseBody
+	public ExecuteJsonResult<Integer> addItem(TbItem tbItem,String description){
+		ExecuteJsonResult<Integer> result;
+		try {
+			int data = itemsService.insertItem(tbItem,description);
+			result = new ExecuteJsonResult<Integer>(true,data);
+			return result;
+		}catch (DataInsertFailException e){
+			result = new ExecuteJsonResult<Integer>(false,"商品信息插入失败！");
+			return result;
+		}catch (TaotaoException e){
+			result = new ExecuteJsonResult<Integer>(false,"商品信息插入失败！");
+			return result;
+		}catch (Exception e){
+			result = new ExecuteJsonResult<Integer>(false,"系统内部异常！");
+			return result;
+		}
+	}
 }

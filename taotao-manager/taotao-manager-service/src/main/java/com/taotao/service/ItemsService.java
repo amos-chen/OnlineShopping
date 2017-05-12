@@ -1,5 +1,6 @@
 package com.taotao.service;
 
+import com.taotao.dto.ExecuteJsonResult;
 import com.taotao.dto.JSTree;
 import com.taotao.pojo.TbItem;
 
@@ -15,4 +16,6 @@ public interface ItemsService {
 	List<TbItem> queryList(String search);
 
 	List<JSTree> queryJSTrees(String id);
+
+	int insertItem(TbItem tbItem,String description);
 }

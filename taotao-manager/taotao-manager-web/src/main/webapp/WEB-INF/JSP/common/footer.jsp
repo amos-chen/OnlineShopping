@@ -9,7 +9,6 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
 <script src="//cdn.bootcss.com/bootstrap-table/1.11.1/extensions/export/bootstrap-table-export.min.js"></script>
-<%--<script src="/resources/js/tableExport.min.js"></script>--%>
 <script src="//rawgit.com/hhurz/tableExport.jquery.plugin/master/tableExport.js"></script>
 
 <%--JSTree.js--%>
@@ -29,9 +28,9 @@
 <script src="https://cdn.bootcss.com/bootstrap-validator/0.5.3/js/language/zh_CN.min.js"></script>
 
 <!-- 自定义js文件 -->
-<script type="text/javascript" src="/resources/js/taotao.js"></script>
 <script type="text/javascript" src="/resources/js/table.js"></script>
 <script type="text/javascript" src="/resources/js/JSTree.js"></script>
 <script type="text/javascript" src="/resources/js/FileInput.js"></script>
 <script type="text/javascript" src="/resources/js/HTMLEditor.js"></script>
 <script type="text/javascript" src="/resources/js/FormValidator.js"></script>
+<script type="text/javascript" src="/resources/js/itemAddSubmit.js"></script>

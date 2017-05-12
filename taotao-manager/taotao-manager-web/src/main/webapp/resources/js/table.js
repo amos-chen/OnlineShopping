@@ -40,7 +40,7 @@ var table = {
                 title:'商品标题'
             },{
                 field:'cid',
-                title:'叶子类目'
+                title:'商品类目'
             },{
                 field:'sell_point',
                 title:'卖点'
@@ -186,7 +186,7 @@ var table = {
             //69.是否显示数据导出图标
             showExport:true,
             //70.basic', 'all', 'selected'.
-            exportDataType:'basic'
+            exportDataType:'all'
 
         });
 

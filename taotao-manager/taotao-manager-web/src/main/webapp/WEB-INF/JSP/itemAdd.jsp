@@ -133,14 +133,15 @@
                                 <h3 class="panel-title">添加商品</h3>
                             </div>
                             <div class="panel-body container-fluid">
-                                <form action="" method="post" class="form-horizontal" id="itemAddForm" role="form">
+                                <form class="form-horizontal" id="itemAddForm" role="form">
                                     <div class="form-group">
-                                        <label for="cid" class="col-sm-2 control-label">商品类目<span class="text-danger">*</span>:</label>
+                                        <label for="cid" class="col-sm-2 control-label">商品类目<span
+                                                class="text-danger">*</span>:</label>
                                         <div class="col-sm-10">
-                                            <a class="btn btn-default" id="cid" data-toggle="modal" href="#mymodal">选择类目</a>
+                                            <a class="btn btn-default" data-toggle="modal" href="#mymodal">选择类目</a>
                                             <%--<span id="cid_choosed" name="itemCat"></span>--%>
-                                            <span type="text" id="cid_choosed" value="" name="itemCat"></span>
-                                            <input type="hidden" id="cid"/>
+                                            <span type="text" id="cid_choosed" name="itemCat"></span>
+                                            <input type="hidden" id="cid" name="cid"/>
                                             <%--商品类目跳出框--%>
                                             <div class="modal fade" id="mymodal">
                                                 <div class="modal-dialog">
@@ -159,7 +160,8 @@
                                                             <button type="button" class="btn btn-default"
                                                                     data-dismiss="modal">关闭
                                                             </button>
-                                                            <button id="jstreeChoosed" type="button" class="btn btn-primary">确定
+                                                            <button id="jstreeChoosed" type="button"
+                                                                    class="btn btn-primary">确定
                                                             </button>
                                                         </div>
                                                     </div><!-- /.modal-content -->
@@ -174,9 +176,11 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="sellPoint" class="col-sm-2 control-label">商品卖点<span class="text-danger">*</span>:</label>
+                                        <label for="sell_point" class="col-sm-2 control-label">商品卖点<span
+                                                class="text-danger">*</span>:</label>
                                         <div class="col-sm-6">
-                                            <textarea name="sellPoint" class="form-control" id="sell_point" rows="3"></textarea>
+                                            <textarea name="sellPoint" class="form-control" id="sell_point"
+                                                      rows="3"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -186,13 +190,15 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="num" class="col-sm-2 control-label">库存数量<span class="text-danger">*</span>:</label>
+                                        <label for="num" class="col-sm-2 control-label">库存数量<span
+                                                class="text-danger">*</span>:</label>
                                         <div class="col-sm-4">
                                             <input name="num" class="form-control" type="text" id="num"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="barcode" class="col-sm-2 control-label">条形码<span class="text-danger">*</span>:</label>
+                                        <label for="barcode" class="col-sm-2 control-label">条形码<span
+                                                class="text-danger">*</span>:</label>
                                         <div class="col-sm-4">
                                             <input name="barcode" class="form-control" type="text" id="barcode"/>
                                         </div>
@@ -201,7 +207,8 @@
                                     <div class="form-group">
                                         <label for="barcode" class="col-sm-2 control-label">上传图片:</label>
                                         <div class="col-sm-6">
-                                            <input name="imageInputFile" id="imageInputFile" type="file" multiple class="file-loading">
+                                            <input name="imageInputFile" id="imageInputFile" type="file" multiple
+                                                   class="file-loading">
                                             <input type="hidden" id="image" name="image"/>
                                         </div>
                                     </div>
@@ -209,17 +216,37 @@
                                     <div class="form-group">
                                         <label for="barcode" class="col-sm-2 control-label">详细描述:</label>
                                         <div class="col-sm-6">
-                                            <div name="description" class="summernote" id="summernote"></div>
+                                            <div class="summernote" id="summernote"></div>
+                                            <input hidden="hidden" name="description" id="descriptionValue"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="col-sm-offset-2">
-                                    <p class="help-block"><span class="text-danger">*</span>为必填项</p>
+                                        <div class="col-sm-6 col-sm-offset-2">
+                                            <p class="help-block"><span class="text-danger">*</span>为必填项</p>
                                         </div>
                                     </div>
+
+                                    <%--成功提交后的弹出框--%>
+                                    <div class="modal fade" id="submitModal">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">提示</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h3 id="submitMsg"></h3>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button id="confirm" type="button" class="btn btn-primary">确定
+                                                    </button>
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div><!-- /.modal -->
+
                                     <div class="form-group">
                                         <div class="col-sm-10 col-sm-offset-2">
-                                            <button type="submit" class="btn btn-primary">保存</button>
+                                            <button id="submit" type="button" class="btn btn-primary">保存</button>
                                         </div>
                                     </div>
                                 </form>
@@ -242,6 +269,8 @@
     FileInput.initFileInput();
     HTMLEditor.initEditor();
     FormValidator.initValidator();
+    itemAddSubmit.submit();
+
 </script>
 </body>
 </html>
