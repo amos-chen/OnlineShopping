@@ -8,6 +8,7 @@ import com.taotao.dto.JSTree;
 import com.taotao.exception.DataInsertFailException;
 import com.taotao.exception.TaotaoException;
 import com.taotao.pojo.TbItem;
+import com.taotao.pojo.TbItemCat;
 import com.taotao.service.ItemsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,57 +33,89 @@ public class ItemController {
 	@Autowired
 	private ItemsService itemsService;
 
-	@RequestMapping(value = "/{itemId}/item",method = RequestMethod.GET,
-						produces = {"application/json;charset=utf-8"})
+	@RequestMapping(value = "/{itemId}/item", method = RequestMethod.GET,
+			produces = {"application/json;charset=utf-8"})
 	@ResponseBody
-	public TbItem queryItemById(@PathVariable("itemId")long itemId){
+	public TbItem queryItemById(@PathVariable("itemId") long itemId) {
 		TbItem tbItem = itemsService.queryById(itemId);
 		return tbItem;
 	}
 
-	@RequestMapping(value = "/item/list",method = RequestMethod.GET)
+	@RequestMapping(value = "/item/list", method = RequestMethod.GET)
 	@ResponseBody
-	public ExecuteItemsJsonResult<List<TbItem>> queryList(int offset, int limit, String search, String sort,
-														  String order){
+	public ExecuteItemsJsonResult<List<TbItem>> queryList(Integer offset, Integer limit, String search, String sort,
+														  String order) {
 		ExecuteItemsJsonResult<List<TbItem>> result;
-//		System.out.println(search);
-		try{
-			PageHelper.offsetPage(offset,limit);
+		try {
+			PageHelper.offsetPage(offset, limit);
 			List<TbItem> tbItemList = itemsService.queryList(search);
 			PageInfo<TbItem> tbItemPageInfo = new PageInfo<>(tbItemList);
 			long total = tbItemPageInfo.getTotal();
-			result = new ExecuteItemsJsonResult<List<TbItem>>(true,total,tbItemList);
-		} catch (Exception e){
-			logger.error(e.getMessage(),e);
+			result = new ExecuteItemsJsonResult<List<TbItem>>(true, total, tbItemList);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
 			result = new ExecuteItemsJsonResult<List<TbItem>>(false, e.getMessage());
 		}
 		return result;
 	}
 
-	@RequestMapping(value = "/itemCat",method = RequestMethod.GET)
+	@RequestMapping(value = "/itemCat", method = RequestMethod.GET)
 	@ResponseBody
-	public List<JSTree> queryJSTrees(String id){
+	public List<JSTree> queryJSTrees(String id) {
 		return itemsService.queryJSTrees(id);
 	}
 
 
-	@RequestMapping(value = "/add/item",method = RequestMethod.POST)
+	@RequestMapping(value = "/add/item", method = RequestMethod.POST)
 	@ResponseBody
-	public ExecuteJsonResult<Integer> addItem(TbItem tbItem,String description){
+	public ExecuteJsonResult<Integer> addItem(TbItem tbItem, String description) {
 		ExecuteJsonResult<Integer> result;
 		try {
-			int data = itemsService.insertItem(tbItem,description);
-			result = new ExecuteJsonResult<Integer>(true,data);
+			int data = itemsService.insertItem(tbItem, description);
+			result = new ExecuteJsonResult<Integer>(true, data);
 			return result;
-		}catch (DataInsertFailException e){
-			result = new ExecuteJsonResult<Integer>(false,"商品信息插入失败！");
+		} catch (DataInsertFailException e) {
+			result = new ExecuteJsonResult<Integer>(false, "商品信息插入失败！");
 			return result;
-		}catch (TaotaoException e){
-			result = new ExecuteJsonResult<Integer>(false,"商品信息插入失败！");
+		} catch (TaotaoException e) {
+			result = new ExecuteJsonResult<Integer>(false, "商品信息插入失败！");
 			return result;
-		}catch (Exception e){
-			result = new ExecuteJsonResult<Integer>(false,"系统内部异常！");
+		} catch (Exception e) {
+			result = new ExecuteJsonResult<Integer>(false, "系统内部异常！");
 			return result;
 		}
 	}
+
+	@RequestMapping(value = "/delete/item",method = RequestMethod.POST)
+	@ResponseBody
+	public ExecuteJsonResult<List<Integer>> deleteItem(String[] itemIdList){
+		ExecuteJsonResult<List<Integer>> result;
+		try {
+			List<Integer> data = itemsService.deleteItem(itemIdList);
+			result = new ExecuteJsonResult<List<Integer>>(true,data);
+			return result;
+		}catch (DataInsertFailException e){
+			result = new ExecuteJsonResult<List<Integer>>(false,e.getMessage());
+			return result;
+		}catch (TaotaoException e){
+			result = new ExecuteJsonResult<List<Integer>>(false,e.getMessage());
+			return result;
+		}
+	}
+
+
+	@RequestMapping(value = "/{cid}/itemCat",method = RequestMethod.GET)
+	@ResponseBody
+	public ExecuteJsonResult<TbItemCat> queryItemCat(@PathVariable("cid") long cid){
+		ExecuteJsonResult<TbItemCat> result;
+		try{
+			TbItemCat tbItemCat = itemsService.queryItemCat(cid);
+			result = new ExecuteJsonResult<TbItemCat>(true,tbItemCat);
+			return result;
+		}catch (Exception e){
+			result = new ExecuteJsonResult<TbItemCat>(false,"系统内部错误:"+e.getMessage());
+			return result;
+		}
+	}
+
 }

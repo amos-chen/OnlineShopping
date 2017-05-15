@@ -99,7 +99,8 @@
                                     class="fa fa-plus fa-fw"></span>添加商品</a></li>
                             <li><a href="/taotao/manager/list">&nbsp;&nbsp;&nbsp;&nbsp;<span
                                     class="fa fa-search fa-fw"></span>查询商品</a></li>
-                            <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;<span class="fa fa-align-left fa-fw"></span>参数规格</a>
+                            <li><a href="/taotao/manager/itemParam">&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                    class="fa fa-align-left fa-fw"></span>参数规格</a>
                             </li>
                         </ul>
                     </li>
@@ -127,130 +128,135 @@
         <div class="wrapper-content">
             <div class="row">
                 <div class="col-lg-12">
+                    <%--主体panel--%>
                     <div class="panel panel-default">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">添加商品</h3>
-                            </div>
-                            <div class="panel-body container-fluid">
-                                <form class="form-horizontal" id="itemAddForm" role="form">
-                                    <div class="form-group">
-                                        <label for="cid" class="col-sm-2 control-label">商品类目<span
-                                                class="text-danger">*</span>:</label>
-                                        <div class="col-sm-10">
-                                            <a class="btn btn-default" data-toggle="modal" href="#mymodal">选择类目</a>
-                                            <%--<span id="cid_choosed" name="itemCat"></span>--%>
-                                            <span type="text" id="cid_choosed" name="itemCat"></span>
-                                            <input type="hidden" id="cid" name="cid"/>
-                                            <%--商品类目跳出框--%>
-                                            <div class="modal fade" id="mymodal">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <button type="button" class="close" data-dismiss="modal"
-                                                                    aria-hidden="true">&times;
-                                                            </button>
-                                                            <h4 class="modal-title">选择类目</h4>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div id="jstree"></div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <span id="jstreeMsg"></span>
-                                                            <button type="button" class="btn btn-default"
-                                                                    data-dismiss="modal">关闭
-                                                            </button>
-                                                            <button id="jstreeChoosed" type="button"
-                                                                    class="btn btn-primary">确定
-                                                            </button>
-                                                        </div>
-                                                    </div><!-- /.modal-content -->
-                                                </div><!-- /.modal-dialog -->
-                                            </div><!-- /.modal -->
-                                        </div>
+                        <%--panel头部--%>
+                        <div class="panel-heading">
+                            <h3 class="panel-title">添加商品</h3>
+                        </div>
+                        <%--panel的主体    --%>
+                        <div class="panel-body container-fluid">
+                            <%--表单--%>
+                            <form class="form-horizontal" id="itemAddForm" role="form">
+                                <%--商品类目选择--%>
+                                <div class="form-group">
+                                    <label for="cid" class="col-sm-2 control-label">商品类目<span
+                                            class="text-danger">*</span>:</label>
+                                    <div class="col-sm-10">
+                                        <a class="btn btn-default" data-toggle="modal" href="#mymodal">选择类目</a>
+                                        <span type="text" id="cid_choosed" name="itemCat"></span>
+                                        <input type="hidden" id="cid" name="cid"/>
+
+                                        <%--商品类目跳出框--%>
+                                        <div class="modal fade" id="mymodal">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                                aria-hidden="true">&times;
+                                                        </button>
+                                                        <h4 class="modal-title">请选择类目</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div id="jstree"></div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <span id="jstreeMsg"></span>
+                                                        <button type="button" class="btn btn-default"
+                                                                data-dismiss="modal">关闭
+                                                        </button>
+                                                        <button id="jstreeChoosed" type="button"
+                                                                class="btn btn-primary">确定
+                                                        </button>
+                                                    </div>
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                        </div><!-- /.modal -->
                                     </div>
-                                    <div class="form-group">
-                                        <label for="title" class="col-sm-2 control-label">商品标题<span class="text-danger">*</span>:</label>
-                                        <div class="col-sm-6">
-                                            <input name="title" class="form-control" type="text" id="title"/>
-                                        </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="title" class="col-sm-2 control-label">商品标题<span
+                                            class="text-danger">*</span>:</label>
+                                    <div class="col-sm-6">
+                                        <input name="title" class="form-control" type="text" id="title"/>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="sell_point" class="col-sm-2 control-label">商品卖点<span
-                                                class="text-danger">*</span>:</label>
-                                        <div class="col-sm-6">
+                                </div>
+                                <div class="form-group">
+                                    <label for="sell_point" class="col-sm-2 control-label">商品卖点<span
+                                            class="text-danger">*</span>:</label>
+                                    <div class="col-sm-6">
                                             <textarea name="sellPoint" class="form-control" id="sell_point"
                                                       rows="3"></textarea>
-                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="price" class="col-sm-2 control-label">商品价格<span class="text-danger">*</span>:</label>
-                                        <div class="col-sm-4">
-                                            <input name="price" class="form-control" type="text" id="price"/>
-                                        </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="price" class="col-sm-2 control-label">商品价格<span
+                                            class="text-danger">*</span>:</label>
+                                    <div class="col-sm-4">
+                                        <input name="price" class="form-control" type="text" id="price"/>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="num" class="col-sm-2 control-label">库存数量<span
-                                                class="text-danger">*</span>:</label>
-                                        <div class="col-sm-4">
-                                            <input name="num" class="form-control" type="text" id="num"/>
-                                        </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="num" class="col-sm-2 control-label">库存数量<span
+                                            class="text-danger">*</span>:</label>
+                                    <div class="col-sm-4">
+                                        <input name="num" class="form-control" type="text" id="num"/>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="barcode" class="col-sm-2 control-label">条形码<span
-                                                class="text-danger">*</span>:</label>
-                                        <div class="col-sm-4">
-                                            <input name="barcode" class="form-control" type="text" id="barcode"/>
-                                        </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="barcode" class="col-sm-2 control-label">条形码<span
+                                            class="text-danger">*</span>:</label>
+                                    <div class="col-sm-4">
+                                        <input name="barcode" class="form-control" type="text" id="barcode"/>
                                     </div>
-                                    <%--图片上传功能--%>
-                                    <div class="form-group">
-                                        <label for="barcode" class="col-sm-2 control-label">上传图片:</label>
-                                        <div class="col-sm-6">
-                                            <input name="imageInputFile" id="imageInputFile" type="file" multiple
-                                                   class="file-loading">
-                                            <input type="hidden" id="image" name="image"/>
-                                        </div>
+                                </div>
+                                <%--图片上传功能--%>
+                                <div class="form-group">
+                                    <label for="barcode" class="col-sm-2 control-label">上传图片:</label>
+                                    <div class="col-sm-6">
+                                        <input name="imageInputFile" id="imageInputFile" type="file" multiple
+                                               class="file-loading">
+                                        <input type="hidden" id="image" name="image"/>
                                     </div>
-                                    <%--富文本编辑器--%>
-                                    <div class="form-group">
-                                        <label for="barcode" class="col-sm-2 control-label">详细描述:</label>
-                                        <div class="col-sm-6">
-                                            <div class="summernote" id="summernote"></div>
-                                            <input hidden="hidden" name="description" id="descriptionValue"/>
-                                        </div>
+                                </div>
+                                <%--富文本编辑器--%>
+                                <div class="form-group">
+                                    <label for="barcode" class="col-sm-2 control-label">详细描述:</label>
+                                    <div class="col-sm-6">
+                                        <div class="summernote" id="summernote"></div>
+                                        <input hidden="hidden" name="description" id="descriptionValue"/>
                                     </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-6 col-sm-offset-2">
-                                            <p class="help-block"><span class="text-danger">*</span>为必填项</p>
-                                        </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-6 col-sm-offset-2">
+                                        <p class="help-block"><span class="text-danger">*</span>为必填项</p>
                                     </div>
+                                </div>
 
-                                    <%--成功提交后的弹出框--%>
-                                    <div class="modal fade" id="submitModal">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h4 class="modal-title">提示</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <h3 id="submitMsg"></h3>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button id="confirm" type="button" class="btn btn-primary">确定
-                                                    </button>
-                                                </div>
-                                            </div><!-- /.modal-content -->
-                                        </div><!-- /.modal-dialog -->
-                                    </div><!-- /.modal -->
+                                <%--成功提交后的弹出框--%>
+                                <div class="modal fade" id="submitModal">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">提示</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h3 id="submitMsg"></h3>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button id="confirm" type="button" class="btn btn-primary">确定
+                                                </button>
+                                            </div>
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal-dialog -->
+                                </div><!-- /.modal -->
 
-                                    <div class="form-group">
-                                        <div class="col-sm-10 col-sm-offset-2">
-                                            <button id="submit" type="button" class="btn btn-primary">保存</button>
-                                        </div>
+                                <div class="form-group">
+                                    <div class="col-sm-10 col-sm-offset-2">
+                                        <button id="submit" type="button" class="btn btn-primary">保存</button>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

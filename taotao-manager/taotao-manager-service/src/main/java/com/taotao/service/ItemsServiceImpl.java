@@ -3,8 +3,8 @@ package com.taotao.service;
 import com.taotao.dao.TbItemCatMapper;
 import com.taotao.dao.TbItemDescMapper;
 import com.taotao.dao.TbItemMapper;
-import com.taotao.dto.ExecuteJsonResult;
 import com.taotao.dto.JSTree;
+import com.taotao.exception.DataDeleteFailException;
 import com.taotao.exception.DataInsertFailException;
 import com.taotao.exception.TaotaoException;
 import com.taotao.pojo.TbItem;
@@ -50,10 +50,10 @@ public class ItemsServiceImpl implements ItemsService {
 	}
 
 	@Override
-	public List<JSTree> queryJSTrees(String id) {	//根据id查询所有子类
-													//因为jstree初始化之后会发起一个get请求，id参数为‘#’
+	public List<JSTree> queryJSTrees(String id) {    //根据id查询所有子类
+		//因为jstree初始化之后会发起一个get请求，id参数为‘#’
 		if (id == null || "".equals(id.trim()) || "#".equals(id)) {
-			id="0";
+			id = "0";
 		}
 		//把String参数转成int型
 		int parentId = Integer.parseInt(id);
@@ -68,7 +68,7 @@ public class ItemsServiceImpl implements ItemsService {
 				jsTree = new JSTree(ItemCat.getId().toString(), ItemCat.getName(),
 						"fa fa-folder fw", state);
 			} else {
-				jsTree = new JSTree(ItemCat.getId().toString(),ItemCat.getName(),
+				jsTree = new JSTree(ItemCat.getId().toString(), ItemCat.getName(),
 						"fa fa-file fw", state);
 			}
 			jsTrees.add(jsTree);
@@ -79,34 +79,67 @@ public class ItemsServiceImpl implements ItemsService {
 
 	@Override
 	@Transactional
-	public int insertItem(TbItem tbItem,String description) throws DataInsertFailException,TaotaoException{
+	public int insertItem(TbItem tbItem, String description) throws DataInsertFailException, TaotaoException {
 		try {
 			//补全tbItem信息
 			Date date = new Date();
 			tbItem.setUpdated(date);
 			tbItem.setCreated(date);
-			tbItem.setStatus((byte)1);
+			tbItem.setStatus((byte) 1);
 			//价格单位:分
-			tbItem.setPrice(tbItem.getPrice()*1000);
+			tbItem.setPrice(tbItem.getPrice() * 1000);
 			Long id = IDUtils.genItemId();
 			tbItem.setId(id);
 
 			int data = tbItemMapper.insertSelective(tbItem);
-			int InsertDescData = insertItemDesc(tbItem,description);
-			if(data!=0&&InsertDescData!=0){
+			int InsertDescData = insertItemDesc(tbItem, description);
+			if (data != 0 && InsertDescData != 0) {
 				return data;
-			}else{
+			} else {
 				throw new DataInsertFailException("商品信息插入失败！");
 			}
-		}catch (DataInsertFailException e){
+		} catch (DataInsertFailException e) {
 			throw e;
-		}catch (Exception e){
+		} catch (Exception e) {
 			logger.error(e.getMessage());
-			throw new TaotaoException("系统内部错误:"+e.getMessage());
+			throw new TaotaoException("系统内部错误:" + e.getMessage());
 		}
 	}
 
-	private int insertItemDesc(TbItem tbItem,String description){
+	@Override
+	@Transactional
+	public List<Integer> deleteItem(String[] itemIdList) throws DataDeleteFailException, TaotaoException {
+		try {
+			List<Integer> reslutList = new ArrayList();
+			for (String id : itemIdList) {
+				long itemId = Long.parseLong(id);
+				int result = tbItemMapper.deleteByPrimaryKey(itemId);
+				if (result == 0) {
+					throw new DataDeleteFailException("商品删除失败!");
+				} else {
+					reslutList.add(result);
+				}
+			}
+			if (reslutList != null && reslutList.size() > 0 && !reslutList.contains(0)) {
+				return reslutList;
+			} else {
+				throw new DataDeleteFailException("商品删除失败!");
+			}
+
+		} catch (DataDeleteFailException e) {
+			throw e;
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			throw new TaotaoException("系统内部错误:" + e.getMessage());
+		}
+	}
+
+	@Override
+	public TbItemCat queryItemCat(Long cid) {
+		return tbItemCatMapper.selectByPrimaryKey(cid);
+	}
+
+	private int insertItemDesc(TbItem tbItem, String description) {
 		TbItemDesc tbItemDesc = new TbItemDesc();
 		tbItemDesc.setItemId(tbItem.getId());
 		tbItemDesc.setItemDesc(description);

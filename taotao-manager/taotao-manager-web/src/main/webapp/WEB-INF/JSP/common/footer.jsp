@@ -5,27 +5,33 @@
 <!-- metisMenu -->
 <script src="https://cdn.bootcss.com/metisMenu/2.7.0/metisMenu.min.js"></script>
 
-<%--bootstrap-table.js--%>
+<!--bootstrap-table.js-->
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
-<script src="//cdn.bootcss.com/bootstrap-table/1.11.1/extensions/export/bootstrap-table-export.min.js"></script>
+
+<!--tableExport.js-->
+<script src="//issues.wenzhixin.net.cn/bootstrap-table/assets/bootstrap-table/src/extensions/export/bootstrap-table-export.js"></script>
 <script src="//rawgit.com/hhurz/tableExport.jquery.plugin/master/tableExport.js"></script>
 
-<%--JSTree.js--%>
+
+<!--JSTree.js-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 
-<%--FileInput.js--%>
+<!--FileInput.js-->
 <script src="https://cdn.bootcss.com/bootstrap-fileinput/4.3.9/js/fileinput.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap-fileinput/4.3.9/js/locales/zh.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap-fileinput/4.3.9/js/locales/fa.min.js"></script>
 
-<%--summernote.js--%>
+<!--summernote.js-->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.min.js"></script>
 <script src="https://cdn.bootcss.com/summernote/0.8.3/lang/summernote-zh-CN.min.js"></script>
 
-<%--bootstrapValidator.js--%>
+<!--bootstrapValidator.js-->
 <script src="https://cdn.bootcss.com/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap-validator/0.5.3/js/language/zh_CN.min.js"></script>
+
+<%--toastr.js--%>
+<script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 
 <!-- 自定义js文件 -->
 <script type="text/javascript" src="/resources/js/table.js"></script>

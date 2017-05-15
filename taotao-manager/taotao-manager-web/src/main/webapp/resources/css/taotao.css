@@ -70,6 +70,29 @@ li{
     }
 }
 
+@media (min-width: 768px) {
+    .dropup-menu-caret:before{
+        position: absolute;
+        bottom: -7px;
+        right: 9px;
+        display: inline-block;
+        border-top: 7px solid #ccc;
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+        content: "";
+    }
+    .dropup-menu-caret:after{
+        position: absolute;
+        bottom: -6px;
+        right: 10px;
+        display: inline-block;
+        border-top: 6px solid #fff;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        content: "";
+    }
+}
+
 @media (max-width: 768px) {
     .dropdown-menu-caret:before{
         position: absolute;
@@ -176,6 +199,12 @@ li{
 .panel{
     margin-bottom : 0px;
 }
+.wrapper-content>div>div>.panel{
+    min-height: 700px;
+}
+
+
+.wrapper-content>div
 
 .jstree-open>a>i.fa-folder:before{
     content: '\f07c';
@@ -193,3 +222,20 @@ li{
 #cid_choosed{
     border: none;
 }
+
+.warnning-icon>span.fa-warning{
+    font-size: 8em;
+    /*line-height: 1.5em;*/
+    color: navajowhite;
+}
+.modal-delete div,h1,p,a{
+    padding: 10px 0;
+}
+
+/*商品表格中的操作的样式*/
+.dropdown-edit>ul.dropdown-menu{
+    right: 0;
+    left: auto;
+    min-width: 120px;
+}
+

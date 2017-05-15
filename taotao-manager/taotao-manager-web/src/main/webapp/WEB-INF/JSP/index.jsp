@@ -97,7 +97,7 @@
                         <ul class="nav">
                             <li><a href="/taotao/manager/itemAdd">&nbsp;&nbsp;&nbsp;&nbsp;<span class="fa fa-plus fa-fw"></span>添加商品</a></li>
                             <li><a href="/taotao/manager/list">&nbsp;&nbsp;&nbsp;&nbsp;<span class="fa fa-search fa-fw"></span>查询商品</a></li>
-                            <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;<span class="fa fa-align-left fa-fw"></span>参数规格</a></li>
+                            <li><a href="/taotao/manager/itemParam">&nbsp;&nbsp;&nbsp;&nbsp;<span class="fa fa-align-left fa-fw"></span>参数规格</a></li>
                         </ul>
                     </li>
                     <li>

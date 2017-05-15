@@ -95,10 +95,13 @@
                             <span class="fa fa-folder fa-fw"></span>商品管理
                             <span class="fa arrow"></span></a>
                         <ul class="nav">
-                            <li><a href="/taotao/manager/itemAdd">&nbsp;&nbsp;&nbsp;&nbsp;<span class="fa fa-plus fa-fw"></span>添加商品</a></li>
-                            <li><a href="/taotao/manager/list">&nbsp;&nbsp;&nbsp;&nbsp;<span class="fa fa-search fa-fw"></span>查询商品</a>
+                            <li><a href="/taotao/manager/itemAdd">&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                    class="fa fa-plus fa-fw"></span>添加商品</a></li>
+                            <li><a href="/taotao/manager/list">&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                    class="fa fa-search fa-fw"></span>查询商品</a>
                             </li>
-                            <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;<span class="fa fa-align-left fa-fw"></span>参数规格</a>
+                            <li><a href="/taotao/manager/itemParam">&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                    class="fa fa-align-left fa-fw"></span>参数规格</a>
                             </li>
                         </ul>
                     </li>
@@ -131,17 +134,39 @@
                             <div class="panel-heading">
                                 <h3 class="panel-title">商品列表</h3>
                             </div>
-                            <div class="toolbar">
-                                <div class="btn-group">
-                                    <button id="btn-add" type="button" class="btn btn-default">
-                                        <span class="fa fa-plus fa-fw"></span>新增</button>
-                                    <button id="btn-edit" type="button" class="btn btn-default">
-                                        <span class="fa fa-edit fa-fw"></span>修改</button>
-                                    <button id="btn-remove" type="button" class="btn btn-default">
-                                        <span class="fa fa-trash fa-fw"></span>删除</button>
-                                </div>
-                            </div>
+
+                            <%--点击删除按键时的弹出框--%>
+                            <div class="modal fade" id="modal-delete">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <div class="container-fluid text-center modal-delete">
+                                                <div class="col-sm-12">
+                                                    <div class="warnning-icon">
+                                                        <span class="fa fa-warning fa-lg"></span>
+                                                    </div>
+                                                    <h1><strong>操作提示</strong></h1>
+                                                    <p>确定要删除吗?</p>
+                                                    <a href="#" class="btn btn-success" data-dismiss="modal">取消</a>
+                                                    <a href="#" id="btn-remove" class="btn btn-danger">确认</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div><!-- /.modal -->
+                            <%--数据表格主体，显示查询到的数据--%>
                             <div class="panel-body">
+                                <%--增删改的工具条--%>
+                                <div class="toolbar">
+                                    <div class="btn-group">
+                                        <a href="/taotao/manager/itemAdd" id="btn-add" type="button"
+                                           class="btn btn-default">
+                                            <span class="fa fa-plus fa-fw"></span>新增商品</a>
+                                        <a id="delete-selected" type="button" class="btn btn-default">
+                                            <span class="fa fa-trash fa-fw"></span>删除已选</a>
+                                    </div>
+                                </div>
                                 <div class="table-content">
                                     <table id="Items-table"></table>
                                 </div>
