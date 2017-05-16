@@ -136,40 +136,7 @@
                             <div class="page-header" id="page-header">
                                 <%--<h1 name="itemTitle" id="itemTitle"><span class="fa fa-angle-double-right"></span></h1>--%>
                             </div>
-                            <div class="param-group" id="param-group">
-                                <div class="col-sm-4">
-                                    <div class="panel panel-primary">
-                                        <div class="panel-heading">
-                                            <h3 class="panel-title">主体
-                                                <div class="edit-group" style="display: inline;float: right;color: ">
-                                                <a href="#" title="修改"><span class="fa fa-pencil"></span></a>
-                                                <a href="#" title="新增列"><span class="fa fa-plus-square"></span></a>
-                                                </div>
-                                            </h3>
-                                        </div>
-                                        <div class="panel-body">
-                                            <div class="param-body">
-                                                <div class="param-row">
-                                                    <div class="param-name">参数1</div>
-                                                    <div class="param-value">品牌</div>
-                                                </div>
-                                                <div class="param-row">
-                                                    <div class="param-name">参数2</div>
-                                                    <div class="param-value">型号</div>
-                                                </div>
-                                                <div class="param-row">
-                                                    <div class="param-name">参数3</div>
-                                                    <div class="param-value">颜色</div>
-                                                </div>
-                                                <div class="param-row">
-                                                    <div class="param-name">参数4</div>
-                                                    <div class="param-value">上市年份</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <div class="param-group" id="param-group"></div>
                             <%--商品类目选择弹窗--%>
                             <div class="modal fade" id="cidModal">
                                 <div class="modal-dialog">

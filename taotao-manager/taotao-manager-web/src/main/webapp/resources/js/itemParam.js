@@ -42,6 +42,16 @@ var itemParam = {
                 $('#jstreeMsg').hide();
                 $('#cidModal').modal('hide');
                 itemParam.writePageHeader(value);
+                //根据id获取itemCat
+                var itemCat = itemParam.getItemCat(id);
+                //如果itemCat为子类目，根据类目id查询itemParam，获取itemParam的ParamData参数
+                var paramData = itemParam.getItemParam(itemCat);
+                //把paramData转成json数组
+                var JsonParamData = JSON.parse(paramData);
+                //遍历json数组，通过数据自动生成HTML
+                $(JsonParamData).each(function () {
+                    itemParam.writePageBody(JsonParamData);
+                });
             }
         });
         //根据URL传来的cid获取itemCat
@@ -58,12 +68,12 @@ var itemParam = {
             });
         } else {
             itemParam.writePageHeader(itemCat.name);
-            //如果itemCat为子类目，根据类目id查询itemParam
+            //如果itemCat为子类目，根据类目id查询itemParam，获取itemParam的ParamData参数
             var paramData = itemParam.getItemParam(itemCat);
+            //把paramData转成json数组
             var JsonParamData = JSON.parse(paramData);
+            //遍历json数组，通过数据自动生成HTML
             $(JsonParamData).each(function () {
-                console.log($(this)[0].group);
-                console.log($(this)[0].params);
                 itemParam.writePageBody(JsonParamData);
             });
         }
@@ -137,36 +147,38 @@ var itemParam = {
             '</h1>'].join(''));
     },
 
-    writePageBody:function (JsonParamData) {
+    writePageBody: function (JsonParamData) {
         var arr = new Array();
         $(JsonParamData).each(function () {
             //添加组
             arr.push(['<div class="col-sm-4">',
                 '<div class="panel panel-primary">',
                 '<div class="panel-heading">',
-                '<h3 class="panel-title">'].join(''));
-            arr.push($(this)[0].group);
+                '<h3 class="panel-title">' + $(this)[0].group].join(''));
             arr.push(['<div class="edit-group">',
-                '<a href="#" title="修改"><span class="fa fa-pencil"></span></a>',
-                '<a href="#" title="新增列"><span class="fa fa-plus-square"></span></a>',
+                '<a href="#" title="修改"><span class="fa fa-pencil fa-fw"></span></a>',
+                '<a href="#" title="新增参数"><span class="fa fa-plus-square fa-fw"></span></a>',
                 '</div>',
                 '</h3>',
                 '</div>'].join(''));
             var paramList = $(this)[0].params;
             arr.push(['<div class="panel-body">',
                 '<div class="param-body">'].join(''));
-            $(paramList).each(function (index) {
+            for (var i = 0; i < paramList.length; i++) {
                 arr.push(['<div class="param-row">'].join(''));
                 arr.push(['<div class="param-name">参数',
-                    index+1,
                     '</div>',
-                    '<div class="param-value">',
-                    $(this),
-                    '</div>'].join(''))
-            })
+                    '<div class="param-value">' + paramList[i],
+                    '</div>'].join(''));
+                arr.push('</div>');
+            }
+
+            arr.push(['</div>',
+                '</div>',
+                '</div>',
+                '</div>'].join(''));
         });
-        $('#param-group').html([arr].join(''));
-        console.log([arr].join(''));
+        $('#param-group').html(arr.join(''));
     }
 
 
