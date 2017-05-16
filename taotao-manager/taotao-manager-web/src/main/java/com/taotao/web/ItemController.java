@@ -9,6 +9,7 @@ import com.taotao.exception.DataInsertFailException;
 import com.taotao.exception.TaotaoException;
 import com.taotao.pojo.TbItem;
 import com.taotao.pojo.TbItemCat;
+import com.taotao.pojo.TbItemParam;
 import com.taotao.service.ItemsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -112,8 +113,22 @@ public class ItemController {
 			TbItemCat tbItemCat = itemsService.queryItemCat(cid);
 			result = new ExecuteJsonResult<TbItemCat>(true,tbItemCat);
 			return result;
-		}catch (Exception e){
-			result = new ExecuteJsonResult<TbItemCat>(false,"系统内部错误:"+e.getMessage());
+		}catch (TaotaoException e){
+			result = new ExecuteJsonResult<TbItemCat>(false,e.getMessage());
+			return result;
+		}
+	}
+
+	@RequestMapping(value = "/{cid}/itemParam",method = RequestMethod.GET)
+	@ResponseBody
+	public ExecuteJsonResult<TbItemParam> queryItemParam(@PathVariable("cid") long cid){
+		ExecuteJsonResult<TbItemParam> result;
+		try{
+			TbItemParam tbItemParam = itemsService.queryItemParam(cid);
+			result = new ExecuteJsonResult<TbItemParam>(true,tbItemParam);
+			return result;
+		}catch (TaotaoException e){
+			result = new ExecuteJsonResult<TbItemParam>(false,e.getMessage());
 			return result;
 		}
 	}

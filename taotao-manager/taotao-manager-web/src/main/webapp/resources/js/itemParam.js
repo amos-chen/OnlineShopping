@@ -1,7 +1,10 @@
 var itemParam = {
-    URL:{
-        queryCid:function (cid) {
-            return "/taotao/manager/"+cid+"/itemCat";
+    URL: {
+        queryItemCat: function (cid) {
+            return "/taotao/manager/" + cid + "/itemCat";
+        },
+        queryItemParam: function (cid) {
+            return "/taotao/manager/" + cid + "/itemParam";
         }
     },
 
@@ -38,39 +41,132 @@ var itemParam = {
                 var value = $(".jstree-clicked").text();
                 $('#jstreeMsg').hide();
                 $('#cidModal').modal('hide');
-                $('#itemTitle').text(value);
+                itemParam.writePageHeader(value);
             }
         });
+        //根据URL传来的cid获取itemCat
         var itemCat = itemParam.getItemCat(params['cid']);
+        //判断id,itemCat是否为空，或者是否为父类目
         if ('' == params['cid'] || params['cid'] == null
-            || params['cid'] == undefined||itemCat.isParent) {
+            || params['cid'] == undefined || itemParam.validateItemCat(itemCat)) {
+            //如果URL没有传递cid，或者itemCat为空，或者itemCat为父类目，则弹出类目选择树，重新选择
+            //并且弹窗不可关闭
             $('#cidModal').modal({
                 show: true,
                 backdrop: 'static',
                 keyboard: false
             });
-        }else{
-            $('#itemTitle').text(itemCat.name);
+        } else {
+            itemParam.writePageHeader(itemCat.name);
+            //如果itemCat为子类目，根据类目id查询itemParam
+            var paramData = itemParam.getItemParam(itemCat);
+            var JsonParamData = JSON.parse(paramData);
+            $(JsonParamData).each(function () {
+                console.log($(this)[0].group);
+                console.log($(this)[0].params);
+                itemParam.writePageBody(JsonParamData);
+            });
         }
     },
+
+
     //如果传来的cid参数对应的是子类目，返回true，如果是父类目，返回false
-    getItemCat:function (cid) {
+    getItemCat: function (cid) {
         var itemCat = null;
         $.ajax({
-            url: itemParam.URL.queryCid(cid), 
-            method:'GET',
+            url: itemParam.URL.queryItemCat(cid),
+            method: 'GET',
             //asyn为true时，ajax请求为异步，这样会导致函数先返回了一个undefined，之后才执行完ajax
             //所以设为false，同步，按顺序执行
-            async:false,
-            success:function (result) {
-                if(result&&result['success']){
+            async: false,
+            success: function (result) {
+                if (result && result['success']) {
                     itemCat = result.data;
-                }else{
+                } else {
                     itemCat = null;
                 }
             }
         });
         return itemCat;
+    },
+    //判断itemCat是否含有子树，如果为空也为true
+    validateItemCat: function (itemCat) {
+        if (itemCat) {
+            if (itemCat.isParent) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return true;
+        }
+    },
+
+    getItemParam: function (itemCat) {
+        var paramData = null;
+        $.ajax({
+            url: itemParam.URL.queryItemParam(itemCat.id),
+            method: 'get',
+            async: false,
+            success: function (result) {
+                if (result && result['success']) {
+                    paramData = result.data.paramData;
+                }
+            }
+        });
+        return paramData;
+    },
+
+    addParamPanel: function () {
+
+
+    },
+
+    writePageHeader: function (name) {
+        $('#page-header').html([
+            '<h1 name="itemTitle" id="itemTitle">',
+            name,
+            '<small>',
+            '<span class="fa fa-angle-double-right"></span>',
+            '参数规格模板设置',
+            '</small>',
+            '<div class="btn-group">',
+            '<a class="btn btn-success" id="add-group"><span class="fa fa-plus-circle fa-fw"></span>新增组</a>',
+            '<a class="btn btn-success" id="param-save"><span class="fa fa-save fa-fw"></span>保存</a>',
+            '</div>',
+            '</h1>'].join(''));
+    },
+
+    writePageBody:function (JsonParamData) {
+        var arr = new Array();
+        $(JsonParamData).each(function () {
+            //添加组
+            arr.push(['<div class="col-sm-4">',
+                '<div class="panel panel-primary">',
+                '<div class="panel-heading">',
+                '<h3 class="panel-title">'].join(''));
+            arr.push($(this)[0].group);
+            arr.push(['<div class="edit-group">',
+                '<a href="#" title="修改"><span class="fa fa-pencil"></span></a>',
+                '<a href="#" title="新增列"><span class="fa fa-plus-square"></span></a>',
+                '</div>',
+                '</h3>',
+                '</div>'].join(''));
+            var paramList = $(this)[0].params;
+            arr.push(['<div class="panel-body">',
+                '<div class="param-body">'].join(''));
+            $(paramList).each(function (index) {
+                arr.push(['<div class="param-row">'].join(''));
+                arr.push(['<div class="param-name">参数',
+                    index+1,
+                    '</div>',
+                    '<div class="param-value">',
+                    $(this),
+                    '</div>'].join(''))
+            })
+        });
+        $('#param-group').html([arr].join(''));
+        console.log([arr].join(''));
     }
 
 

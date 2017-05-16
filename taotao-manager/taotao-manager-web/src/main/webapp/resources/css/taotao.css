@@ -228,14 +228,77 @@ li{
     /*line-height: 1.5em;*/
     color: navajowhite;
 }
-.modal-delete div,h1,p,a{
+.modal-delete div,
+.modal-delete h1,
+.modal-delete p{
     padding: 10px 0;
 }
 
-/*商品表格中的操作的样式*/
+    /*商品表格中的操作的样式*/
 .dropdown-edit>ul.dropdown-menu{
     right: 0;
     left: auto;
     min-width: 120px;
 }
 
+.page-header{
+    margin: 0 0 12px;
+    border-bottom: 1px dotted #E2E2E2;
+    padding-bottom: 16px;
+    padding-top: 7px;
+}
+.page-header>h1{
+    padding: 0;
+    margin: 0 8px;
+    font-size: 32px;
+    font-weight: lighter;
+    color: #2679B5;
+}
+
+/*itemParam样式设置*/
+.page-header small{
+    margin: 0 6px;
+    font-size: 14px;
+    font-weight: 300;
+    color: #8089A0;
+}
+
+.param-body{
+    display: table;
+    border: 1px solid #d9edf7;
+    width:98%;
+}
+.param-row:first-child .param-name,
+.param-row:first-child .param-value{
+    border-top: none;
+}
+
+.param-row{
+    display: table-row;
+}
+.param-name{
+    display: table-cell;
+    background: #d9edf7;
+    color: #31708f;
+    text-align: right;
+    width: 80px;
+    padding: 6px 10px 6px 4px;
+    border-top: 1px solid white;
+}
+.param-value{
+    display: table-cell;
+    padding: 12px;
+    border-top: 1px dotted #d9edf7;
+}
+
+.edit-group{
+    display: inline;
+    float: right;
+}
+.edit-group a{
+    color: white;
+}
+
+.param-group .panel{
+    margin-bottom: 20px;
+}

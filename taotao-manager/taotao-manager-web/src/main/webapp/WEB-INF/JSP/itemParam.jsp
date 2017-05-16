@@ -129,52 +129,82 @@
         <div class="wrapper-content">
             <div class="row">
                 <div class="col-lg-12">
-                    <%--主体panel--%>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">参数规格</h3>
-                        </div>
-                        <div class="panel-body">
-                            <%--表单，提交参数规格模板--%>
-                            <form action="" method="post" class="form-horizontal" role="form">
-                                <%--商品类目--%>
-                                <div class="form-group" id="itemCat">
-                                    <h1 class="text-center" name="itemTitle" id="itemTitle"></h1>
-                                    <%--商品类目选择弹窗--%>
-                                    <div class="modal fade" id="cidModal">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h4 class="modal-title">请选择类目</h4>
+                    <%--表单，提交参数规格模板--%>
+                    <form action="" method="post" class="form-horizontal" role="form">
+                        <%--商品类目--%>
+                        <div class="form-group" id="itemCat">
+                            <div class="page-header" id="page-header">
+                                <%--<h1 name="itemTitle" id="itemTitle"><span class="fa fa-angle-double-right"></span></h1>--%>
+                            </div>
+                            <div class="param-group" id="param-group">
+                                <div class="col-sm-4">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title">主体
+                                                <div class="edit-group" style="display: inline;float: right;color: ">
+                                                <a href="#" title="修改"><span class="fa fa-pencil"></span></a>
+                                                <a href="#" title="新增列"><span class="fa fa-plus-square"></span></a>
                                                 </div>
-                                                <%--商品类目选择tree--%>
-                                                <div class="modal-body">
-                                                    <div id="jstree"></div>
+                                            </h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="param-body">
+                                                <div class="param-row">
+                                                    <div class="param-name">参数1</div>
+                                                    <div class="param-value">品牌</div>
                                                 </div>
-                                                <div class="modal-footer">
-                                                    <span id="jstreeMsg"></span>
-                                                    <button id="jstreeChoosed" type="button"
-                                                            class="btn btn-success">确定
-                                                    </button>
+                                                <div class="param-row">
+                                                    <div class="param-name">参数2</div>
+                                                    <div class="param-value">型号</div>
                                                 </div>
-                                            </div><!-- /.modal-content -->
-                                        </div><!-- /.modal-dialog -->
-                                    </div><!-- /.modal -->
-                                </div>
-
-                                <%--提交按键--%>
-                                <div class="form-group">
-                                    <div class="col-sm-10 col-sm-offset-2">
-                                        <%--<button type="button" class="btn btn-primary">确定</button>--%>
+                                                <div class="param-row">
+                                                    <div class="param-name">参数3</div>
+                                                    <div class="param-value">颜色</div>
+                                                </div>
+                                                <div class="param-row">
+                                                    <div class="param-name">参数4</div>
+                                                    <div class="param-value">上市年份</div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
+                            <%--商品类目选择弹窗--%>
+                            <div class="modal fade" id="cidModal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">请选择类目</h4>
+                                        </div>
+                                        <%--商品类目选择tree--%>
+                                        <div class="modal-body">
+                                            <div id="jstree"></div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <span id="jstreeMsg"></span>
+                                            <button id="jstreeChoosed" type="button"
+                                                    class="btn btn-success">确定
+                                            </button>
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div><!-- /.modal -->
                         </div>
-                    </div>
+
+                        <%--提交按键--%>
+                        <div class="form-group">
+                            <div class="col-sm-10 col-sm-offset-2">
+                                <%--<button type="button" class="btn btn-primary">确定</button>--%>
+                                <%--<a href="#" id="username">superuser</a>--%>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 
@@ -189,6 +219,7 @@
         cid: "${param.cid}"
     })
 
+    editable.initEditable();
 </script>
 </body>
 </html>

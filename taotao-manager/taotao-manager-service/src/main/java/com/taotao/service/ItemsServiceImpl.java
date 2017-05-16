@@ -3,13 +3,16 @@ package com.taotao.service;
 import com.taotao.dao.TbItemCatMapper;
 import com.taotao.dao.TbItemDescMapper;
 import com.taotao.dao.TbItemMapper;
+import com.taotao.dao.TbItemParamMapper;
 import com.taotao.dto.JSTree;
 import com.taotao.exception.DataDeleteFailException;
 import com.taotao.exception.DataInsertFailException;
+import com.taotao.exception.DataNotFindException;
 import com.taotao.exception.TaotaoException;
 import com.taotao.pojo.TbItem;
 import com.taotao.pojo.TbItemCat;
 import com.taotao.pojo.TbItemDesc;
+import com.taotao.pojo.TbItemParam;
 import com.taotao.utils.IDUtils;
 import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
@@ -38,6 +41,9 @@ public class ItemsServiceImpl implements ItemsService {
 
 	@Autowired
 	private TbItemDescMapper tbItemDescMapper;
+
+	@Autowired
+	private TbItemParamMapper tbItemParamMapper;
 
 	@Override
 	public TbItem queryById(@Param("id") long id) {
@@ -136,7 +142,35 @@ public class ItemsServiceImpl implements ItemsService {
 
 	@Override
 	public TbItemCat queryItemCat(Long cid) {
-		return tbItemCatMapper.selectByPrimaryKey(cid);
+		try {
+			TbItemCat tbItemCat = tbItemCatMapper.selectByPrimaryKey(cid);
+			if(tbItemCat==null){
+				throw new DataNotFindException("没有查到相应数据");
+			}else{
+				return tbItemCat;
+			}
+		}catch (DataNotFindException e){
+			throw e;
+		}catch (Exception e){
+			throw new TaotaoException("系统内部错误:"+e.getMessage());
+		}
+	}
+
+	@Override
+	public TbItemParam queryItemParam(Long cid) throws DataNotFindException,TaotaoException{
+		try {
+			TbItemParam tbItemParam = tbItemParamMapper.selectByCid(cid);
+			if(tbItemParam==null){
+				throw new DataNotFindException("没有查到相应数据");
+			}else{
+				return tbItemParam;
+			}
+		}catch (DataNotFindException e){
+			throw e;
+		}catch (Exception e){
+			throw new TaotaoException("系统内部错误:"+e.getMessage());
+		}
+
 	}
 
 	private int insertItemDesc(TbItem tbItem, String description) {

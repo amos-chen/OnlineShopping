@@ -24,6 +24,9 @@
 <%--toastr.css--%>
 <link href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
 
+<%--x-editable.css--%>
+<link href="https://cdn.bootcss.com/x-editable/1.5.1/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet">
+
 <!-- 自定义的css -->
 <link rel="stylesheet" href="/resources/css/taotao.css">
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
