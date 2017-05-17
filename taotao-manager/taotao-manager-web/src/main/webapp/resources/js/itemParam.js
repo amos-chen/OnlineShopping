@@ -24,6 +24,8 @@ var itemParam = {
                 }
             }
         });
+
+        //类目选择树，点击确定触发事件
         $("#jstreeChoosed").click(function () {
             //value为所选节点的ID
             var tree = $("#jstree").jstree(true);
@@ -52,6 +54,7 @@ var itemParam = {
                 $(JsonParamData).each(function () {
                     itemParam.writePageBody(JsonParamData);
                 });
+                editable.initEditable();
             }
         });
         //根据URL传来的cid获取itemCat
@@ -76,6 +79,8 @@ var itemParam = {
             $(JsonParamData).each(function () {
                 itemParam.writePageBody(JsonParamData);
             });
+            editable.initEditable();
+
         }
     },
 
@@ -154,10 +159,15 @@ var itemParam = {
             arr.push(['<div class="col-sm-4">',
                 '<div class="panel panel-primary">',
                 '<div class="panel-heading">',
-                '<h3 class="panel-title">' + $(this)[0].group].join(''));
+                '<h3 class="panel-title">',
+                '<a href="#" class="editable">'+ $(this)[0].group+'</a>'].join(''));
             arr.push(['<div class="edit-group">',
-                '<a href="#" title="修改"><span class="fa fa-pencil fa-fw"></span></a>',
-                '<a href="#" title="新增参数"><span class="fa fa-plus-square fa-fw"></span></a>',
+                //修改组内容
+                '<a href="#" id="editStatus" title="修改"><span class="fa fa-pencil fa-fw"></span></a>',
+                //增加行
+                '<a href="#" id="addLine" title="新增参数"><span class="fa fa-plus-square fa-fw"></span></a>',
+                //删除组
+                '<a href="#" id="deleteGroup" title="删除组"><span class="fa fa-trash fa-fw"></span></a>',
                 '</div>',
                 '</h3>',
                 '</div>'].join(''));
@@ -168,7 +178,9 @@ var itemParam = {
                 arr.push(['<div class="param-row">'].join(''));
                 arr.push(['<div class="param-name">参数',
                     '</div>',
-                    '<div class="param-value">' + paramList[i],
+                    '<div class="param-value">',
+                    '<a href="#" class="editable">'+ paramList[i]+'</a>',
+                    '<a href="#" class="deleteLine" id="deleteLine"><span class="fa fa-close fa-lg"></span></a>',
                     '</div>'].join(''));
                 arr.push('</div>');
             }

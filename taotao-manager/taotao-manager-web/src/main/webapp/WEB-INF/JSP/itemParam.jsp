@@ -130,7 +130,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <%--表单，提交参数规格模板--%>
-                    <form action="" method="post" class="form-horizontal" role="form">
+                    <form id="itemParamForm" method="post" class="form-horizontal" role="form">
+                        <input type="hidden" id="itemParamJson"/>
                         <%--商品类目--%>
                         <div class="form-group" id="itemCat">
                             <div class="page-header" id="page-header">
@@ -159,11 +160,32 @@
                             </div><!-- /.modal -->
                         </div>
 
+                            <%--删除提示--%>
+                        <div class="modal fade deleteModal" id="deleteModal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            &times;
+                                        </button>
+                                        <h4 class="modal-title"><span class="fa fa-warning fa-fw"></span>操作提示:</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h2 class="text-center text-danger">是否进行删除操作?</h2>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-success" data-dismiss="modal">取消
+                                        </button>
+                                        <button id="deleteConfirm" type="button" class="btn btn-danger">确定</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->
                         <%--提交按键--%>
                         <div class="form-group">
                             <div class="col-sm-10 col-sm-offset-2">
+                                <a href="#deleteModal" data-toggle="modal" class="btn btn-danger">测试</a>
                                 <%--<button type="button" class="btn btn-primary">确定</button>--%>
-                                <%--<a href="#" id="username">superuser</a>--%>
                             </div>
                         </div>
                     </form>
@@ -186,7 +208,8 @@
         cid: "${param.cid}"
     })
 
-    editable.initEditable();
+    //在itemParam.js里进行初始化
+    //editable.initEditable();
 </script>
 </body>
 </html>

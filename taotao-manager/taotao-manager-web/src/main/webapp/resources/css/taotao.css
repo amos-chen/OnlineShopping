@@ -265,12 +265,17 @@ li{
 
 .param-body{
     display: table;
-    border: 1px solid #d9edf7;
+    border-left: 1px solid #d9edf7;
+    border-right: 1px solid #d9edf7;
     width:98%;
 }
 .param-row:first-child .param-name,
 .param-row:first-child .param-value{
-    border-top: none;
+    border-top: 1px solid #d9edf7;
+}
+.param-row:last-child .param-name,
+.param-row:last-child .param-value{
+    border-bottom: 1px solid #d9edf7;
 }
 
 .param-row{
@@ -297,9 +302,49 @@ li{
 }
 .edit-group a{
     color: white;
+    line-height: 27px;
 }
 
 .param-group .panel{
     margin-bottom: 20px;
-    min-height: 250px;
+    min-height: 280px;
+}
+
+
+.panel-title>a.editable.editable-click.editable-disabled{
+    color: white!important;
+    border-bottom: none;
+}
+h3.panel-title{
+    line-height: normal;
+}
+.panel-title>a.editable.editable-click{
+    color: white;
+    border-bottom: dashed 1px white;
+}
+div.editable-input>input{
+    width: 100px!important;
+    margin-left: 10px;
+}
+.panel-title .btn-primary{
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+.panel-title .btn-primary:hover{
+    background-color: #449d44;
+    border-color: #398439;
+}
+
+.deleteModal h2{
+    margin: 15px;
+}
+.deleteLine{
+    position: absolute;
+    right: 45px;
+    color: #a94442;
+    line-height: 25px;
+}
+.deleteLine:hover,
+.deleteLine:visited{
+    color: #a9171d;
 }
