@@ -54,7 +54,7 @@ var itemParam = {
                 $(JsonParamData).each(function () {
                     itemParam.writePageBody(JsonParamData);
                 });
-                editable.initEditable();
+                editable.init();
             }
         });
         //根据URL传来的cid获取itemCat
@@ -79,7 +79,7 @@ var itemParam = {
             $(JsonParamData).each(function () {
                 itemParam.writePageBody(JsonParamData);
             });
-            editable.initEditable();
+            editable.init();
 
         }
     },
@@ -160,7 +160,7 @@ var itemParam = {
                 '<div class="panel panel-primary">',
                 '<div class="panel-heading">',
                 '<h3 class="panel-title">',
-                '<a href="#" class="editable">'+ $(this)[0].group+'</a>'].join(''));
+                '<a id="paramHeading" href="#" class="editable">'+ $(this)[0].group+'</a>'].join(''));
             arr.push(['<div class="edit-group">',
                 //修改组内容
                 '<a href="#" id="editStatus" title="修改"><span class="fa fa-pencil fa-fw"></span></a>',

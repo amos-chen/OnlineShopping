@@ -217,6 +217,10 @@ var table = {
             //all不生效的原因:表格是后台分页，如果要获取所有的商品信息会向后台发出一个ajax请求，获取所有的商品信息
             exportDataType: 'basic'
         });
+        //当modal隐藏时，移除btn-remove上绑定的事件
+        $('#modal-delete').on("hidden.bs.modal", function() {
+            $('#btn-remove').unbind();
+        });
 
         window.operationEvents = {
             'click .copy': function (e, value, row, index) {

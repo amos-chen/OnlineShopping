@@ -137,7 +137,7 @@
                             <div class="page-header" id="page-header">
                                 <%--<h1 name="itemTitle" id="itemTitle"><span class="fa fa-angle-double-right"></span></h1>--%>
                             </div>
-                            <div class="param-group" id="param-group"></div>
+                            <div class="param-group row" id="param-group"></div>
                             <%--商品类目选择弹窗--%>
                             <div class="modal fade" id="cidModal">
                                 <div class="modal-dialog">
@@ -184,8 +184,8 @@
                         <%--提交按键--%>
                         <div class="form-group">
                             <div class="col-sm-10 col-sm-offset-2">
-                                <a href="#deleteModal" data-toggle="modal" class="btn btn-danger">测试</a>
-                                <%--<button type="button" class="btn btn-primary">确定</button>--%>
+                                <%--<a id="username" href="#">测试</a>--%>
+                                <%--<a class="btn btn-defalut" id="disabled">disabled</a>--%>
                             </div>
                         </div>
                     </form>
@@ -206,7 +206,7 @@
     //在js中使用EL表达式一定要用双引号，否则如果EL取不到值，会报错
     itemParam.initParam({
         cid: "${param.cid}"
-    })
+    });
 
     //在itemParam.js里进行初始化
     //editable.initEditable();
