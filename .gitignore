@@ -8,3 +8,4 @@ target/
 .settings/
 .setting/
 test/
+taotao-manager/taotao-manager-web/src/main/webapp/WEB-INF/JSP/test.jsp

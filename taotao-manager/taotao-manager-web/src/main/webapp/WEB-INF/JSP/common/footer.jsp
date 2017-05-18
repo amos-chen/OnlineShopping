@@ -36,6 +36,10 @@
 <%--x-editabel.js--%>
 <script src="https://cdn.bootcss.com/x-editable/1.5.1/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 
+<%--bootstrap.modal.js--%>
+<script src="https://cdn.bootcss.com/bootstrap-modal/2.2.6/js/bootstrap-modalmanager.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-modal/2.2.6/js/bootstrap-modal.min.js"></script>
+
 <!-- 自定义js文件 -->
 <script type="text/javascript" src="/resources/js/table.js"></script>
 <script type="text/javascript" src="/resources/js/JSTree.js"></script>

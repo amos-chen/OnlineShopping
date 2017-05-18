@@ -149,28 +149,24 @@
 
                                         <%--商品类目跳出框--%>
                                         <div class="modal fade" id="mymodal">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                                aria-hidden="true">&times;
-                                                        </button>
-                                                        <h4 class="modal-title">请选择类目</h4>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div id="jstree"></div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <span id="jstreeMsg"></span>
-                                                        <button type="button" class="btn btn-default"
-                                                                data-dismiss="modal">关闭
-                                                        </button>
-                                                        <button id="jstreeChoosed" type="button"
-                                                                class="btn btn-primary">确定
-                                                        </button>
-                                                    </div>
-                                                </div><!-- /.modal-content -->
-                                            </div><!-- /.modal-dialog -->
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-hidden="true">&times;
+                                                </button>
+                                                <h4 class="modal-title">请选择类目</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div id="jstree"></div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <span id="jstreeMsg"></span>
+                                                <button type="button" class="btn btn-default"
+                                                        data-dismiss="modal">关闭
+                                                </button>
+                                                <button id="jstreeChoosed" type="button"
+                                                        class="btn btn-primary">确定
+                                                </button>
+                                            </div>
                                         </div><!-- /.modal -->
                                     </div>
                                 </div>
@@ -235,20 +231,16 @@
 
                                 <%--成功提交后的弹出框--%>
                                 <div class="modal fade" id="submitModal">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">提示</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <h3 id="submitMsg"></h3>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button id="confirm" type="button" class="btn btn-primary">确定
-                                                </button>
-                                            </div>
-                                        </div><!-- /.modal-content -->
-                                    </div><!-- /.modal-dialog -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">提示</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h3 id="submitMsg"></h3>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button id="confirm" type="button" class="btn btn-primary">确定
+                                        </button>
+                                    </div>
                                 </div><!-- /.modal -->
 
                                 <div class="form-group">

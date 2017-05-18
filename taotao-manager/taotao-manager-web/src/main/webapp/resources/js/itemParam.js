@@ -54,7 +54,10 @@ var itemParam = {
                 $(JsonParamData).each(function () {
                     itemParam.writePageBody(JsonParamData);
                 });
-                editable.init();
+                editable.init({
+                    itemParams: paramData,
+                    cid: itemCat.id
+                });
             }
         });
         //根据URL传来的cid获取itemCat
@@ -79,13 +82,16 @@ var itemParam = {
             $(JsonParamData).each(function () {
                 itemParam.writePageBody(JsonParamData);
             });
-            editable.init();
+            editable.init({
+                itemParams: paramData,
+                cid: itemCat.id
+            });
 
         }
     },
 
 
-    //如果传来的cid参数对应的是子类目，返回true，如果是父类目，返回false
+    //如果传来的cid参数itemCat
     getItemCat: function (cid) {
         var itemCat = null;
         $.ajax({
@@ -132,10 +138,6 @@ var itemParam = {
         return paramData;
     },
 
-    addParamPanel: function () {
-
-
-    },
 
     writePageHeader: function (name) {
         $('#page-header').html([
@@ -147,6 +149,7 @@ var itemParam = {
             '</small>',
             '<div class="btn-group">',
             '<a class="btn btn-success" id="add-group"><span class="fa fa-plus-circle fa-fw"></span>新增组</a>',
+            // '<a class="btn btn-success" id="changeEditStatus"><span class="fa fa-edit fa-fw"></span>修改</a>',
             '<a class="btn btn-success" id="param-save"><span class="fa fa-save fa-fw"></span>保存</a>',
             '</div>',
             '</h1>'].join(''));
@@ -154,24 +157,26 @@ var itemParam = {
 
     writePageBody: function (JsonParamData) {
         var arr = new Array();
-        $(JsonParamData).each(function () {
+        arr.push('<div class="row">');
+        for (var j = 0; j < JsonParamData.length; j++) {
+            if (j !== 0 && j % 3 === 0) {
+                arr.push('</div><div class="row">');
+            }
             //添加组
             arr.push(['<div class="col-sm-4">',
                 '<div class="panel panel-primary">',
                 '<div class="panel-heading">',
                 '<h3 class="panel-title">',
-                '<a id="paramHeading" href="#" class="editable">'+ $(this)[0].group+'</a>'].join(''));
+                '<a id="paramHeading" href="javascript:void(0)" class="editable">' + $(JsonParamData[j])[0].group + '</a>'].join(''));
             arr.push(['<div class="edit-group">',
-                //修改组内容
-                '<a href="#" id="editStatus" title="修改"><span class="fa fa-pencil fa-fw"></span></a>',
                 //增加行
-                '<a href="#" id="addLine" title="新增参数"><span class="fa fa-plus-square fa-fw"></span></a>',
+                '<a href="javascript:void(0)" id="addLine" title="新增参数"><span class="fa fa-plus-square fa-fw"></span></a>',
                 //删除组
-                '<a href="#" id="deleteGroup" title="删除组"><span class="fa fa-trash fa-fw"></span></a>',
+                '<a href="javascript:void(0)" id="deleteGroup" title="删除组"><span class="fa fa-trash fa-fw"></span></a>',
                 '</div>',
                 '</h3>',
                 '</div>'].join(''));
-            var paramList = $(this)[0].params;
+            var paramList = $(JsonParamData[j])[0].params;
             arr.push(['<div class="panel-body">',
                 '<div class="param-body">'].join(''));
             for (var i = 0; i < paramList.length; i++) {
@@ -179,17 +184,15 @@ var itemParam = {
                 arr.push(['<div class="param-name">参数',
                     '</div>',
                     '<div class="param-value">',
-                    '<a href="#" class="editable">'+ paramList[i]+'</a>',
-                    '<a href="#" class="deleteLine" id="deleteLine"><span class="fa fa-close fa-lg"></span></a>',
+                    '<a href="javascript:void(0)" class="editable" id="paramValue">' + paramList[i] + '</a>',
+                    '<a href="javascript:void(0)" class="deleteLine" id="deleteLine"><span class="fa fa-close fa-lg"></span></a>',
                     '</div>'].join(''));
                 arr.push('</div>');
             }
 
-            arr.push(['</div>',
-                '</div>',
-                '</div>',
-                '</div>'].join(''));
-        });
+            arr.push(['</div></div></div></div>'].join(''));
+        }
+        arr.push('</div');
         $('#param-group').html(arr.join(''));
     }
 

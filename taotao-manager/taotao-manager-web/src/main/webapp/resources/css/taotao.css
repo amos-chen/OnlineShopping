@@ -1,54 +1,59 @@
 /*设置背景*/
-body{
+body {
     background: #222;
 }
 
-.navbar-right{
+.navbar-right {
     margin-right: 0px;
 }
 
 /*取消导航栏的默认圆角*/
-.navbar-default{
+.navbar-default {
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
 }
+
 /*顶部导航栏底部margin:0*/
-.navbar-static-top{
+.navbar-static-top {
     margin-bottom: 0px;
 }
+
 /*取消li的圆点*/
-li{
+li {
     list-style: none;
 }
 
-.taotao-top-nav li:last-child{
+.taotao-top-nav li:last-child {
     margin-right: 15px;
 }
 
 /*使li横向排列*/
-.taotao-top-nav>li{
+.taotao-top-nav > li {
     float: left;
     display: inline-block;
 }
-.taotao-top-nav>li>a{
+
+.taotao-top-nav > li > a {
     color: #9d9d9d;
     height: 50px;
     /*li里的a元素居中*/
     line-height: 20px;
     padding: 15px 15px;
 }
+
 /*a的聚焦颜色*/
-.taotao-top-nav>li>a:hover{
+.taotao-top-nav > li > a:hover {
     color: white;
 }
-.taotao-top-nav>li>a:hover,
-.taotao-top-nav>li>a:focus,
-.taotao-top-nav>li.open>a{
+
+.taotao-top-nav > li > a:hover,
+.taotao-top-nav > li > a:focus,
+.taotao-top-nav > li.open > a {
     background: #383838 !important;
 }
 
 @media (min-width: 768px) {
-    .dropdown-menu-caret:before{
+    .dropdown-menu-caret:before {
         position: absolute;
         top: -7px;
         right: 9px;
@@ -58,7 +63,8 @@ li{
         border-right: 7px solid transparent;
         content: "";
     }
-    .dropdown-menu-caret:after{
+
+    .dropdown-menu-caret:after {
         position: absolute;
         top: -6px;
         right: 10px;
@@ -71,7 +77,7 @@ li{
 }
 
 @media (min-width: 768px) {
-    .dropup-menu-caret:before{
+    .dropup-menu-caret:before {
         position: absolute;
         bottom: -7px;
         right: 9px;
@@ -81,7 +87,8 @@ li{
         border-right: 7px solid transparent;
         content: "";
     }
-    .dropup-menu-caret:after{
+
+    .dropup-menu-caret:after {
         position: absolute;
         bottom: -6px;
         right: 10px;
@@ -94,7 +101,7 @@ li{
 }
 
 @media (max-width: 768px) {
-    .dropdown-menu-caret:before{
+    .dropdown-menu-caret:before {
         position: absolute;
         top: -7px;
         left: 9px;
@@ -104,7 +111,8 @@ li{
         border-right: 7px solid transparent;
         content: "";
     }
-    .dropdown-menu-caret:after{
+
+    .dropdown-menu-caret:after {
         position: absolute;
         top: -6px;
         left: 10px;
@@ -116,57 +124,68 @@ li{
     }
 }
 
-@media(min-width: 768px){
-    .navbar-collapse{
+@media (min-width: 768px) {
+    .navbar-collapse {
         width: 225px;
         position: absolute;
         margin-top: 51px;
     }
 }
-.navbar-collapse{
+
+.navbar-collapse {
     border: solid black 1px;
 }
-.metisFolder a{
+
+.metisFolder a {
     color: #9d9d9d;
 }
-.metisFolder a:hover{
+
+.metisFolder a:hover {
     color: #ffffff;
 }
-.metisFolder>li a:hover,
-.metisFolder>li a:visited,
-.metisFolder>li.active>a,
-.metisFolder>li a:focus{
+
+.metisFolder > li a:hover,
+.metisFolder > li a:visited,
+.metisFolder > li.active > a,
+.metisFolder > li a:focus {
     background: #383838 !important;
 }
-.sidebar-search{
+
+.sidebar-search {
     padding: 15px;
 }
-.active>a>.fa-folder:before{
+
+.active > a > .fa-folder:before {
     content: "\f07c";
 }
-.arrow{
+
+.arrow {
     float: right;
 }
-.active>a>.arrow:before{
-    content:"\f107";
-}
-.arrow:before{
-    content:"\f104";
+
+.active > a > .arrow:before {
+    content: "\f107";
 }
 
-.page-wrapper{
+.arrow:before {
+    content: "\f104";
+}
+
+.page-wrapper {
     padding: 0 15px;
     background: white;
     min-height: 752px;
 }
-@media(min-width: 768px) {
-    .page-wrapper{
-        margin:0 0 0 225px;
+
+@media (min-width: 768px) {
+    .page-wrapper {
+        margin: 0 0 0 225px;
         position: inherit;
         padding: 0 30px;
     }
 }
-.bread-navbar{
+
+.bread-navbar {
     margin: 0 -15px;
     min-height: 41px;
     line-height: 40px;
@@ -175,79 +194,85 @@ li{
     -webkit-border-radius: 0px;
     border: solid black 1px;
 }
-.bread-navbar>li a{
+
+.bread-navbar > li a {
     color: #9d9d9d;
 }
-.bread-navbar>.active{
+
+.bread-navbar > .active {
     color: white;
     text-decoration: none;
 }
-@media(min-width: 768px) {
-    .bread-navbar{
+
+@media (min-width: 768px) {
+    .bread-navbar {
         margin: 0 -30px;
     }
 }
 
-.wrapper-content{
+.wrapper-content {
     margin-top: 30px;
 }
+
 @media (max-width: 768px) {
-    .wrapper-table{
+    .wrapper-table {
         margin-top: 15px;
     }
 }
-.panel{
-    margin-bottom : 0px;
+
+.panel {
+    margin-bottom: 0px;
 }
-.wrapper-content>div>div>.panel{
+
+.wrapper-content > div > div > .panel {
     min-height: 700px;
 }
 
-
-.wrapper-content>div
-
-.jstree-open>a>i.fa-folder:before{
+.wrapper-content > div
+.jstree-open > a > i.fa-folder:before {
     content: '\f07c';
 }
 
-.file-preview-image{
+.file-preview-image {
     height: 160px;
     width: auto;
 }
-.note-editable.panel-body li{
+
+.note-editable.panel-body li {
     list-style: inherit;
 }
 
-
-#cid_choosed{
+#cid_choosed {
     border: none;
 }
 
-.warnning-icon>span.fa-warning{
+.warnning-icon > span.fa-warning {
     font-size: 8em;
     /*line-height: 1.5em;*/
     color: navajowhite;
 }
+
 .modal-delete div,
 .modal-delete h1,
-.modal-delete p{
+.modal-delete p {
     padding: 10px 0;
 }
 
-    /*商品表格中的操作的样式*/
-.dropdown-edit>ul.dropdown-menu{
+/*商品表格中的操作的样式*/
+.dropdown-edit > ul.dropdown-menu {
     right: 0;
     left: auto;
     min-width: 120px;
 }
 
-.page-header{
+.page-header {
     margin: 0 0 12px;
     border-bottom: 1px dotted #E2E2E2;
     padding-bottom: 16px;
     padding-top: 7px;
 }
-.page-header>h1{
+
+.page-header > h1 {
     padding: 0;
     margin: 0 8px;
     font-size: 32px;
@@ -256,32 +281,35 @@ li{
 }
 
 /*itemParam样式设置*/
-.page-header small{
+.page-header small {
     margin: 0 6px;
     font-size: 14px;
     font-weight: 300;
     color: #8089A0;
 }
 
-.param-body{
+.param-body {
     display: table;
     border-left: 1px solid #d9edf7;
     border-right: 1px solid #d9edf7;
-    width:98%;
+    width: 98%;
 }
+
 .param-row:first-child .param-name,
-.param-row:first-child .param-value{
+.param-row:first-child .param-value {
     border-top: 1px solid #d9edf7;
 }
+
 .param-row:last-child .param-name,
-.param-row:last-child .param-value{
+.param-row:last-child .param-value {
     border-bottom: 1px solid #d9edf7;
 }
 
-.param-row{
+.param-row {
     display: table-row;
 }
-.param-name{
+
+.param-name {
     display: table-cell;
     background: #d9edf7;
     color: #31708f;
@@ -290,61 +318,79 @@ li{
     padding: 6px 10px 6px 4px;
     border-top: 1px solid white;
 }
-.param-value{
+
+.param-value {
     display: table-cell;
     padding: 12px;
     border-top: 1px dotted #d9edf7;
 }
 
-.edit-group{
+.edit-group {
     display: inline;
     float: right;
 }
-.edit-group a{
+
+.edit-group a {
     color: white;
     line-height: 27px;
 }
 
-.param-group .panel{
+.param-group .panel {
     margin-bottom: 20px;
-    min-height: 280px;
+
 }
 
+.param-group .panel-body {
+    height: 350px;
+    overflow: scroll;
+}
 
-.panel-title>a.editable.editable-click.editable-disabled{
-    color: white!important;
+.panel-title > a.editable.editable-click.editable-disabled {
+    color: white !important;
     border-bottom: none;
 }
-h3.panel-title{
+
+h3.panel-title {
     line-height: normal;
 }
-.panel-title>a.editable.editable-click{
+
+.panel-title > a.editable.editable-click {
     color: white;
     border-bottom: dashed 1px white;
 }
-div.editable-input>input{
-    width: 100px!important;
+
+div.editable-input > input {
+    width: 100px !important;
     margin-left: 10px;
 }
-.panel-title .btn-primary{
+
+.panel-title .btn-primary {
     background-color: #5cb85c;
     border-color: #4cae4c;
 }
-.panel-title .btn-primary:hover{
+
+.panel-title .btn-primary:hover {
     background-color: #449d44;
     border-color: #398439;
 }
 
-.deleteModal h2{
+.deleteModal h2 {
     margin: 15px;
 }
-.deleteLine{
-    position: absolute;
-    right: 45px;
+
+.deleteLine {
+    float: right;
     color: #a94442;
     line-height: 25px;
 }
+
 .deleteLine:hover,
-.deleteLine:visited{
+.deleteLine:visited {
     color: #a9171d;
+}
+
+@media (min-width: 768px ) {
+    #cidModal {
+        margin-top: -303.5px !important;
+    }
 }

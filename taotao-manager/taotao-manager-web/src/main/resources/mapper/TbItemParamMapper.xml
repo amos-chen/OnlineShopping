@@ -45,9 +45,9 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
     <insert id="insert" parameterType="com.taotao.pojo.TbItemParam">
-    insert into tb_item_param (id, item_cat_id, created, 
+    insert into tb_item_param (item_cat_id, created,
       updated, param_data)
-    values (#{id,jdbcType=BIGINT}, #{itemCatId,jdbcType=BIGINT}, #{created,jdbcType=TIMESTAMP}, 
+    values (#{itemCatId,jdbcType=BIGINT}, #{created,jdbcType=TIMESTAMP},
       #{updated,jdbcType=TIMESTAMP}, #{paramData,jdbcType=LONGVARCHAR})
   </insert>
     <insert id="insertSelective" parameterType="com.taotao.pojo.TbItemParam">
@@ -108,10 +108,9 @@
     <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.taotao.pojo.TbItemParam">
     update tb_item_param
     set item_cat_id = #{itemCatId,jdbcType=BIGINT},
-      created = #{created,jdbcType=TIMESTAMP},
       updated = #{updated,jdbcType=TIMESTAMP},
       param_data = #{paramData,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=BIGINT}
+    where item_cat_id = #{itemCatId,jdbcType=BIGINT}
   </update>
     <update id="updateByPrimaryKey" parameterType="com.taotao.pojo.TbItemParam">
     update tb_item_param

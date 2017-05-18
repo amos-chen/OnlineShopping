@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -129,6 +130,52 @@ public class ItemController {
 			return result;
 		}catch (TaotaoException e){
 			result = new ExecuteJsonResult<TbItemParam>(false,e.getMessage());
+			return result;
+		}
+	}
+
+	@RequestMapping(value = "/insert/{cid}/itemParam",method = RequestMethod.POST)
+	@ResponseBody
+	public ExecuteJsonResult<Integer> insertItemParam(@PathVariable("cid") long cid,String paramData){
+		ExecuteJsonResult<Integer> result;
+		try {
+			TbItemParam tbItemParam = new TbItemParam();
+			tbItemParam.setItemCatId(cid);
+			tbItemParam.setParamData(paramData);
+			Date date = new Date();
+			tbItemParam.setCreated(date);
+			tbItemParam.setUpdated(date);
+			Integer data = itemsService.insertTbitemParam(tbItemParam);
+			result = new ExecuteJsonResult<Integer>(true,data);
+			return result;
+		}catch (DataInsertFailException e){
+			result = new ExecuteJsonResult<Integer>(false,e.getMessage());
+			return result;
+		}catch (TaotaoException e){
+			result = new ExecuteJsonResult<Integer>(false,e.getMessage());
+			return result;
+		}
+
+	}
+
+	@RequestMapping(value = "/update/{cid}/itemParam",method = RequestMethod.POST)
+	@ResponseBody
+	public ExecuteJsonResult<Integer> updateItemParam(@PathVariable("cid") long cid,String paramData){
+		ExecuteJsonResult<Integer> result;
+		try {
+			TbItemParam tbItemParam = new TbItemParam();
+			tbItemParam.setItemCatId(cid);
+			tbItemParam.setParamData(paramData);
+			Date date = new Date();
+			tbItemParam.setUpdated(date);
+			Integer data = itemsService.updateTbitemParam(tbItemParam);
+			result = new ExecuteJsonResult<Integer>(true,data);
+			return result;
+		}catch (DataInsertFailException e){
+			result = new ExecuteJsonResult<Integer>(false,e.getMessage());
+			return result;
+		}catch (TaotaoException e){
+			result = new ExecuteJsonResult<Integer>(false,e.getMessage());
 			return result;
 		}
 	}

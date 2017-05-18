@@ -5,10 +5,7 @@ import com.taotao.dao.TbItemDescMapper;
 import com.taotao.dao.TbItemMapper;
 import com.taotao.dao.TbItemParamMapper;
 import com.taotao.dto.JSTree;
-import com.taotao.exception.DataDeleteFailException;
-import com.taotao.exception.DataInsertFailException;
-import com.taotao.exception.DataNotFindException;
-import com.taotao.exception.TaotaoException;
+import com.taotao.exception.*;
 import com.taotao.pojo.TbItem;
 import com.taotao.pojo.TbItemCat;
 import com.taotao.pojo.TbItemDesc;
@@ -171,6 +168,38 @@ public class ItemsServiceImpl implements ItemsService {
 			throw new TaotaoException("系统内部错误:"+e.getMessage());
 		}
 
+	}
+
+	@Override
+	public int insertTbitemParam(TbItemParam tbItemParam) throws DataInsertFailException,TaotaoException{
+		try{
+			int result = tbItemParamMapper.insert(tbItemParam);
+			if(result==0){
+				throw new DataInsertFailException("商品参数模板插入失败!");
+			}else{
+				return result;
+			}
+		}catch (DataInsertFailException e){
+			throw e;
+		}catch (Exception e){
+			throw new TaotaoException("系统内部错误:"+e.getMessage());
+		}
+	}
+
+	@Override
+	public int updateTbitemParam(TbItemParam tbItemParam) {
+		try {
+			int result = tbItemParamMapper.updateByPrimaryKeyWithBLOBs(tbItemParam);
+			if(result==0){
+				throw new DataUpdateFailException("商品参数模板更新失败!");
+			}else{
+				return result;
+			}
+		}catch (DataUpdateFailException e){
+			throw e;
+		} catch (Exception e){
+			throw new TaotaoException("系统内部错误:"+e.getMessage());
+		}
 	}
 
 	private int insertItemDesc(TbItem tbItem, String description) {

@@ -25,4 +25,8 @@ public interface ItemsService {
 	TbItemCat queryItemCat(Long cid);
 
 	TbItemParam queryItemParam(Long cid);
+
+	int insertTbitemParam(TbItemParam tbItemParam);
+
+	int updateTbitemParam(TbItemParam tbItemParam);
 }

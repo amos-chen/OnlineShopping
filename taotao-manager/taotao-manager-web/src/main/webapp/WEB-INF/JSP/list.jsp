@@ -137,23 +137,19 @@
 
                             <%--点击删除按键时的弹出框--%>
                             <div class="modal fade" id="modal-delete">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-body">
-                                            <div class="container-fluid text-center modal-delete">
-                                                <div class="col-sm-12">
-                                                    <div class="warnning-icon">
-                                                        <span class="fa fa-warning fa-lg"></span>
-                                                    </div>
-                                                    <h1><strong>操作提示</strong></h1>
-                                                    <p>确定要删除吗?</p>
-                                                    <a href="#" class="btn btn-success" data-dismiss="modal">取消</a>
-                                                    <a href="#" id="btn-remove" class="btn btn-danger">确认</a>
-                                                </div>
+                                <div class="modal-body">
+                                    <div class="container-fluid text-center modal-delete">
+                                        <div class="col-sm-12">
+                                            <div class="warnning-icon">
+                                                <span class="fa fa-warning fa-lg"></span>
                                             </div>
+                                            <h1><strong>操作提示</strong></h1>
+                                            <p>确定要删除吗?</p>
+                                            <a href="#" class="btn btn-success" data-dismiss="modal">取消</a>
+                                            <a href="#" id="btn-remove" class="btn btn-danger">确认</a>
                                         </div>
-                                    </div><!-- /.modal-content -->
-                                </div><!-- /.modal-dialog -->
+                                    </div>
+                                </div>
                             </div><!-- /.modal -->
                             <%--数据表格主体，显示查询到的数据--%>
                             <div class="panel-body">
