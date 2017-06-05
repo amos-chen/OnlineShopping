@@ -243,6 +243,24 @@
                                     </div>
                                 </div><!-- /.modal -->
 
+                                <div class="modal fade" id="redirectMoadal">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"
+                                                aria-hidden="true">&times;
+                                        </button>
+                                        <h4 class="modal-title">提示:</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p class="text-warning"><span id="modalValue"></span>未包含参数模板，请先新建参数模板！</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                                            取消
+                                        </button>
+                                        <button id="redirectConfirm" type="button" class="btn btn-primary">确定</button>
+                                    </div>
+                                </div><!-- /.modal -->
+
                                 <div class="form-group">
                                     <div class="col-sm-10 col-sm-offset-2">
                                         <button id="submit" type="button" class="btn btn-primary">保存</button>

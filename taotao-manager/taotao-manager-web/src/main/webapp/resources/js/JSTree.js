@@ -3,6 +3,9 @@ var JSTree = {
     URL: {
         JSTreeJsonURL: function (node) {
             return "/taotao/manager/itemCat";
+        },
+        queryItemParam: function (cid) {
+            return "/taotao/manager/" + cid + "/itemParam";
         }
 
     },
@@ -13,8 +16,8 @@ var JSTree = {
             $('#jstreeMsg').hide();
         }),
 
-        //这个是关键，如果不清空实例，jstree不会重新生成
-        $('#jstree').data('jstree', false).empty();
+            //这个是关键，如果不清空实例，jstree不会重新生成
+            $('#jstree').data('jstree', false).empty();
         $("#jstree").jstree({
             // 'plugins': ["checkbox"], //出现选择框
             // 'checkbox': {cascade: "", three_state: false}, //不级联
@@ -36,22 +39,49 @@ var JSTree = {
             //获取选中节点的class值
             var choosedText = $(node).attr("class");
             //判断class值中是否含有folder
-            if (choosedText.indexOf("folder")>0) {
+            if (choosedText.indexOf("folder") > 0) {
                 $('#jstreeMsg').hide().html('<label class="label label-danger label-lg">请选择子节点！</label>').show(300);
             } else {
                 var value = $(".jstree-clicked").text();
-                $("#cid_choosed").html(value);
-                $('#cid').val(id);
-                $('#jstreeMsg').hide();
-                $('#mymodal').modal('hide');
+                var itemParam = JSTree.getItemParam(id);
+                console.log(itemParam);
+                if (itemParam === null||itemParam===undefined) {
+                    $('#modalValue').html(value);
+                    $('#redirectMoadal').modal('show');
+                    $('#redirectConfirm').on('click', function () {
+                        window.location.href='/taotao/manager/itemParam?cid='+id;
+                    });
+                } else {
+                    $("#cid_choosed").html(value);
+                    $('#cid').val(id);
+                    $('#jstreeMsg').hide();
+                    $('#mymodal').modal('hide');
 
-                //当span的HTML发生改变时，重新验证span(validator里的内容)
-                $('#itemAddForm').bootstrapValidator('revalidateField', 'itemCat');
+                    //当span的HTML发生改变时，重新验证span(validator里的内容)
+                    $('#itemAddForm').bootstrapValidator('revalidateField', 'itemCat');
+                }
 
             }
         });
 
     },
+
+    getItemParam: function (cid) {
+        $.ajax({
+            url: JSTree.URL.queryItemParam(cid),
+            method: 'get',
+            success: function (result) {
+                if (result && result['success']) {
+                    return result.data;
+                }
+            }
+
+        })
+    },
     
+    writeParamBody:function (paramData) {
+        
+    }
+
 
 }
