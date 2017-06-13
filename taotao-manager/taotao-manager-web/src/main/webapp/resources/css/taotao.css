@@ -394,3 +394,7 @@ div.editable-input > input {
         margin-top: -303.5px !important;
     }
 }
+
+.parameters div.row{
+    margin-bottom: 5px;
+}

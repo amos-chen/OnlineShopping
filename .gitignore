@@ -9,3 +9,5 @@ target/
 .setting/
 test/
 taotao-manager/taotao-manager-web/src/main/webapp/WEB-INF/JSP/test.jsp
+taotao-manager/taotao-manager-web/src/main/webapp/WEB-INF/JSP/common/footer_offline.jsp
+taotao-manager/taotao-manager-web/src/main/webapp/WEB-INF/JSP/common/header_offline.jsp

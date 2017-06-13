@@ -44,16 +44,16 @@ var JSTree = {
             } else {
                 var value = $(".jstree-clicked").text();
                 var itemParam = JSTree.getItemParam(id);
-                console.log(itemParam);
-                if (itemParam === null||itemParam===undefined) {
+                if (itemParam === null || itemParam === undefined) {
                     $('#modalValue').html(value);
                     $('#redirectMoadal').modal('show');
                     $('#redirectConfirm').on('click', function () {
-                        window.location.href='/taotao/manager/itemParam?cid='+id;
+                        window.location.href = '/taotao/manager/itemParam?cid=' + id;
                     });
                 } else {
                     $("#cid_choosed").html(value);
                     $('#cid').val(id);
+                    JSTree.writeParamBody(itemParam);
                     $('#jstreeMsg').hide();
                     $('#mymodal').modal('hide');
 
@@ -67,21 +67,42 @@ var JSTree = {
     },
 
     getItemParam: function (cid) {
+        var data = null;
         $.ajax({
             url: JSTree.URL.queryItemParam(cid),
             method: 'get',
+            async: false,
             success: function (result) {
                 if (result && result['success']) {
-                    return result.data;
+                    data = result['data'];
                 }
             }
-
         })
+        return data;
     },
-    
-    writeParamBody:function (paramData) {
-        
+
+    writeParamBody: function (itemParam) {
+        $('#parameters').remove();
+        var arr = new Array();
+        arr.push(['<div class="form-group parameters" id="parameters">',
+            '<label for="params" class="col-sm-2 control-label">规格参数:</label>',
+            '<div class="col-sm-6">'].join(''));
+        console.log(itemParam.paramData);
+        var jsonData = JSON.parse(itemParam.paramData);
+        for (var i = 0; i < jsonData.length; i++) {
+            arr.push(['<fieldset>',
+                '<legend><small>' + $(jsonData[i])[0].group + '</small></legend>'].join(''));
+            var paramList = $(jsonData[i])[0].params;
+            for (var j = 0; j < paramList.length; j++) {
+                arr.push(['<div class="row">',
+                    '<span class="col-sm-4 control-label">' + paramList[j] + ':' + '</span>',
+                    '<div class="col-sm-8">',
+                    '<input class="form-control" type="text"/>',
+                    '</div></div>'].join(''))
+            }
+            arr.push('</fieldset>');
+        }
+        arr.push('</div></div>');
+        $('#HTMLeditor').after(arr.join(''));
     }
-
-
 }

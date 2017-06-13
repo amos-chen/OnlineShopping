@@ -208,7 +208,7 @@
                                 </div>
                                 <%--图片上传功能--%>
                                 <div class="form-group">
-                                    <label for="barcode" class="col-sm-2 control-label">上传图片:</label>
+                                    <label for="image" class="col-sm-2 control-label">上传图片:</label>
                                     <div class="col-sm-6">
                                         <input name="imageInputFile" id="imageInputFile" type="file" multiple
                                                class="file-loading">
@@ -216,13 +216,16 @@
                                     </div>
                                 </div>
                                 <%--富文本编辑器--%>
-                                <div class="form-group">
-                                    <label for="barcode" class="col-sm-2 control-label">详细描述:</label>
+                                <div class="form-group" id="HTMLeditor">
+                                    <label for="descriptionValue" class="col-sm-2 control-label">详细描述:</label>
                                     <div class="col-sm-6">
                                         <div class="summernote" id="summernote"></div>
                                         <input hidden="hidden" name="description" id="descriptionValue"/>
                                     </div>
                                 </div>
+
+                                <%--规格参数在jstree.js里动态添加--%>
+
                                 <div class="form-group">
                                     <div class="col-sm-6 col-sm-offset-2">
                                         <p class="help-block"><span class="text-danger">*</span>为必填项</p>

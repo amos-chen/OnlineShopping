@@ -159,6 +159,7 @@ var itemParam = {
         var arr = new Array();
         arr.push('<div class="row">');
         for (var j = 0; j < JsonParamData.length; j++) {
+            // 三个panel为一行
             if (j !== 0 && j % 3 === 0) {
                 arr.push('</div><div class="row">');
             }
