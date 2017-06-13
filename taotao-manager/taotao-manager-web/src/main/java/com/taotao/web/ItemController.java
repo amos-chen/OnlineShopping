@@ -70,10 +70,10 @@ public class ItemController {
 
 	@RequestMapping(value = "/add/item", method = RequestMethod.POST)
 	@ResponseBody
-	public ExecuteJsonResult<Integer> addItem(TbItem tbItem, String description) {
+	public ExecuteJsonResult<Integer> addItem(TbItem tbItem, String description,String itemParameter) {
 		ExecuteJsonResult<Integer> result;
 		try {
-			int data = itemsService.insertItem(tbItem, description);
+			int data = itemsService.insertItem(tbItem, description,itemParameter);
 			result = new ExecuteJsonResult<Integer>(true, data);
 			return result;
 		} catch (DataInsertFailException e) {

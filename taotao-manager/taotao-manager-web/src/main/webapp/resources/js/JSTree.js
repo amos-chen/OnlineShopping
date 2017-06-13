@@ -12,7 +12,6 @@ var JSTree = {
     initTree: function () {
         //当关闭模态弹窗时隐藏警告信息
         $('#mymodal').on('hidden.bs.modal', function (e) {
-            console.log('test');
             $('#jstreeMsg').hide();
         }),
 
@@ -87,17 +86,16 @@ var JSTree = {
         arr.push(['<div class="form-group parameters" id="parameters">',
             '<label for="params" class="col-sm-2 control-label">规格参数:</label>',
             '<div class="col-sm-6">'].join(''));
-        console.log(itemParam.paramData);
         var jsonData = JSON.parse(itemParam.paramData);
         for (var i = 0; i < jsonData.length; i++) {
             arr.push(['<fieldset>',
-                '<legend><small>' + $(jsonData[i])[0].group + '</small></legend>'].join(''));
+                '<legend><small id="group">' + $(jsonData[i])[0].group + '</small></legend>'].join(''));
             var paramList = $(jsonData[i])[0].params;
             for (var j = 0; j < paramList.length; j++) {
                 arr.push(['<div class="row">',
-                    '<span class="col-sm-4 control-label">' + paramList[j] + ':' + '</span>',
+                    '<span class="col-sm-4 control-label" id="key">' + paramList[j] +  '</span>',
                     '<div class="col-sm-8">',
-                    '<input class="form-control" type="text"/>',
+                    '<input id="value" class="form-control" type="text"/>',
                     '</div></div>'].join(''))
             }
             arr.push('</fieldset>');

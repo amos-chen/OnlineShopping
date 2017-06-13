@@ -61,7 +61,7 @@ var table = {
                 field: 'cid',
                 title: '商品类目'
             }, {
-                field: 'sell_point',
+                field: 'sellPoint',
                 title: '卖点'
             }, {
                 field: 'price',

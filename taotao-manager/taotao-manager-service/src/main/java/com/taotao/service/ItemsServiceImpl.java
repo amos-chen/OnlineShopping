@@ -1,15 +1,9 @@
 package com.taotao.service;
 
-import com.taotao.dao.TbItemCatMapper;
-import com.taotao.dao.TbItemDescMapper;
-import com.taotao.dao.TbItemMapper;
-import com.taotao.dao.TbItemParamMapper;
+import com.taotao.dao.*;
 import com.taotao.dto.JSTree;
 import com.taotao.exception.*;
-import com.taotao.pojo.TbItem;
-import com.taotao.pojo.TbItemCat;
-import com.taotao.pojo.TbItemDesc;
-import com.taotao.pojo.TbItemParam;
+import com.taotao.pojo.*;
 import com.taotao.utils.IDUtils;
 import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
@@ -41,6 +35,9 @@ public class ItemsServiceImpl implements ItemsService {
 
 	@Autowired
 	private TbItemParamMapper tbItemParamMapper;
+
+	@Autowired
+	private TbItemParamItemMapper tbItemParamItemMapper;
 
 	@Override
 	public TbItem queryById(@Param("id") long id) {
@@ -82,7 +79,7 @@ public class ItemsServiceImpl implements ItemsService {
 
 	@Override
 	@Transactional
-	public int insertItem(TbItem tbItem, String description) throws DataInsertFailException, TaotaoException {
+	public int insertItem(TbItem tbItem, String description,String itemParameter) throws DataInsertFailException, TaotaoException {
 		try {
 			//补全tbItem信息
 			Date date = new Date();
@@ -94,9 +91,19 @@ public class ItemsServiceImpl implements ItemsService {
 			Long id = IDUtils.genItemId();
 			tbItem.setId(id);
 
+			//创建tbitemParamItem对象
+			TbItemParamItem tbItemParamItem = new TbItemParamItem();
+			tbItemParamItem.setItemId(tbItem.getId());
+			tbItemParamItem.setParamData(itemParameter);
+			tbItemParamItem.setCreated(date);
+			tbItemParamItem.setUpdated(date);
+
+			//把tbItemParamItem对象持久化到对应的数据库的表中
+			int result = tbItemParamItemMapper.insert(tbItemParamItem);
+
 			int data = tbItemMapper.insertSelective(tbItem);
 			int InsertDescData = insertItemDesc(tbItem, description);
-			if (data != 0 && InsertDescData != 0) {
+			if (data != 0 && InsertDescData != 0 && result!=0) {
 				return data;
 			} else {
 				throw new DataInsertFailException("商品信息插入失败！");

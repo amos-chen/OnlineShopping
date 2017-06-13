@@ -37,9 +37,9 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.taotao.pojo.TbItemParamItem">
-    insert into tb_item_param_item (id, item_id, created, 
+    insert into tb_item_param_item (item_id, created,
       updated, param_data)
-    values (#{id,jdbcType=BIGINT}, #{itemId,jdbcType=BIGINT}, #{created,jdbcType=TIMESTAMP}, 
+    values (#{itemId,jdbcType=BIGINT}, #{created,jdbcType=TIMESTAMP},
       #{updated,jdbcType=TIMESTAMP}, #{paramData,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.taotao.pojo.TbItemParamItem">

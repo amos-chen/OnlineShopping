@@ -225,6 +225,8 @@
                                 </div>
 
                                 <%--规格参数在jstree.js里动态添加--%>
+                                <%--提交表单用--%>
+                                <input id="itemParameter" name="itemParameter" type="hidden">
 
                                 <div class="form-group">
                                     <div class="col-sm-6 col-sm-offset-2">
