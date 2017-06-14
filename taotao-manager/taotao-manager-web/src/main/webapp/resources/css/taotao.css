@@ -52,6 +52,12 @@ li {
     background: #383838 !important;
 }
 
+.items-table{
+    position: relative;
+    z-index: auto;
+}
+
+
 @media (min-width: 768px) {
     .dropdown-menu-caret:before {
         position: absolute;
@@ -389,11 +395,6 @@ div.editable-input > input {
     color: #a9171d;
 }
 
-@media (min-width: 768px ) {
-    #cidModal {
-        margin-top: -303.5px !important;
-    }
-}
 
 .parameters div.row{
     margin-bottom: 5px;
