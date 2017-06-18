@@ -225,17 +225,18 @@ var table = {
 
             },
             'click .edit': function (e, value, row, index) {
-
+                window.location.href = "taotao/manager/updateItem?id="+row.id+"&&cid="+row.cid;
             },
             //删除单个商品
             'click .remove': function (e, value, row, index) {
+                console.log(row);
                 $('#modal-delete').modal('show');
                 //用one事件，只绑定一次，不然会出现错误
                 $('#btn-remove').one('click', function () {
                     var arr = new Array();
                     arr.push(row.id);
                     table.deleteItems(arr);
-                })
+                });
                 //当modal隐藏时，移除btn-remove上绑定的事件
                 $('#modal-delete').on('hidden.bs.modal', function () {
                     console.log("test");
