@@ -3,9 +3,9 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-<%--&lt;%&ndash;bootstrap modal.css&ndash;%&gt;--%>
-<%--<link href="https://cdn.bootcss.com/bootstrap-modal/2.2.6/css/bootstrap-modal-bs3patch.css" rel="stylesheet">--%>
-<%--<link href="https://cdn.bootcss.com/bootstrap-modal/2.2.6/css/bootstrap-modal.min.css" rel="stylesheet">--%>
+<%--bootstrap modal.css--%>
+<link href="https://cdn.bootcss.com/bootstrap-modal/2.2.6/css/bootstrap-modal-bs3patch.css" rel="stylesheet">
+<link href="https://cdn.bootcss.com/bootstrap-modal/2.2.6/css/bootstrap-modal.min.css" rel="stylesheet">
 
 <!-- metisMenu.css -->
 <link href="https://cdn.bootcss.com/metisMenu/2.7.0/metisMenu.min.css" rel="stylesheet">

@@ -92,8 +92,7 @@ public class FileInputServiceImpl implements FileInputService {
 
     @Override
     public boolean deleteFile(String extra, String key) {
-        boolean flag = FtpUtil.deleteFile(FTP_HOST, FTP_PORT, FTP_USERNAME, FTP_PASSWORD,
-                extra, key);
+        boolean flag = FtpUtil.deleteFile(FTP_HOST,FTP_PORT,FTP_USERNAME,FTP_PASSWORD,extra,key);
         return flag;
     }
 

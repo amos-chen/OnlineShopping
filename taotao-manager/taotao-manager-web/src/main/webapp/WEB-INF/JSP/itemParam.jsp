@@ -138,70 +138,57 @@
                                 <%--<h1 name="itemTitle" id="itemTitle"><span class="fa fa-angle-double-right"></span></h1>--%>
                             </div>
                             <div class="param-group" id="param-group"></div>
-
                             <%--商品类目选择弹窗--%>
                             <div id="cidModal" class="modal fade">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">请选择类目</h4>
-                                        </div>
-                                        <%--商品类目选择tree--%>
-                                        <div class="modal-body">
-                                            <div id="jstree"></div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <span id="jstreeMsg"></span>
-                                            <button id="jstreeChoosed" type="button"
-                                                    class="btn btn-success">确定
-                                            </button>
-                                        </div>
-                                    </div>
+                                <div class="modal-header">
+                                    <h4 class="modal-title">请选择类目</h4>
+                                </div>
+                                <%--商品类目选择tree--%>
+                                <div class="modal-body">
+                                    <div id="jstree"></div>
+                                </div>
+                                <div class="modal-footer">
+                                    <span id="jstreeMsg"></span>
+                                    <button id="jstreeChoosed" type="button"
+                                            class="btn btn-success">确定
+                                    </button>
                                 </div>
                             </div><!-- /.modal -->
                         </div>
 
                         <%--删除提示--%>
                         <div class="modal fade deleteModal" id="deleteModal">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                            &times;
-                                        </button>
-                                        <h4 class="modal-title"><span class="fa fa-warning fa-fw"></span>操作提示:</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <h2 class="text-center text-danger">是否进行删除操作?</h2>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-success" data-dismiss="modal">取消
-                                        </button>
-                                        <button id="deleteConfirm" type="button" class="btn btn-danger">确定</button>
-                                    </div>
-                                </div>
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title"><span class="fa fa-warning fa-fw"></span>操作提示:</h4>
+                            </div>
+                            <div class="modal-body">
+                                <h2 class="text-center text-danger">是否进行删除操作?</h2>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success" data-dismiss="modal">取消
+                                </button>
+                                <button id="deleteConfirm" type="button" class="btn btn-danger">确定</button>
                             </div>
                         </div><!-- /.modal -->
 
                         <%--保存提示--%>
                         <div class="modal fade" id="saveModal">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                            &times;
-                                        </button>
-                                        <h4 class="modal-title"><span class="fa fa-save fa-fw"></span>操作提示</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <h2 class="text-center text-danger">是否保存修改？</h2>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-success" data-dismiss="modal">取消
-                                        </button>
-                                        <button id="saveConfrim" type="button" class="btn btn-danger">确定</button>
-                                    </div>
-                                </div>
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title"><span class="fa fa-save fa-fw"></span>操作提示</h4>
+                            </div>
+                            <div class="modal-body">
+                                <h2 class="text-center text-danger">是否保存修改？</h2>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success" data-dismiss="modal">取消
+                                </button>
+                                <button id="saveConfrim" type="button" class="btn btn-danger">确定</button>
                             </div>
                         </div><!-- /.modal -->
                     </form>
@@ -216,6 +203,7 @@
 <%@include file="common/footer.jsp" %>
 <script type="text/javascript" src="/resources/js/itemParam.js"></script>
 <script type="text/javascript">
+
 
 
     $("#menu").metisMenu({

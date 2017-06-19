@@ -126,6 +126,7 @@
     $("#menu").metisMenu({
 //        toggle: false
     });
+
 </script>
 </body>
 </html>

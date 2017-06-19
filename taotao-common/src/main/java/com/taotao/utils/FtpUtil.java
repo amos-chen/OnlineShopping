@@ -135,7 +135,7 @@ public class FtpUtil {
 		return result;
 	}
 
-	public static boolean deleteFile(String host,int port,String userName,String password,
+	public static boolean deleteFile(String host,Integer port,String userName,String password,
 							  String filePath,String fileName){
 		boolean flag = false;
 		try {

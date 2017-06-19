@@ -135,10 +135,8 @@
                                 <h3 class="panel-title">商品列表</h3>
                             </div>
 
-                    <%--点击删除按键时的弹出框--%>
-                    <div class="modal fade" id="modal-delete">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
+                            <%--点击删除按键时的弹出框--%>
+                            <div class="modal fade" id="modal-delete">
                                 <div class="modal-body">
                                     <div class="container-fluid text-center modal-delete">
                                         <div class="col-sm-12">
@@ -152,31 +150,29 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div><!-- /.modal -->
+                            <%--数据表格主体，显示查询到的数据--%>
+                            <div class="panel-body">
+                                <%--增删改的工具条--%>
+                                <div class="toolbar">
+                                    <div class="btn-group">
+                                        <a href="/taotao/manager/itemAdd" id="btn-add" type="button"
+                                           class="btn btn-default">
+                                            <span class="fa fa-plus fa-fw"></span>新增商品</a>
+                                        <a id="delete-selected" type="button" class="btn btn-default">
+                                            <span class="fa fa-trash fa-fw"></span>删除已选</a>
+                                    </div>
+                                </div>
+                                <div class="table-content">
+                                    <table id="Items-table"></table>
+                                </div>
                             </div>
-                        </div>
-                    </div><!-- /.modal -->
-                    <%--数据表格主体，显示查询到的数据--%>
-                    <div class="panel-body">
-                        <%--增删改的工具条--%>
-                        <div class="toolbar">
-                            <div class="btn-group">
-                                <a href="/taotao/manager/itemAdd" id="btn-add" type="button"
-                                   class="btn btn-default">
-                                    <span class="fa fa-plus fa-fw"></span>新增商品</a>
-                                <a id="delete-selected" type="button" class="btn btn-default">
-                                    <span class="fa fa-trash fa-fw"></span>删除已选</a>
-                            </div>
-                        </div>
-                        <div class="table-content">
-                            <table id="Items-table" class="items-table"></table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-</div>
 </div>
 
 <%@include file="common/footer.jsp" %>
