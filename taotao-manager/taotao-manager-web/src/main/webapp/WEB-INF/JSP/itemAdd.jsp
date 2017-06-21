@@ -17,6 +17,14 @@
     <meta name="author" content="Amos">
     <title>淘淘商城后台管理系统</title>
     <%@include file="common/header.jsp" %>
+    <%--FileInput.css--%>
+    <link href="https://cdn.bootcss.com/bootstrap-fileinput/4.3.9/css/fileinput.min.css" rel="stylesheet">
+
+    <%--summernote.css--%>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.css" rel="stylesheet">
+
+    <%--bootstrapValidator.css--%>
+    <link href="https://cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet">
 </head>
 <body>
 <div class="wrapper">
@@ -108,9 +116,11 @@
                         <a href="#" aria-expanded="false">
                             <span class="fa fa-folder fa-fw"></span>网站内容管理<span class="fa arrow"></span></a>
                         <ul class="nav">
-                            <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;<span class="fa fa-th-list fa-fw"></span>内容分类管理</a>
+                            <li><a href="/taotao/manager/contentCategory">&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                    class="fa fa-th-list fa-fw"></span>内容分类管理</a>
                             </li>
-                            <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;<span class="fa fa-book fa-fw"></span>内容管理</a></li>
+                            <li><a href="/taotao/manager/content">&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                    class="fa fa-book fa-fw"></span>内容管理</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -149,23 +159,27 @@
 
                                         <%--商品类目跳出框--%>
                                         <div class="modal fade" id="mymodal">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                        aria-hidden="true">&times;
-                                                </button>
-                                                <h4 class="modal-title">请选择类目</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div id="jstree"></div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <span id="jstreeMsg"></span>
-                                                <button type="button" class="btn btn-default"
-                                                        data-dismiss="modal">关闭
-                                                </button>
-                                                <button id="jstreeChoosed" type="button"
-                                                        class="btn btn-primary">确定
-                                                </button>
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                                aria-hidden="true">&times;
+                                                        </button>
+                                                        <h4 class="modal-title">请选择类目</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div id="jstree"></div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <span id="jstreeMsg"></span>
+                                                        <button type="button" class="btn btn-default"
+                                                                data-dismiss="modal">关闭
+                                                        </button>
+                                                        <button id="jstreeChoosed" type="button"
+                                                                class="btn btn-primary">确定
+                                                        </button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div><!-- /.modal -->
                                     </div>
@@ -236,33 +250,43 @@
 
                                 <%--成功提交后的弹出框--%>
                                 <div class="modal fade" id="submitModal">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">提示</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <h3 id="submitMsg"></h3>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button id="confirm" type="button" class="btn btn-primary">确定
-                                        </button>
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">提示</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h3 id="submitMsg"></h3>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button id="confirm" type="button" class="btn btn-primary">确定
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div><!-- /.modal -->
 
                                 <div class="modal fade" id="redirectMoadal">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal"
-                                                aria-hidden="true">&times;
-                                        </button>
-                                        <h4 class="modal-title">提示:</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p class="text-warning"><span id="modalValue"></span>未包含参数模板，请先新建参数模板！</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">
-                                            取消
-                                        </button>
-                                        <button id="redirectConfirm" type="button" class="btn btn-primary">确定</button>
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-hidden="true">&times;
+                                                </button>
+                                                <h4 class="modal-title">提示:</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p class="text-warning"><span id="modalValue"></span>未包含参数模板，请先新建参数模板！
+                                                </p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                    取消
+                                                </button>
+                                                <button id="redirectConfirm" type="button" class="btn btn-primary">确定
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div><!-- /.modal -->
 
@@ -282,6 +306,25 @@
 
 
 <%@include file="common/footer.jsp" %>
+
+<!--FileInput.js-->
+<script src="https://cdn.bootcss.com/bootstrap-fileinput/4.3.9/js/fileinput.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-fileinput/4.3.9/js/locales/zh.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-fileinput/4.3.9/js/locales/fa.min.js"></script>
+
+<!--summernote.js-->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.min.js"></script>
+<script src="https://cdn.bootcss.com/summernote/0.8.3/lang/summernote-zh-CN.min.js"></script>
+
+<!--bootstrapValidator.js-->
+<script src="https://cdn.bootcss.com/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-validator/0.5.3/js/language/zh_CN.min.js"></script>
+
+<!-- 自定义js文件 -->
+<script type="text/javascript" src="/resources/js/FileInput.js"></script>
+<script type="text/javascript" src="/resources/js/HTMLEditor.js"></script>
+<script type="text/javascript" src="/resources/js/FormValidator.js"></script>
+<script type="text/javascript" src="/resources/js/itemAddSubmit.js"></script>
 <script type="text/javascript">
     $("#menu").metisMenu({
 //        toggle: false

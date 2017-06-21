@@ -17,6 +17,8 @@
     <meta name="author" content="Amos">
     <title>淘淘商城后台管理系统</title>
     <%@include file="common/header.jsp" %>
+    <%--bootstrap-table.css--%>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
 </head>
 <body>
 <div class="wrapper">
@@ -109,9 +111,11 @@
                         <a href="#" aria-expanded="false">
                             <span class="fa fa-folder fa-fw"></span>网站内容管理<span class="fa arrow"></span></a>
                         <ul class="nav">
-                            <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;<span class="fa fa-th-list fa-fw"></span>内容分类管理</a>
+                            <li><a href="/taotao/manager/contentCategory">&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                    class="fa fa-th-list fa-fw"></span>内容分类管理</a>
                             </li>
-                            <li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;<span class="fa fa-book fa-fw"></span>内容管理</a></li>
+                            <li><a href="/taotao/manager/content">&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                    class="fa fa-book fa-fw"></span>内容管理</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -137,16 +141,20 @@
 
                             <%--点击删除按键时的弹出框--%>
                             <div class="modal fade" id="modal-delete">
-                                <div class="modal-body">
-                                    <div class="container-fluid text-center modal-delete">
-                                        <div class="col-sm-12">
-                                            <div class="warnning-icon">
-                                                <span class="fa fa-warning fa-lg"></span>
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <div class="container-fluid text-center modal-delete">
+                                                <div class="col-sm-12">
+                                                    <div class="warnning-icon">
+                                                        <span class="fa fa-warning fa-lg"></span>
+                                                    </div>
+                                                    <h1><strong>操作提示</strong></h1>
+                                                    <p>确定要删除吗?</p>
+                                                    <a href="#" class="btn btn-success" data-dismiss="modal">取消</a>
+                                                    <a href="#" id="btn-remove" class="btn btn-danger">确认</a>
+                                                </div>
                                             </div>
-                                            <h1><strong>操作提示</strong></h1>
-                                            <p>确定要删除吗?</p>
-                                            <a href="#" class="btn btn-success" data-dismiss="modal">取消</a>
-                                            <a href="#" id="btn-remove" class="btn btn-danger">确认</a>
                                         </div>
                                     </div>
                                 </div>
@@ -176,6 +184,16 @@
 </div>
 
 <%@include file="common/footer.jsp" %>
+<!--bootstrap-table.js-->
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+
+<!--tableExport.js-->
+<script src="//issues.wenzhixin.net.cn/bootstrap-table/assets/bootstrap-table/src/extensions/export/bootstrap-table-export.js"></script>
+<script src="//rawgit.com/hhurz/tableExport.jquery.plugin/master/tableExport.js"></script>
+
+<!-- 自定义js文件 -->
+<script type="text/javascript" src="/resources/js/table.js"></script>
 <script type="text/javascript">
     $("#menu").metisMenu({
 //        toggle: false

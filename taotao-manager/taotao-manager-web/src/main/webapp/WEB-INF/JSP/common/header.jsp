@@ -3,34 +3,20 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-<%--bootstrap modal.css--%>
-<link href="https://cdn.bootcss.com/bootstrap-modal/2.2.6/css/bootstrap-modal-bs3patch.css" rel="stylesheet">
-<link href="https://cdn.bootcss.com/bootstrap-modal/2.2.6/css/bootstrap-modal.min.css" rel="stylesheet">
+<%--&lt;%&ndash;bootstrap modal.css&ndash;%&gt;--%>
+<%--<link href="https://cdn.bootcss.com/bootstrap-modal/2.2.6/css/bootstrap-modal-bs3patch.css" rel="stylesheet">--%>
+<%--<link href="https://cdn.bootcss.com/bootstrap-modal/2.2.6/css/bootstrap-modal.min.css" rel="stylesheet">--%>
 
 <!-- metisMenu.css -->
 <link href="https://cdn.bootcss.com/metisMenu/2.7.0/metisMenu.min.css" rel="stylesheet">
 <!-- font-awesome -->
 <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<%--bootstrap-table.css--%>
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
 
 <%--JSTree.css--%>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
 
-<%--FileInput.css--%>
-<link href="https://cdn.bootcss.com/bootstrap-fileinput/4.3.9/css/fileinput.min.css" rel="stylesheet">
-
-<%--summernote.css--%>
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.css" rel="stylesheet">
-
-<%--bootstrapValidator.css--%>
-<link href="https://cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet">
-
 <%--toastr.css--%>
 <link href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
-
-<%--x-editable.css--%>
-<link href="https://cdn.bootcss.com/x-editable/1.5.1/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet">
 
 <!-- 自定义的css -->
 <link rel="stylesheet" href="/resources/css/taotao.css">

@@ -389,12 +389,12 @@ div.editable-input > input {
     color: #a9171d;
 }
 
-@media (min-width: 768px ) {
-    #cidModal {
-        margin-top: -303.5px !important;
-    }
-}
-
 .parameters div.row{
     margin-bottom: 5px;
+}
+
+/*content page css*/
+.CatTree{
+    border-right: solid 1px #ddd;
+    min-height: 700px
 }

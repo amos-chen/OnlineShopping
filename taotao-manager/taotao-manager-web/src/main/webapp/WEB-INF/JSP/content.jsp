@@ -1,12 +1,11 @@
 <%--
   Created by IntelliJ IDEA.
-  User: chenlunwei
-  Date: 2017/5/6
-  Time: 19:23
+  User: Amos
+  Date: 2017/5/3
+  Time: 10:10
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,10 +17,8 @@
     <meta name="author" content="Amos">
     <title>淘淘商城后台管理系统</title>
     <%@include file="common/header.jsp" %>
-
-    <%--x-editable.css--%>
-    <link href="https://cdn.bootcss.com/x-editable/1.5.1/bootstrap3-editable/css/bootstrap-editable.css"
-          rel="stylesheet">
+    <%--select2.css--%>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
 </head>
 <body>
 <div class="wrapper">
@@ -95,8 +92,8 @@
                             </button>
                         </span>
                     </div>
-                    <li class="active">
-                        <a href="#" aria-expanded="true">
+                    <li>
+                        <a href="#" aria-expanded="false">
                             <span class="fa fa-folder fa-fw"></span>商品管理
                             <span class="fa arrow"></span></a>
                         <ul class="nav">
@@ -105,17 +102,15 @@
                             <li><a href="/taotao/manager/list">&nbsp;&nbsp;&nbsp;&nbsp;<span
                                     class="fa fa-search fa-fw"></span>查询商品</a></li>
                             <li><a href="/taotao/manager/itemParam">&nbsp;&nbsp;&nbsp;&nbsp;<span
-                                    class="fa fa-align-left fa-fw"></span>参数规格</a>
-                            </li>
+                                    class="fa fa-align-left fa-fw"></span>参数规格</a></li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="#" aria-expanded="false">
+                    <li class="active">
+                        <a href="#" aria-expanded="true">
                             <span class="fa fa-folder fa-fw"></span>网站内容管理<span class="fa arrow"></span></a>
                         <ul class="nav">
                             <li><a href="/taotao/manager/contentCategory">&nbsp;&nbsp;&nbsp;&nbsp;<span
-                                    class="fa fa-th-list fa-fw"></span>内容分类管理</a>
-                            </li>
+                                    class="fa fa-th-list fa-fw"></span>内容分类管理</a></li>
                             <li><a href="/taotao/manager/content">&nbsp;&nbsp;&nbsp;&nbsp;<span
                                     class="fa fa-book fa-fw"></span>内容管理</a></li>
                         </ul>
@@ -129,112 +124,89 @@
             <li>
                 <a href="/taotao/manager/index"><span class="fa fa-home fa-lg fa-fw"></span>首页</a>
             </li>
-            <li><a href="#">商品管理</a></li>
-            <li class="active">参数规格</li>
+            <li><a href="#">网站内容管理</a></li>
+            <li class="active">内容管理</li>
         </ol>
+
         <div class="wrapper-content">
             <div class="row">
                 <div class="col-lg-12">
-                    <%--表单，提交参数规格模板--%>
-                    <form id="itemParamForm" method="post" class="form-horizontal" role="form">
-                        <input type="hidden" id="itemParamJson"/>
-                        <%--商品类目--%>
-                        <div class="form-group" id="itemCat">
-                            <div class="page-header" id="page-header">
-                                <%--<h1 name="itemTitle" id="itemTitle"><span class="fa fa-angle-double-right"></span></h1>--%>
+                    <div class="panel panel-default">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">内容分类管理</h3>
                             </div>
-                            <div class="param-group" id="param-group"></div>
-                            <%--商品类目选择弹窗--%>
-                            <div id="cidModal" class="modal fade">
+                            <div class="panel-body">
+                                <div id="CatTree" class="CatTree col-lg-3">
+                                    <div class="btn-group">
+                                        <button type="button" id="catAdd" class="btn btn-default">
+                                            <span class="fa fa-plus fa-fw"></span>新增
+                                        </button>
+                                        <button type="button" id="catEdit" class="btn btn-default">
+                                            <span class="fa fa-edit fa-fw"></span>修改
+                                        </button>
+                                        <button type="button" id="catDele" class="btn btn-default">
+                                            <span class="fa fa-trash fa-fw"></span>删除
+                                        </button>
+                                    </div>
+                                    <hr>
+                                    <div id="jstree"></div>
+                                </div>
+                                <div class="col-lg-9">
+
+
+                                </div>
+                            </div>
+
+                            <%--新增以及修改内容类目modal--%>
+                            <div class="modal" id="CatManage">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h4 class="modal-title">请选择类目</h4>
-                                        </div>
-                                        <%--商品类目选择tree--%>
-                                        <div class="modal-body">
-                                            <div id="jstree"></div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <span id="jstreeMsg"></span>
-                                            <button id="jstreeChoosed" type="button"
-                                                    class="btn btn-success">确定
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                &times;
                                             </button>
+                                            <h4 class="modal-title" id="CatManageModalTitle"></h4>
                                         </div>
-                                    </div>
-                                </div>
+                                        <div class="modal-body">
+                                            <form action="" method="post" role="form">
+                                                <legend>Form Title</legend>
+                                                <div class="form-group">
+                                                    <label for="ContentName">类目名称：</label>
+                                                    <input type="text" class="form-control" name="ContentName"
+                                                           id="ContentName">
+                                                    <label for="ParentId">父类名称：</label>
+                                                    <select name="ParentId" id="ParentId" class="form-control">
+                                                    </select>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">保存</button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
                             </div><!-- /.modal -->
                         </div>
-
-                        <%--删除提示--%>
-                        <div class="modal fade deleteModal" id="deleteModal">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                            &times;
-                                        </button>
-                                        <h4 class="modal-title"><span class="fa fa-warning fa-fw"></span>操作提示:</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <h2 class="text-center text-danger">是否进行删除操作?</h2>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-success" data-dismiss="modal">取消
-                                        </button>
-                                        <button id="deleteConfirm" type="button" class="btn btn-danger">确定</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- /.modal -->
-
-                        <%--保存提示--%>
-                        <div class="modal fade" id="saveModal">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                            &times;
-                                        </button>
-                                        <h4 class="modal-title"><span class="fa fa-save fa-fw"></span>操作提示</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <h2 class="text-center text-danger">是否保存修改？</h2>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-success" data-dismiss="modal">取消
-                                        </button>
-                                        <button id="saveConfrim" type="button" class="btn btn-danger">确定</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- /.modal -->
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
-</div>
-
 
 <%@include file="common/footer.jsp" %>
-<%--x-editabel.js--%>
-<script src="https://cdn.bootcss.com/x-editable/1.5.1/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
-<%--自定义的js--%>
-<script type="text/javascript" src="/resources/js/itemParam.js"></script>
-<script type="text/javascript" src="/resources/js/x-editable.js"></script>
+<%--select2.js--%>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<script type="text/javascript" src="/resources/js/Content.js"></script>
+<script type="text/javascript" src="/resources/js/select2.js"></script>
 <script type="text/javascript">
     $("#menu").metisMenu({
 //        toggle: false
     });
-    //在js中使用EL表达式一定要用双引号，否则如果EL取不到值，会报错
-    itemParam.initParam({
-        cid: "${param.cid}"
-    });
+    Content.initTree();
 
-    //在itemParam.js里进行初始化
-    //editable.initEditable();
 </script>
 </body>
 </html>

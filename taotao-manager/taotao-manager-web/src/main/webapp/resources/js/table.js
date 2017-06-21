@@ -238,16 +238,12 @@ var table = {
                 //用one事件，只绑定一次，不然会出现错误
                 $('#btn-remove').one('click',function () {
                     table.deleteItems(arr);
-<<<<<<< HEAD
                 });
                 //当modal隐藏时，移除btn-remove上绑定的事件
                 $('#modal-delete').on('hidden.bs.modal', function () {
                     console.log("test");
                     $('#btn-remove').unbind();
                 });
-=======
-                })
->>>>>>> parent of 53cf986... fix some bug and disable the bootstrap-modal
             }
         };
         //删除选中的商品
