@@ -19,6 +19,8 @@
     <%@include file="common/header.jsp" %>
     <%--select2.css--%>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.6/select2-bootstrap.min.css"
+          rel="stylesheet"/>
 </head>
 <body>
 <div class="wrapper">
@@ -154,7 +156,6 @@
                                 </div>
                                 <div class="col-lg-9">
 
-
                                 </div>
                             </div>
 
@@ -169,20 +170,30 @@
                                             <h4 class="modal-title" id="CatManageModalTitle"></h4>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="" method="post" role="form">
-                                                <legend>Form Title</legend>
+                                            <form class="form-horizontal" action="" method="post" role="form">
                                                 <div class="form-group">
-                                                    <label for="ContentName">类目名称：</label>
-                                                    <input type="text" class="form-control" name="ContentName"
-                                                           id="ContentName">
-                                                    <label for="ParentId">父类名称：</label>
-                                                    <select name="ParentId" id="ParentId" class="form-control">
-                                                    </select>
+                                                    <label class="col-sm-4 control-label"
+                                                           for="ContentName">类目名称：</label>
+                                                    <div class=" col-sm-8">
+                                                        <input type="text" class="form-control"
+                                                               name="ContentName"
+                                                               id="ContentName">
+                                                    </div>
                                                 </div>
-                                                <button type="submit" class="btn btn-primary">保存</button>
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">取消
-                                                </button>
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label"
+                                                           for="ParentId">父类名称：</label>
+                                                    <div class=" col-sm-8">
+                                                        <select name="ParentId" id="ParentId"></select>
+                                                    </div>
+                                                </div>
                                             </form>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary">保存</button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                    取消
+                                                </button>
+                                            </div>
                                         </div>
                                     </div><!-- /.modal-content -->
                                 </div><!-- /.modal-dialog -->
@@ -199,14 +210,18 @@
 <%@include file="common/footer.jsp" %>
 <%--select2.js--%>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/i18n/zh-CN.js"></script>
+
+<%--自定义js--%>
 <script type="text/javascript" src="/resources/js/Content.js"></script>
 <script type="text/javascript" src="/resources/js/select2.js"></script>
+<script type="text/javascript" src="/resources/js/select2tree.js"></script>
 <script type="text/javascript">
     $("#menu").metisMenu({
 //        toggle: false
     });
     Content.initTree();
-
+    select2.init();
 </script>
 </body>
 </html>

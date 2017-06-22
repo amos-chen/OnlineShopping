@@ -18,4 +18,6 @@ public interface TbContentCategoryMapper {
     int updateByPrimaryKey(TbContentCategory record);
 
     List<TbContentCategory> queryByParentId(Long parentId);
+
+    List<TbContentCategory> queryList();
 }

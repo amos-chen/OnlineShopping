@@ -1,6 +1,7 @@
 package com.taotao.web;
 
 import com.taotao.dto.JSTree;
+import com.taotao.pojo.TbContentCategory;
 import com.taotao.service.ContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,13 @@ public class ContentController {
     @ResponseBody
     public List<JSTree> getJstree(String id){
         return contentService.queryJstreeNode(id);
+    }
+
+
+    @RequestMapping(value = "/contentCat/list",method = RequestMethod.GET)
+    @ResponseBody
+    public List<TbContentCategory> getContentCatList(){
+        return contentService.queryContentCat();
     }
 
 }

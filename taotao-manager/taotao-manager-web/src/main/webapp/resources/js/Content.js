@@ -28,8 +28,6 @@ var Content = {
                 'root':{'icon':'fa fa-folder fw'},
                 'file':{'icon':'fa fa-file fw'}
             }
-
-
         });
     },
 

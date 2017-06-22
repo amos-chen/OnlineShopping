@@ -53,7 +53,7 @@ public class ContentServiceImpl implements ContentService {
 
     @Override
     public List<TbContentCategory> queryContentCat() {
-        List<>
-        return null;
+        List<TbContentCategory> tbContentCategories = tbContentCategoryMapper.queryList();
+        return tbContentCategories;
     }
 }
