@@ -20,4 +20,6 @@ public interface TbItemCatMapper {
 
     List<TbItemCat> queryListByParentId(@Param("id") long id);
 
+    List<TbItemCat> queryItemCatList();
+
 }

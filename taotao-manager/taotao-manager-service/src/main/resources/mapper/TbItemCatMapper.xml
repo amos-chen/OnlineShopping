@@ -28,6 +28,11 @@
         FROM tb_item_cat
         WHERE parent_id=#{id}
     </select>
+    <select id="queryItemCatList" resultType="com.taotao.pojo.TbItemCat">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM tb_item_cat
+    </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from tb_item_cat

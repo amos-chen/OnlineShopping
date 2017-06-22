@@ -4,6 +4,7 @@ import com.taotao.dao.TbContentCategoryMapper;
 import com.taotao.dto.JSTree;
 import com.taotao.pojo.TbContent;
 import com.taotao.pojo.TbContentCategory;
+import com.taotao.utils.ParentTree;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,7 +54,13 @@ public class ContentServiceImpl implements ContentService {
 
     @Override
     public List<TbContentCategory> queryContentCat() {
+        ParentTree<TbContentCategory> PT = new ParentTree<>();
         List<TbContentCategory> tbContentCategories = tbContentCategoryMapper.queryList();
-        return tbContentCategories;
+        for(TbContentCategory tb:tbContentCategories){
+            PT.addNode(tb,tb.getId(),tb.getParentId(),tb.getIsParent());
+        }
+        List<TbContentCategory> result =  PT.Traversal(0l);
+        result.remove(0);
+        return result;
     }
 }
