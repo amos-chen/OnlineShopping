@@ -2,6 +2,7 @@ package com.taotao.service;
 
 import com.taotao.dao.*;
 import com.taotao.dto.JSTree;
+import com.taotao.dto.JSTreeAjax;
 import com.taotao.exception.*;
 import com.taotao.pojo.*;
 import com.taotao.utils.IDUtils;
@@ -50,7 +51,7 @@ public class ItemsServiceImpl implements ItemsService {
 	}
 
 	@Override
-	public List<JSTree> queryJSTrees(String id) {    //根据id查询所有子类
+	public List<JSTreeAjax> queryJSTrees(String id) {    //根据id查询所有子类
 		//因为jstree初始化之后会发起一个get请求，id参数为‘#’
 		if (id == null || "".equals(id.trim()) || "#".equals(id)) {
 			id = "0";
@@ -60,20 +61,20 @@ public class ItemsServiceImpl implements ItemsService {
 		//根据id查询此Id所对应的所有子类
 		List<TbItemCat> tbItemCats = tbItemCatMapper.queryListByParentId(parentId);
 		//把子类信息转成JStree所需要的POJO
-		List<JSTree> jsTrees = new ArrayList<>();
+		List<JSTreeAjax> jsTreeAjaxes = new ArrayList<>();
 		for (TbItemCat ItemCat : tbItemCats) {
 			boolean state = ItemCat.getIsParent();
-			JSTree jsTree;
+			JSTreeAjax jsTree;
 			if (state) {
-				jsTree = new JSTree(ItemCat.getId().toString(), ItemCat.getName(),
-						"fa fa-folder fw", state);
+				jsTree = new JSTreeAjax(ItemCat.getId().toString(), ItemCat.getName(),
+						"fa fa-folder fw",true);
 			} else {
-				jsTree = new JSTree(ItemCat.getId().toString(), ItemCat.getName(),
-						"fa fa-file fw", state);
+				jsTree = new JSTreeAjax(ItemCat.getId().toString(), ItemCat.getName(),
+						"fa fa-file fw", false);
 			}
-			jsTrees.add(jsTree);
+			jsTreeAjaxes.add(jsTree);
 		}
-		return jsTrees;
+		return jsTreeAjaxes;
 
 	}
 

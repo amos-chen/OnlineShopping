@@ -1,6 +1,7 @@
 package com.taotao.service;
 
 import com.taotao.dto.JSTree;
+import com.taotao.dto.JSTreeAjax;
 import com.taotao.pojo.TbItem;
 import com.taotao.pojo.TbItemCat;
 import com.taotao.pojo.TbItemParam;
@@ -18,7 +19,7 @@ public interface ItemsService {
 	List<TbItem> queryList(String search);
 
 	//根据id查询所有子类
-	List<JSTree> queryJSTrees(String id);
+	List<JSTreeAjax> queryJSTrees(String id);
 
 	int insertItem(TbItem tbItem,String description, String itemParameter);
 

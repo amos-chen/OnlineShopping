@@ -52,8 +52,8 @@ public class ParentTree<E> {
 		return -1;
 	}
 
-	//获取指定id的节点的数据
-	public Node<E> getData(Long id) {
+	//获取指定id的节点
+	public Node<E> getNode(Long id) {
 		for (Node<E> node : nodelist) {
 			if (node.id == id.intValue()) {
 				return node;
@@ -62,8 +62,18 @@ public class ParentTree<E> {
 		throw new RuntimeException("未找到节点");
 	}
 
-	//获取指定id的节点的所有子节点的数据
-	public List<Node<E>> getChildrenData(Long id) {
+	//获取指定id的节点的数据
+	public E getData(Long id) {
+		for (Node<E> node : nodelist) {
+			if (node.id == id.intValue()) {
+				return node.data;
+			}
+		}
+		throw new RuntimeException("未找到数据");
+	}
+
+	//获取指定id的节点的所有子节点
+	public List<Node<E>> getChildrenNode(Long id) {
 		List<Node<E>> list = new ArrayList<>();
 		int index = getIndex(id);
 		for (Node<E> node : nodelist) {
@@ -72,6 +82,23 @@ public class ParentTree<E> {
 			}
 		}
 		return list;
+	}
+
+	//获取指定id的节点的所有子节点的数据
+	public List<E> getChildrenData(Long id) {
+		List<E> list = new ArrayList<>();
+		int index = getIndex(id);
+		for (Node<E> node : nodelist) {
+			if (node.parentIndex == index) {
+				list.add(node.data);
+			}
+		}
+		return list;
+	}
+
+	//判断节点是否有子节点
+	public boolean isParent(Node<E> node){
+		return node.isParent;
 	}
 
 	//获取prentTree容量大小
@@ -88,10 +115,10 @@ public class ParentTree<E> {
 	//先根遍历
 	public List<E> Traversal(Long rootId){
 		List result = new ArrayList();
-		Node<E> node1 = getData(rootId);
+		Node<E> node1 = getNode(rootId);
 		result.add(node1.data);
 		if(node1.isParent){
-			List<Node<E>> nodelist = getChildrenData((long)node1.id);
+			List<Node<E>> nodelist = getChildrenNode((long)node1.id);
 			for (Node<E> node2 : nodelist){
 				result.addAll(Traversal((long)node2.id));
 			}

@@ -7,10 +7,8 @@ var select2 = {
     },
 
     init: function () {
-        $('#ParentId').select2tree();
         select2.addFunction();
-
-
+        $('#ParentId').select2();
     },
 
 

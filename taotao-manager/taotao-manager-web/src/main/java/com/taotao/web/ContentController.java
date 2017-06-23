@@ -24,8 +24,8 @@ public class ContentController {
 
     @RequestMapping(value = "/contentCat",method = RequestMethod.GET)
     @ResponseBody
-    public List<JSTree> getJstree(String id){
-        return contentService.queryJstreeNode(id);
+    public List<JSTree> getJstree(){
+        return contentService.queryJstreeNode();
     }
 
 

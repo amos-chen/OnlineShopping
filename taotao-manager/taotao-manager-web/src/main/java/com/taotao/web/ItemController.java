@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.taotao.dto.ExecuteItemsJsonResult;
 import com.taotao.dto.ExecuteJsonResult;
 import com.taotao.dto.JSTree;
+import com.taotao.dto.JSTreeAjax;
 import com.taotao.exception.DataInsertFailException;
 import com.taotao.exception.TaotaoException;
 import com.taotao.pojo.TbItem;
@@ -63,7 +64,7 @@ public class ItemController {
 
 	@RequestMapping(value = "/itemCat", method = RequestMethod.GET)
 	@ResponseBody
-	public List<JSTree> queryJSTrees(String id) {
+	public List<JSTreeAjax> queryJSTrees(String id) {
 		return itemsService.queryJSTrees(id);
 	}
 

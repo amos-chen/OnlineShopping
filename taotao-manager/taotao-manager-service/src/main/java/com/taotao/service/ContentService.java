@@ -12,7 +12,7 @@ import java.util.List;
 public interface ContentService {
     List<TbContent> queryContent();
 
-    List<JSTree> queryJstreeNode(String id);
+    List<JSTree> queryJstreeNode();
 
     List<TbContentCategory> queryContentCat();
 

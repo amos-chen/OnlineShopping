@@ -19,8 +19,8 @@
     <%@include file="common/header.jsp" %>
     <%--select2.css--%>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.6/select2-bootstrap.min.css"
-          rel="stylesheet"/>
+    <%--<link href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.6/select2-bootstrap.min.css"--%>
+          <%--rel="stylesheet"/>--%>
 </head>
 <body>
 <div class="wrapper">
@@ -170,7 +170,17 @@
                                             <h4 class="modal-title" id="CatManageModalTitle"></h4>
                                         </div>
                                         <div class="modal-body">
-                                            <form class="form-horizontal" action="" method="post" role="form">
+                                            <form class="form-horizontal" id="contentCatForm" role="form">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label"
+                                                           for="ParentId">父类名称：</label>
+                                                    <div class=" col-sm-8">
+                                                        <p>
+                                                        <select class="form-control" name="ParentId"
+                                                                id="ParentId" style="width: 100%;" multiple="multiple"></select>
+                                                        </p>
+                                                    </div>
+                                                </div>
                                                 <div class="form-group">
                                                     <label class="col-sm-4 control-label"
                                                            for="ContentName">类目名称：</label>
@@ -178,13 +188,6 @@
                                                         <input type="text" class="form-control"
                                                                name="ContentName"
                                                                id="ContentName">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-4 control-label"
-                                                           for="ParentId">父类名称：</label>
-                                                    <div class=" col-sm-8">
-                                                        <select name="ParentId" id="ParentId"></select>
                                                     </div>
                                                 </div>
                                             </form>
@@ -215,7 +218,9 @@
 <%--自定义js--%>
 <script type="text/javascript" src="/resources/js/Content.js"></script>
 <script type="text/javascript" src="/resources/js/select2.js"></script>
-<script type="text/javascript" src="/resources/js/select2tree.js"></script>
+
+<%--树形下拉框，暂时不使用--%>
+<%--<script type="text/javascript" src="/resources/js/select2tree.js"></script>--%>
 <script type="text/javascript">
     $("#menu").metisMenu({
 //        toggle: false

@@ -1,11 +1,10 @@
 package com.taotao.dto;
 
-import java.util.List;
 
 /**
  * Created by chenlunwei on 2017/5/6.
  */
-public class JSTree {
+public class JSTreeAjax {
 
 	private String id;
 
@@ -13,9 +12,7 @@ public class JSTree {
 
 	private String icon;
 
-	private boolean hasChild;
-
-	private List<JSTree> children;
+	private boolean children;
 
 	public String getId() {
 		return id;
@@ -41,34 +38,19 @@ public class JSTree {
 		this.icon = icon;
 	}
 
-	public List<JSTree> getChildren() {
+	public boolean isChildren() {
 		return children;
 	}
 
-	public void setChildren(List<JSTree> children) {
+	public void setChildren(boolean children) {
 		this.children = children;
 	}
 
-	public boolean isHasChild() {
-		return hasChild;
-	}
-
-	public void setHasChild(boolean hasChild) {
-		this.hasChild = hasChild;
-	}
-
-	public JSTree(String id, String text, String icon, List<JSTree> children) {
+	public JSTreeAjax(String id, String text, String icon, boolean children) {
 		this.id = id;
 		this.text = text;
 		this.icon = icon;
 		this.children = children;
-	}
-
-	public JSTree(String id, String text, String icon, boolean hasChild) {
-		this.id = id;
-		this.text = text;
-		this.icon = icon;
-		this.hasChild = hasChild;
 	}
 
 	@Override
