@@ -1,10 +1,6 @@
 var Content = {
 
-    URL: {
-        ContentCatJstreeURL: function () {
-            return "/taotao/manager/contentCat";
-        }
-    },
+    URL: {},
     initTree: function () {
 
         //这个是关键，如果不清空实例，jstree不会重新生成
@@ -41,8 +37,18 @@ var Content = {
             'types': {
                 'root': {'icon': 'fa fa-folder fw'},
                 'file': {'icon': 'fa fa-file fw'}
-            }
+            },
+            'conditionalselect': function (node, event) {
+                //event代表的是node绑定的所有事件
+                // console.log(event);
+                if(node.parent !=='#'){
+                    //node属性及json数据属性
+                    return true;
+                }
+            },
+            'plugins': ['conditionalselect'],
         });
+
 
     },
 
@@ -50,7 +56,7 @@ var Content = {
         var data = null;
         $.ajax({
             method: 'get',
-            url: Content.URL.ContentCatJstreeURL,
+            url: "/taotao/manager/contentCat",
             async: false,
             success: function (result) {
                 data = result;

@@ -7,11 +7,13 @@ import java.util.List;
 public interface TbContentCategoryMapper {
     int deleteByPrimaryKey(Long id);
 
-    int insert(TbContentCategory record);
+    int insertWithoutId(TbContentCategory record);
 
     int insertSelective(TbContentCategory record);
 
     TbContentCategory selectByPrimaryKey(Long id);
+
+    TbContentCategory selectByName(String name);
 
     int updateByPrimaryKeySelective(TbContentCategory record);
 
@@ -20,4 +22,7 @@ public interface TbContentCategoryMapper {
     List<TbContentCategory> queryByParentId(Long parentId);
 
     List<TbContentCategory> queryList();
+
+    Long queryMaxId();
+
 }

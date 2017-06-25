@@ -241,7 +241,7 @@ var table = {
                 });
                 //当modal隐藏时，移除btn-remove上绑定的事件
                 $('#modal-delete').on('hidden.bs.modal', function () {
-                    console.log("test");
+                    //移除确认按键绑定的事件
                     $('#btn-remove').unbind();
                 });
             }

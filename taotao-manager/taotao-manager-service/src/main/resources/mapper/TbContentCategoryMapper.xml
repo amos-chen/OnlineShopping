@@ -33,15 +33,25 @@
         <include refid="Base_Column_List"/>
         from tb_content_category
     </select>
+    <select id="selectByName" resultType="com.taotao.pojo.TbContentCategory">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from tb_content_category
+        WHERE name = #{name}
+    </select>
+    <select id="queryMaxId" resultType="java.lang.Long">
+        SELECT MAX(id)
+        FROM tb_content_category
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from tb_content_category
     where id = #{id,jdbcType=BIGINT}
   </delete>
-    <insert id="insert" parameterType="com.taotao.pojo.TbContentCategory">
-    insert into tb_content_category (id, parent_id, name, 
+    <insert id="insertWithoutId" parameterType="com.taotao.pojo.TbContentCategory">
+    insert into tb_content_category (parent_id, name,
       status, sort_order, is_parent, 
       created, updated)
-    values (#{id,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+    values (#{parentId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR},
       #{status,jdbcType=INTEGER}, #{sortOrder,jdbcType=INTEGER}, #{isParent,jdbcType=BIT}, 
       #{created,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP})
   </insert>

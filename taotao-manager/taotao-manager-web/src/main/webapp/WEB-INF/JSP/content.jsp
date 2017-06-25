@@ -19,8 +19,8 @@
     <%@include file="common/header.jsp" %>
     <%--select2.css--%>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
-    <%--<link href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.6/select2-bootstrap.min.css"--%>
-          <%--rel="stylesheet"/>--%>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.6/select2-bootstrap.min.css"
+          rel="stylesheet"/>
 </head>
 <body>
 <div class="wrapper">
@@ -147,7 +147,7 @@
                                         <button type="button" id="catEdit" class="btn btn-default">
                                             <span class="fa fa-edit fa-fw"></span>修改
                                         </button>
-                                        <button type="button" id="catDele" class="btn btn-default">
+                                        <button type="button" id="catDel" class="btn btn-default">
                                             <span class="fa fa-trash fa-fw"></span>删除
                                         </button>
                                     </div>
@@ -192,7 +192,7 @@
                                                 </div>
                                             </form>
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">保存</button>
+                                                <button type="submit" id="ContentCatSave" class="btn btn-primary">保存</button>
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">
                                                     取消
                                                 </button>
@@ -201,6 +201,29 @@
                                     </div><!-- /.modal-content -->
                                 </div><!-- /.modal-dialog -->
                             </div><!-- /.modal -->
+
+                            <%--删除提示--%>
+                            <div class="modal fade deleteModal" id="deleteModal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                &times;
+                                            </button>
+                                            <h4 class="modal-title"><span class="fa fa-warning fa-fw"></span>操作提示:</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h2 class="text-center text-danger">是否进行删除操作?</h2>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-success" data-dismiss="modal">取消
+                                            </button>
+                                            <button id="deleteConfirm" type="button" class="btn btn-danger">确定</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- /.modal -->
+
                         </div>
                     </div>
                 </div>

@@ -70,7 +70,7 @@ var itemAddSubmit = {
             });
             var parameterJson = {group:groupValue,params:Jsonparams};
             itemParams.push(parameterJson);
-        })
+        });
         $('#itemParameter').val(JSON.stringify(itemParams));
     }
-}
+};

@@ -2,13 +2,18 @@ package com.taotao.service;
 
 import com.taotao.dao.TbContentCategoryMapper;
 import com.taotao.dto.JSTree;
+import com.taotao.exception.*;
 import com.taotao.pojo.TbContent;
 import com.taotao.pojo.TbContentCategory;
-import com.taotao.utils.ParentTree;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,6 +21,8 @@ import java.util.List;
  */
 @Service
 public class ContentServiceImpl implements ContentService {
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     private TbContentCategoryMapper tbContentCategoryMapper;
 
@@ -91,5 +98,123 @@ public class ContentServiceImpl implements ContentService {
 
         List<TbContentCategory> tbContentCategories = tbContentCategoryMapper.queryByParentId(0l);
         return tbContentCategories;
+    }
+
+    @Override
+    @Transactional
+    public int addContentCat(String[] ParentId,String ContentName) throws DataInsertFailException, TaotaoException{
+        try {
+            String parent = ParentId[0];
+            boolean isNumber = StringUtils.isNumeric(parent);
+            if(isNumber){
+                //根据网页的form表单创建tbContentCategory对象
+                TbContentCategory tb = new TbContentCategory();
+                Date date = new Date();
+                tb.setName(ContentName);
+                tb.setIsParent(false);
+                tb.setSortOrder(1);
+                tb.setStatus(1);
+                tb.setCreated(date);
+                tb.setUpdated(date);
+                tb.setParentId(Long.parseLong(parent));
+                //把对象存到数据库中
+                int data = tbContentCategoryMapper.insertWithoutId(tb);
+                if (data != 0 ) {
+                    return data;
+                } else {
+                    throw new DataInsertFailException("类目插入失败！");
+                }
+            }else{
+                //如果form表单传来的父类在数据库中不存在，则先创建父类
+                TbContentCategory parentTb = new TbContentCategory();
+                Date date = new Date();
+                parentTb.setName(parent);
+                parentTb.setIsParent(true);
+                parentTb.setSortOrder(1);
+                parentTb.setStatus(1);
+                parentTb.setCreated(date);
+                parentTb.setUpdated(date);
+                parentTb.setParentId(0l);
+                //把父类目存入数据库中
+                int addParentResult = tbContentCategoryMapper.insertWithoutId(parentTb);
+                //查询数据库中最大的ID值获取父类id
+                long Pid = tbContentCategoryMapper.queryMaxId();
+                //再根据父类目的Id创建子类目
+                TbContentCategory childTbcontentCat = new TbContentCategory();
+                Date childDate = new Date();
+                childTbcontentCat.setName(ContentName);
+                childTbcontentCat.setIsParent(false);
+                childTbcontentCat.setSortOrder(1);
+                childTbcontentCat.setStatus(1);
+                childTbcontentCat.setCreated(childDate);
+                childTbcontentCat.setUpdated(childDate);
+                childTbcontentCat.setParentId(Pid);
+                //把子类目存入数据库中
+                int addChildResult = tbContentCategoryMapper.insertWithoutId(childTbcontentCat);
+                if (addParentResult != 0 && addChildResult!=0) {
+                    return addParentResult;
+                } else {
+                    throw new DataInsertFailException("类目插入失败！");
+                }
+            }
+        }catch (DataInsertFailException e) {
+            throw e;
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new TaotaoException("系统内部错误:" + e.getMessage());
+        }
+    }
+
+    @Override
+    public TbContentCategory queryContentCat(Long id) throws DataNotFindException,TaotaoException{
+        try {
+            TbContentCategory tb = tbContentCategoryMapper.selectByPrimaryKey(id);
+            return tb;
+        }catch (DataNotFindException e){
+            throw new DataNotFindException("未找到相应数据！");
+        }catch (TaotaoException e){
+            logger.error(e.getMessage());
+            throw new TaotaoException("系统内部错误:" + e.getMessage());
+        }
+    }
+
+    @Override
+    public int updateContentCat(String id, String name) throws DataUpdateFailException,TaotaoException{
+        try {
+            //根据传入的id查询相应的TbContentCategory对象
+            TbContentCategory tb = tbContentCategoryMapper.selectByPrimaryKey(Long.parseLong(id));
+            //更新TbContentCategory的名称
+            tb.setName(name);
+            Date date = new Date();
+            //更新TbContentCategory的更新时间
+            tb.setUpdated(date);
+            int reslut = tbContentCategoryMapper.updateByPrimaryKey(tb);
+            if(reslut==0){
+                throw new DataUpdateFailException("数据更新失败");
+            }
+            return reslut;
+        }catch (DataUpdateFailException e){
+            throw e;
+        }catch (TaotaoException e){
+            logger.error(e.getMessage());
+            throw new TaotaoException("系统内部错误:" + e.getMessage());
+        }
+
+    }
+
+    @Override
+    public int deleteContentCat(String id) throws DataDeleteFailException,TaotaoException {
+        try {
+            int reslut = tbContentCategoryMapper.deleteByPrimaryKey(Long.parseLong(id));
+            if(reslut==0){
+                throw new DataDeleteFailException("数据删除失败");
+            }
+            return reslut;
+        }catch (DataDeleteFailException e){
+            throw e;
+        }catch (TaotaoException e){
+            logger.error(e.getMessage());
+            throw new TaotaoException("系统内部错误:" + e.getMessage());
+        }
     }
 }

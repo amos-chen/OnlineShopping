@@ -93,7 +93,7 @@ var JSTree = {
             var paramList = $(jsonData[i])[0].params;
             for (var j = 0; j < paramList.length; j++) {
                 arr.push(['<div class="row">',
-                    '<span class="col-sm-4 control-label" id="key">' + paramList[j] +  '</span>',
+                    '<span class="col-sm-4 control-label" id="key">' + paramList[j] + '</span>',
                     '<div class="col-sm-8">',
                     '<input id="value" class="form-control" type="text"/>',
                     '</div></div>'].join(''))
