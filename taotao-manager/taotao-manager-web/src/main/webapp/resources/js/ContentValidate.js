@@ -1,0 +1,9 @@
+var ContentValidate= {
+
+
+    init:function () {
+
+    }
+
+
+}

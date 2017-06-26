@@ -1,6 +1,7 @@
 package com.taotao.service;
 
 import com.taotao.dao.TbContentCategoryMapper;
+import com.taotao.dao.TbContentMapper;
 import com.taotao.dto.JSTree;
 import com.taotao.exception.*;
 import com.taotao.pojo.TbContent;
@@ -25,6 +26,9 @@ public class ContentServiceImpl implements ContentService {
 
     @Autowired
     private TbContentCategoryMapper tbContentCategoryMapper;
+
+    @Autowired
+    private TbContentMapper tbContentMapper;
 
 
     @Override
@@ -102,10 +106,11 @@ public class ContentServiceImpl implements ContentService {
 
     @Override
     @Transactional
-    public int addContentCat(String[] ParentId,String ContentName) throws DataInsertFailException, TaotaoException{
+    public List<Integer> addContentCat(String[] ParentId,String ContentName) throws DataInsertFailException, TaotaoException{
         try {
             String parent = ParentId[0];
             boolean isNumber = StringUtils.isNumeric(parent);
+            List<Integer> result = new ArrayList<>();
             if(isNumber){
                 //根据网页的form表单创建tbContentCategory对象
                 TbContentCategory tb = new TbContentCategory();
@@ -119,8 +124,9 @@ public class ContentServiceImpl implements ContentService {
                 tb.setParentId(Long.parseLong(parent));
                 //把对象存到数据库中
                 int data = tbContentCategoryMapper.insertWithoutId(tb);
+                result.add(data);
                 if (data != 0 ) {
-                    return data;
+                    return result;
                 } else {
                     throw new DataInsertFailException("类目插入失败！");
                 }
@@ -137,6 +143,7 @@ public class ContentServiceImpl implements ContentService {
                 parentTb.setParentId(0l);
                 //把父类目存入数据库中
                 int addParentResult = tbContentCategoryMapper.insertWithoutId(parentTb);
+                result.add(addParentResult);
                 //查询数据库中最大的ID值获取父类id
                 long Pid = tbContentCategoryMapper.queryMaxId();
                 //再根据父类目的Id创建子类目
@@ -151,8 +158,9 @@ public class ContentServiceImpl implements ContentService {
                 childTbcontentCat.setParentId(Pid);
                 //把子类目存入数据库中
                 int addChildResult = tbContentCategoryMapper.insertWithoutId(childTbcontentCat);
+                result.add(addChildResult);
                 if (addParentResult != 0 && addChildResult!=0) {
-                    return addParentResult;
+                    return result;
                 } else {
                     throw new DataInsertFailException("类目插入失败！");
                 }
@@ -216,5 +224,11 @@ public class ContentServiceImpl implements ContentService {
             logger.error(e.getMessage());
             throw new TaotaoException("系统内部错误:" + e.getMessage());
         }
+    }
+
+    @Override
+    public List<TbContent> queryContentList(String categoryId) {
+        List<TbContent> tbContents = tbContentMapper.queryListByCid(Long.parseLong(categoryId));
+        return tbContents;
     }
 }

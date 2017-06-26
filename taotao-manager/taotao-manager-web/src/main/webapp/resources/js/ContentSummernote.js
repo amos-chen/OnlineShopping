@@ -1,22 +1,21 @@
-var HTMLEditor = {
-
+var ContentSummernote = {
     URL: {
         FileUpload: function () {
             return "/taotao/manager/HTMLEditor/Add/Image";
         }
     },
     //TODO 删除服务器图片的方法
-    initEditor: function () {
+    init: function () {
         //页面完成后加载
         $(function () {
             //默认accpt为'image/*',所以验证会很慢
             $('.note-image-input').attr("accept", "image/jpg," +
                 "image/jpeg,image/png,image/gif");
-        })
+        });
 
         $('#summernote').summernote({
             lang: 'zh-CN',
-            minHeight: 200,
+            minHeight: 100,
             placeholder: '请填写商品的详细信息...',
             //对话框功能
             dialogsFade: true,
@@ -66,6 +65,4 @@ var HTMLEditor = {
         })
         ;
     }
-
-
 }

@@ -2,6 +2,8 @@ package com.taotao.dao;
 
 import com.taotao.pojo.TbContent;
 
+import java.util.List;
+
 public interface TbContentMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -16,4 +18,6 @@ public interface TbContentMapper {
     int updateByPrimaryKeyWithBLOBs(TbContent record);
 
     int updateByPrimaryKey(TbContent record);
+
+    List<TbContent> queryListByCid(Long cid);
 }

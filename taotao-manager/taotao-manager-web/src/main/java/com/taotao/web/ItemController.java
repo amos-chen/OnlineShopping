@@ -4,7 +4,6 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.taotao.dto.ExecuteItemsJsonResult;
 import com.taotao.dto.ExecuteJsonResult;
-import com.taotao.dto.JSTree;
 import com.taotao.dto.JSTreeAjax;
 import com.taotao.exception.DataInsertFailException;
 import com.taotao.exception.TaotaoException;
@@ -54,10 +53,10 @@ public class ItemController {
 			List<TbItem> tbItemList = itemsService.queryList(search);
 			PageInfo<TbItem> tbItemPageInfo = new PageInfo<>(tbItemList);
 			long total = tbItemPageInfo.getTotal();
-			result = new ExecuteItemsJsonResult<List<TbItem>>(true, total, tbItemList);
+			result = new ExecuteItemsJsonResult<>(true, total, tbItemList);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
-			result = new ExecuteItemsJsonResult<List<TbItem>>(false, e.getMessage());
+			result = new ExecuteItemsJsonResult<>(false, e.getMessage());
 		}
 		return result;
 	}

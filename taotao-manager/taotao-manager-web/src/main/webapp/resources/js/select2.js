@@ -7,9 +7,6 @@ var select2 = {
         addContentCat: function () {
             return '/taotao/manager/add/contentCat'
         },
-        queryContentCat: function (id) {
-            return '/taotao/manager/get/' + id + '/contentCat';
-        },
         updateContentCat: function (id) {
             return '/taotao/manager/update/' + id + '/contentCat';
         },
@@ -41,7 +38,10 @@ var select2 = {
             //修改modal的header为新增类目
             $('#CatManageModalTitle').text('新增类目');
             //初始化父类目select
-            if ($('#ParentId').html() === "" || $('#ParentId').length === 0) {
+            if ($('#ParentId').html() === "" || $('#ParentId').length === 0 ||
+                $('#booleanLoadContentCat').val()==='true') {
+                //先清空select里的内容
+                $('#ParentId').html('');
                 $.ajax({
                     url: select2.URL.getContentCatList(),
                     method: 'get',
@@ -51,8 +51,8 @@ var select2 = {
                         }
                     }
                 });
-            }
-            ;
+                $('#booleanLoadContentCat').val('false');
+            };
             $("#CatManage").modal('show');
             //保存类目
             $('#ContentCatSave').on('click', function () {
@@ -66,11 +66,17 @@ var select2 = {
                         || $("input#ContentName").val() === undefined) {
                         toastr.warning("请输入类目名称！");
                     } else {
-                        //把输入的表单数据传到后天，进行数据插入操作
+                        //把输入的表单数据传到后台，进行数据插入操作
                         $.post(select2.URL.addContentCat(), $('form#contentCatForm').serialize(),
                             function (result) {
                                 //如果插入成功，则提示成功信息，并且刷新类目树
                                 if (result && result['success']) {
+                                    if(result.data.length>1){
+                                        $('#booleanLoadContentCat').val('true');
+                                    }else {
+                                        $('#booleanLoadContentCat').val('true');
+                                    }
+
                                     toastr.success('类目保存成功!');
                                     $("#CatManage").modal('hide');
                                     // 重新加载类目数的数据
@@ -177,12 +183,13 @@ var select2 = {
                                     //只有一个的时候就可以删除父类目了
                                     if ($(parent).find('li.jstree-leaf').length === 1) {
                                         var parentId = parent[0].id;
-                                        $.post(select2.URL.deleteContentCat(parentId),function (result) {
+                                        $.post(select2.URL.deleteContentCat(parentId), function (result) {
                                             if (result && result['success']) {
                                                 toastr.success('类目删除成功!');
+                                                $('#booleanLoadContentCat').val('true');
                                                 $("#deleteModal").modal('hide');
                                                 Content.initTree();
-                                            }else{
+                                            } else {
                                                 //如果删除失败，则提示错误信息
                                                 toastr.danger(result.error);
                                             }
@@ -205,9 +212,7 @@ var select2 = {
                         $("#deleteConfirm").unbind();
                     });
                 }
-
             }
         )
     }
-
-}
+};

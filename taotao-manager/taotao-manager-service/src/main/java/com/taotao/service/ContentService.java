@@ -16,12 +16,14 @@ public interface ContentService {
 
     List<TbContentCategory> queryContentCat();
 
-    int addContentCat(String[] ParentId,String ContentName);
+    List<Integer> addContentCat(String[] ParentId,String ContentName);
 
     TbContentCategory queryContentCat(Long id);
 
     int updateContentCat(String id,String name);
 
     int deleteContentCat(String id);
+
+    List<TbContent> queryContentList(String categoryId);
 
 }

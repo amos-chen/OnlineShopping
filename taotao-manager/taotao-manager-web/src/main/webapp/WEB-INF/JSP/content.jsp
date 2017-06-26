@@ -21,6 +21,18 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.6/select2-bootstrap.min.css"
           rel="stylesheet"/>
+
+    <%--bootstrap-table.css--%>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+
+    <%--FileInput.css--%>
+    <link href="https://cdn.bootcss.com/bootstrap-fileinput/4.3.9/css/fileinput.min.css" rel="stylesheet">
+
+    <%--summernote.css--%>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.css" rel="stylesheet">
+
+    <%--bootstrapValidator.css--%>
+    <link href="https://cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet">
 </head>
 <body>
 <div class="wrapper">
@@ -153,9 +165,25 @@
                                     </div>
                                     <hr>
                                     <div id="jstree"></div>
+
+                                    <%--当新增或删除父类节点时，需要重新加载select里的值--%>
+                                    <input type="hidden" id="booleanLoadContentCat">
                                 </div>
                                 <div class="col-lg-9">
+                                    <%--增删改的工具条--%>
+                                    <div class="toolbar">
+                                        <div class="btn-group">
+                                            <a href="#" id="btn-add" type="button"
+                                               class="btn btn-default">
+                                                <span class="fa fa-plus fa-fw"></span>新增内容</a>
+                                            <a id="delete-selected" type="button" class="btn btn-default">
+                                                <span class="fa fa-trash fa-fw"></span>删除已选</a>
+                                        </div>
+                                    </div>
 
+                                    <div class="table-content">
+                                        <table id="Items-table"></table>
+                                    </div>
                                 </div>
                             </div>
 
@@ -176,8 +204,9 @@
                                                            for="ParentId">父类名称：</label>
                                                     <div class=" col-sm-8">
                                                         <p>
-                                                        <select class="form-control" name="ParentId"
-                                                                id="ParentId" style="width: 100%;" multiple="multiple"></select>
+                                                            <select class="form-control" name="ParentId"
+                                                                    id="ParentId" style="width: 100%;"
+                                                                    multiple="multiple"></select>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -192,7 +221,8 @@
                                                 </div>
                                             </form>
                                             <div class="modal-footer">
-                                                <button type="submit" id="ContentCatSave" class="btn btn-primary">保存</button>
+                                                <button type="submit" id="ContentCatSave" class="btn btn-primary">保存
+                                                </button>
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">
                                                     取消
                                                 </button>
@@ -202,7 +232,7 @@
                                 </div><!-- /.modal-dialog -->
                             </div><!-- /.modal -->
 
-                            <%--删除提示--%>
+                            <%--内容类目删除提示--%>
                             <div class="modal fade deleteModal" id="deleteModal">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -224,6 +254,123 @@
                                 </div>
                             </div><!-- /.modal -->
 
+                            <%--点击删除按键时的弹出框--%>
+                            <div class="modal fade" id="modal-delete">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <div class="container-fluid text-center modal-delete">
+                                                <div class="col-sm-12">
+                                                    <div class="warnning-icon">
+                                                        <span class="fa fa-warning fa-lg"></span>
+                                                    </div>
+                                                    <h1><strong>操作提示</strong></h1>
+                                                    <p>确定要删除吗?</p>
+                                                    <a href="#" class="btn btn-success" data-dismiss="modal">取消</a>
+                                                    <a href="#" id="btn-remove" class="btn btn-danger">确认</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- /.modal -->
+
+                            <%--内容新增/修改弹出框--%>
+                            <a class="btn btn-primary" data-toggle="modal" href="#contentManager">Trigger modal</a>
+                            <div class="modal fade" id="contentManager">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                &times;
+                                            </button>
+                                            <h4 class="contentManagerTitle"></h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="contentForm" class="form-horizontal" role="form">
+                                                <div class="form-group">
+                                                    <label for="title" class="col-sm-4 control-label">内容标题<span
+                                                            class="text-danger">*</span>:</label>
+                                                    <div class="col-sm-6">
+                                                        <input name="title" class="form-control" type="text"
+                                                               id="title"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="subTitle" class="col-sm-4 control-label">内容副标题<span
+                                                            class="text-danger">*</span>:</label>
+                                                    <div class="col-sm-6">
+                                                        <input name="subTitle" class="form-control" type="text"
+                                                               id="subTitle"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="titleDesc" class="col-sm-4 control-label">内容描述<span
+                                                            class="text-danger">*</span>:</label>
+                                                    <div class="col-sm-6">
+                                                        <textarea name="titleDesc" class="form-control" id="titleDesc"
+                                                                  rows="3"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="contentURL" class="col-sm-4 control-label">类目地址<span
+                                                            class="text-danger">*</span>:</label>
+                                                    <div class="col-sm-6">
+                                                        <input name="contentURL" class="form-control" type="text"
+                                                               id="contentURL"/>
+                                                    </div>
+                                                </div>
+
+                                                <%--图片上传功能--%>
+                                                <div class="form-group">
+                                                    <label for="bigImage" class="col-sm-4 control-label">大图片:</label>
+                                                    <div class="col-sm-6">
+                                                        <input name="imageInputFile" class="imageInputFile" id="bigImageInputFile" type="file"
+                                                               data-show-preview="false"
+                                                               class="file-loading">
+                                                        <input type="hidden" id="bigImage" class="fileinputImange" name="bigImage"/>
+                                                    </div>
+                                                </div>
+                                                <%--图片上传功能--%>
+                                                <div class="form-group">
+                                                    <label for="smallImage" class="col-sm-4 control-label">小图片:</label>
+                                                    <div class="col-sm-6">
+                                                        <input name="imageInputFile" class="imageInputFile" id="samallImageInputFile" type="file"
+                                                               data-show-preview="false"
+                                                               class="file-loading">
+                                                        <input type="hidden" id="smallImage" class="fileinputImange" name="smallImage"/>
+                                                    </div>
+                                                </div>
+                                                <%--富文本编辑器--%>
+                                                <div class="form-group" id="HTMLeditor">
+                                                    <label for="descriptionValue"
+                                                           class="col-sm-4 control-label">内容详情:</label>
+                                                    <div class="col-sm-6">
+                                                        <div class="summernote" id="summernote"></div>
+                                                        <input hidden="hidden" name="description"
+                                                               id="descriptionValue"/>
+                                                    </div>
+                                                </div>
+
+                                                <%--summernote提交表单用--%>
+                                                <input id="itemParameter" name="itemParameter" type="hidden">
+
+                                                <div class="form-group">
+                                                    <div class="col-sm-6 col-sm-offset-4">
+                                                        <p class="help-block"><span class="text-danger">*</span>为必填项</p>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                                            </button>
+                                            <button type="button" class="btn btn-primary">保存</button>
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div><!-- /.modal -->
+
                         </div>
                     </div>
                 </div>
@@ -238,18 +385,57 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/i18n/zh-CN.js"></script>
 
+<%--树形下拉框，暂时不使用--%>
+<%--<script type="text/javascript" src="/resources/js/select2tree.js"></script>--%>
+
+<!--bootstrap-table.js-->
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+
+<!--FileInput.js-->
+<script src="https://cdn.bootcss.com/bootstrap-fileinput/4.3.9/js/fileinput.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-fileinput/4.3.9/js/locales/zh.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-fileinput/4.3.9/js/locales/fa.min.js"></script>
+
+<!--summernote.js-->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.min.js"></script>
+<script src="https://cdn.bootcss.com/summernote/0.8.3/lang/summernote-zh-CN.min.js"></script>
+
+<!--bootstrapValidator.js-->
+<script src="https://cdn.bootcss.com/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-validator/0.5.3/js/language/zh_CN.min.js"></script>
+
+
 <%--自定义js--%>
 <script type="text/javascript" src="/resources/js/Content.js"></script>
 <script type="text/javascript" src="/resources/js/select2.js"></script>
+<script type="text/javascript" src="/resources/js/ContentTable.js"></script>
+<script type="text/javascript" src="/resources/js/ContentFileInput.js"></script>
+<script type="text/javascript" src="/resources/js/ContentSummernote.js"></script>
+<script type="text/javascript" src="/resources/js/ContentValidate.js"></script>
 
-<%--树形下拉框，暂时不使用--%>
-<%--<script type="text/javascript" src="/resources/js/select2tree.js"></script>--%>
 <script type="text/javascript">
     $("#menu").metisMenu({
 //        toggle: false
     });
     Content.initTree();
     select2.init();
+    $(document).ready(function () {
+        //延时加载
+        setTimeout(selectFirst, 200);
+        function selectFirst() {
+            $($('body').find('li.jstree-leaf')[0]).find('a.jstree-anchor').addClass('jstree-clicked');
+            var id = $('.jstree-clicked')[0].id.split('_')[0];
+            ContentTable.showTabale({
+                id: id
+            });
+        }
+    });
+    ContentFileInput.init();
+    ContentSummernote.init();
+    ContentValidate.init();
+
+
 </script>
 </body>
 </html>

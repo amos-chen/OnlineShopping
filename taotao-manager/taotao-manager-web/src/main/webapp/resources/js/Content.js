@@ -32,7 +32,7 @@ var Content = {
             // 'checkbox': {cascade: "", three_state: false}, //不级联
             'core': {
                 'data': Content.getJsonTree(),
-                'check_callback': true,
+                'check_callback': true
             },
             'types': {
                 'root': {'icon': 'fa fa-folder fw'},
@@ -48,7 +48,6 @@ var Content = {
             },
             'plugins': ['conditionalselect'],
         });
-
 
     },
 
