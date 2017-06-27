@@ -1,65 +1,97 @@
 var ContentFileInput = {
-    URL:{
-        picture : function () {
+    URL: {
+        picture: function () {
             //地址不能用双引号
             return '/taotao/manager/picture/upload';
+        },
+        deletePic: function () {
+            return '/taotao/manager/picture/delete'
         }
     },
 
-    init:function () {
+    init: function () {
         $("input.imageInputFile").fileinput({
             //ajax上传的地址
-            uploadUrl:ContentFileInput.URL.picture(),
-            uploadAsync:true,
-            language:'zh',
+            uploadUrl: ContentFileInput.URL.picture(),
+            uploadAsync: true,
+            language: 'zh',
             allowedPreviewTypes: ['image'],
             allowedFileTypes: ['image'],
             //不显示本地的移除按键，只保留从数据库删除的按键
-            showRemove:false,
+            showRemove: false,
             // allowedFileExtensions:  ['jpg', 'png'],
             // maxFileSize : 2000,
-            browseClass:'btn btn-default',
-            maxFileCount:'5',
+            browseClass: 'btn btn-default',
+            //文件最大数量
+            maxFileCount: '1',
             // showPreview:true,
             enctype: 'multipart/form-data',
         });
-        //文件上传服务器成功后触发事件
-        $("#imageInputFile").on('fileuploaded',function (event, data) {
-            var response = data.response;
-            var initialPreviewConfig = response.initialPreviewConfig;
-            var imageURL = initialPreviewConfig[0].extra.imageURL;
-            var value = $('#image').val();
-            if(value==null||""==value){
-                $('#image').val(imageURL);
-            }else{
-                $('#image').val(value+";"+imageURL);
+        //禁用进度条kv进度条
+        // $('.kv-upload-progress').hide();
+        //TODO 如果上传出现错误时，取消上传结束后的显示完成信息，
+        $('input.imageInputFile').on('fileuploaderror', function (event, data, msg) {
+            console.log("123");
+            // $(progressbar).hide();
+            setTimeout(changeCompleteMsg, 200);
+            // $(progressbar).show();
+            function changeCompleteMsg() {
+                if ($('.has-error').length !== 0) {
+                    var progressbar = $('.has-error').find('.progress-bar');
+                    $(progressbar).removeClass('progress-bar-success').addClass('progress-bar-danger');
+                    $(progressbar).html('上传出现错误！');
+                }
             }
         });
 
-        //删除缩略图后的回调事件
-        $('#imageInputFile').on('filedeleted',function (event, key, jqXHR, data) {
-            var value = $('#image').val();
-            var newValue="";
-            var deleteURL = data.imageURL;
-            if(value.indexOf(";")>0){
-                //含有";"说明有两张及以上的图片
-                var array = value.split(";");
-                //遍历所有元素，删除需要删除的元素，重新拼接
-                for(var i=0;i<array.length;i++){
-                    if(array[i].indexOf(deleteURL)==-1){
-                        if(""==newValue){
-                            newValue = array[i];
-                        }else{
-                            newValue = newValue+";"+array[i];
-                        }
-                    }
-                }
-                $('#image').val(newValue);
-            }else{
-                //如果只有一张图片，删除是直接清空value值
-                $('#image').val("");
-            }
-        })
+        //文件上传服务器成功后触发事件
+        $("input.imageInputFile").on('fileuploaded', function (event, data) {
+            var response = data.response;
+            var initialPreviewConfig = response.initialPreviewConfig;
+            var imageURL = initialPreviewConfig[0].extra.imageURL;
+            var baseroot = initialPreviewConfig[0].extra.baseroot;
+            var key = initialPreviewConfig[0].key;
+            ContentFileInput.uploadSuccess(event,imageURL);
+            ContentFileInput.deleteImage(baseroot,key);
+        });
 
+    },
+
+    uploadSuccess: function (event, imageURL) {
+        var fileInputDiv = $(event.currentTarget).parent().parent().parent().parent()[0];
+        $(fileInputDiv).attr('hidden', 'hidden');
+        var array = new Array();
+        array.push('<img class="" src="' + imageURL + '" style="width: 50px;height: auto;position: relative;">'
+            + '<div class="tools" style="position: absolute;top: 0;left: 70px;">'
+            + '<a id="removeImage" href="javascript:void(0)" style="color: #DD5A43!important;">'
+            + '<i class="fa fa-times"></i>'
+            + '</a>'
+            + '</div>');
+        $(fileInputDiv).parent().append(array.join(''));
+    },
+
+    deleteImage: function (baseroot, key) {
+        $('a#removeImage').one('click', function () {
+            var divParent = $(this).parent().parent();
+            var deletDiv = $(this).parent();
+            var data = new FormData();
+            data.append('baseroot', baseroot);
+            data.append('key', key);
+            $.ajax({
+                url:ContentFileInput.URL.deletePic(),
+                data:data,
+                type:'POST',
+                cache: false,
+                contentType: false,
+                processData: false,
+                success:function () {
+                    var fileInput = $(divParent).find('.imageInputFile');
+                    var img = $(divParent).find('img');
+                    $(fileInput).fileinput('refresh');
+                    $(img).remove();
+                    $(deletDiv).remove();
+                }
+            });
+        })
     }
 }

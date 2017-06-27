@@ -18,7 +18,7 @@
     <title>淘淘商城后台管理系统</title>
     <%@include file="common/header.jsp" %>
     <%--FileInput.css--%>
-    <link href="https://cdn.bootcss.com/bootstrap-fileinput/4.3.9/css/fileinput.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap-fileinput/4.4.2/css/fileinput.min.css" rel="stylesheet">
 
     <%--summernote.css--%>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.css" rel="stylesheet">
@@ -224,6 +224,7 @@
                                 <div class="form-group">
                                     <label for="image" class="col-sm-2 control-label">上传图片:</label>
                                     <div class="col-sm-6">
+                                        <%--TODO 图片上传取消后progressbar显示完成，待修复--%>
                                         <input name="imageInputFile" id="imageInputFile" type="file" multiple
                                                class="file-loading">
                                         <input type="hidden" id="image" name="image"/>
@@ -308,9 +309,9 @@
 <%@include file="common/footer.jsp" %>
 
 <!--FileInput.js-->
-<script src="https://cdn.bootcss.com/bootstrap-fileinput/4.3.9/js/fileinput.min.js"></script>
-<script src="https://cdn.bootcss.com/bootstrap-fileinput/4.3.9/js/locales/zh.min.js"></script>
-<script src="https://cdn.bootcss.com/bootstrap-fileinput/4.3.9/js/locales/fa.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-fileinput/4.4.2/js/fileinput.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-fileinput/4.4.2/js/locales/zh.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-fileinput/4.4.2/js/locales/fa.min.js"></script>
 
 <!--summernote.js-->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.min.js"></script>

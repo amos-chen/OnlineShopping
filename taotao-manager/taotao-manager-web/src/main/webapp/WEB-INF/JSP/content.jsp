@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
 
     <%--FileInput.css--%>
-    <link href="https://cdn.bootcss.com/bootstrap-fileinput/4.3.9/css/fileinput.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap-fileinput/4.4.2/css/fileinput.min.css" rel="stylesheet">
 
     <%--summernote.css--%>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.css" rel="stylesheet">
@@ -326,8 +326,8 @@
                                                     <label for="bigImage" class="col-sm-4 control-label">大图片:</label>
                                                     <div class="col-sm-6">
                                                         <input name="imageInputFile" class="imageInputFile" id="bigImageInputFile" type="file"
-                                                               data-show-preview="false"
-                                                               class="file-loading">
+                                                        data-show-preview="false"
+                                                        class="file-loading">
                                                         <input type="hidden" id="bigImage" class="fileinputImange" name="bigImage"/>
                                                     </div>
                                                 </div>
@@ -335,10 +335,12 @@
                                                 <div class="form-group">
                                                     <label for="smallImage" class="col-sm-4 control-label">小图片:</label>
                                                     <div class="col-sm-6">
-                                                        <input name="imageInputFile" class="imageInputFile" id="samallImageInputFile" type="file"
+                                                        <input name="imageInputFile" class="imageInputFile"
+                                                               id="samallImageInputFile" type="file"
                                                                data-show-preview="false"
                                                                class="file-loading">
-                                                        <input type="hidden" id="smallImage" class="fileinputImange" name="smallImage"/>
+                                                        <input type="hidden" id="smallImage" class="fileinputImange"
+                                                               name="smallImage"/>
                                                     </div>
                                                 </div>
                                                 <%--富文本编辑器--%>
@@ -393,9 +395,9 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
 
 <!--FileInput.js-->
-<script src="https://cdn.bootcss.com/bootstrap-fileinput/4.3.9/js/fileinput.min.js"></script>
-<script src="https://cdn.bootcss.com/bootstrap-fileinput/4.3.9/js/locales/zh.min.js"></script>
-<script src="https://cdn.bootcss.com/bootstrap-fileinput/4.3.9/js/locales/fa.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-fileinput/4.4.2/js/fileinput.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-fileinput/4.4.2/js/locales/zh.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-fileinput/4.4.2/js/locales/fa.min.js"></script>
 
 <!--summernote.js-->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.min.js"></script>

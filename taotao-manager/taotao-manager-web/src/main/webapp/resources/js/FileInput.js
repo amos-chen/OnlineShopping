@@ -24,13 +24,17 @@ var FileInput = {
             maxFileCount:'5',
             // showPreview:true,
             enctype: 'multipart/form-data',
+
         });
+        // 禁用进度条
+        $('.kv-upload-progress').hide();
         //文件上传服务器成功后触发事件
         $("#imageInputFile").on('fileuploaded',function (event, data) {
             var response = data.response;
             var initialPreviewConfig = response.initialPreviewConfig;
             var imageURL = initialPreviewConfig[0].extra.imageURL;
             var value = $('#image').val();
+            //表单数据，如果原来已经有数据，则在数据后追加
             if(value==null||""==value){
                 $('#image').val(imageURL);
             }else{
