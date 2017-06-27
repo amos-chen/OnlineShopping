@@ -16,7 +16,7 @@ var ContentSummernote = {
         $('#summernote').summernote({
             lang: 'zh-CN',
             minHeight: 100,
-            placeholder: '请填写商品的详细信息...',
+            // placeholder: '请填写商品的详细信息...',
             //对话框功能
             dialogsFade: true,
             dialogsInBody: true,
