@@ -3,9 +3,11 @@ var ContentTable = {
         ContentList: function (id) {
             return "/taotao/manager/content/" + id + "/list";
         },
-
         deleteURL: function () {
-            return "/taotao/manager/delete/item";
+            return "/taotao/manager/delete/content";
+        },
+        getContent: function (id) {
+            return "/taotao/manager/get/" + id + "/content";
         }
     },
 
@@ -209,6 +211,7 @@ var ContentTable = {
             //all不生效的原因:表格是后台分页，如果要获取所有的商品信息会向后台发出一个ajax请求，获取所有的商品信息
             // exportDataType: 'basic'
         });
+        //点击类目时重新加载表格
         ContentTable.reloadTableWhenClick();
 
         //当modal隐藏时，移除btn-remove上绑定的事件
@@ -217,15 +220,36 @@ var ContentTable = {
         });
 
         window.operationEvents = {
-            'click .copy': function (e, value, row, index) {
-
-            },
+            //修改内容条目
             'click .edit': function (e, value, row, index) {
-                window.location.href = "taotao/manager/updateItem?id=" + row.id + "&&cid=" + row.cid;
+                // window.location.href = "taotao/manager/updateItem?id=" + row.id + "&&cid=" + row.cid;
+                //根据行编号获取内容信息，并同步到modal中
+                $.get(ContentTable.URL.getContent(row.id), function (result) {
+                    if (result && result['success']) {
+                        $('#title').val(result.data.title);
+                        $('#subTitle').val(result.data.subTitle);
+                        $('#titleDesc').val(result.data.titleDesc);
+                        $('#contentURL').val(result.data.url);
+                        ContentTable.querySuccess($('#bigImageInputFile'),result.data.pic);
+                        ContentTable.querySuccess($('#smallImageInputFile'),result.data.pic2);
+                        var arr1 = ContentTable.getBaseRootAndKey(result.data.pic);
+                        var arr2 = ContentTable.getBaseRootAndKey(result.data.pic2);
+                        var baseroot1 = arr1[0];
+                        var key1 = arr1[1];
+                        var baseroot2 = arr2[0];
+                        var key2 = arr2[1];
+                        ContentTable.deleteImage(baseroot1,key1);
+                        ContentTable.deleteImage(baseroot2,key2);
+                        //同步summernote的内容
+                        $('#summernote').summernote('insertText', result.data.content);
+                        $('#contentManager').modal('show');
+                    } else {
+                        toastr.danger(result.error);
+                    }
+                })
             },
             //删除单个商品
             'click .remove': function (e, value, row, index) {
-                console.log(row);
                 $('#modal-delete').modal('show');
                 var arr = new Array();
                 arr.push(row.id);
@@ -276,7 +300,6 @@ var ContentTable = {
             return '<li class="dropdown dropdown-edit">' +
                 '<a style="color: black" class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="fa fa-edit fa-lg"></span></a>' +
                 '<ul class="dropdown-menu dropdown-menu-caret" role="menu">' +
-                '<li><a class="copy" href="#"><span class="fa fa-copy fa-fw"></span>复制</a></li>' +
                 '<li><a class="edit" href="#"><span class="fa fa-pencil fa-fw"></span>修改</a></li>' +
                 '<li><a class="remove" href="#"><span class="fa fa-trash fa-fw"></span>删除</a></li>' +
                 '</ul></li>';
@@ -284,7 +307,6 @@ var ContentTable = {
             return '<li class="dropdown dropdown-edit dropup">' +
                 '<a style="color: black" class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="fa fa-edit fa-lg"></span></a>' +
                 '<ul class="dropdown-menu dropup-menu-caret" role="menu">' +
-                '<li><a href="#"><span class="fa fa-copy fa-fw"></span>复制</a></li>' +
                 '<li><a href="#"><span class="fa fa-pencil fa-fw"></span>修改</a></li>' +
                 '<li><a href="#"><span class="fa fa-trash fa-fw"></span>删除</a></li>' +
                 '</ul></li>';
@@ -325,7 +347,7 @@ var ContentTable = {
         })
     },
 
-
+    //当点击类目时，刷新表格内容
     reloadTableWhenClick: function () {
         //获取树状结构里所有的页节点
         var childrenNodes = $($('ul.jstree-container-ul').find('ul.jstree-children')).find('a.jstree-anchor');
@@ -333,11 +355,64 @@ var ContentTable = {
         $(childrenNodes).on('click', function (node, e) {
             var id = node.currentTarget.id.split('_')[0];
             //刷新数据
-            $("#Items-table").bootstrapTable('refresh',{
-                url:ContentTable.URL.ContentList(id)
+            $("#Items-table").bootstrapTable('refresh', {
+                url: ContentTable.URL.ContentList(id)
             })
         })
+    },
+
+    //查询成功后显示图片
+    querySuccess: function (node, imageURL) {
+        console.log(node);
+        console.log(imageURL);
+        console.log(arguments);
+        var fileInputDiv = $(node).parent().parent().parent().parent()[0];
+        $(fileInputDiv).attr('hidden', 'hidden');
+        var array = new Array();
+        array.push('<img class="" src="' + imageURL + '" style="width: 50px;height: auto;position: relative;">'
+            + '<div class="tools" style="position: absolute;top: 0;left: 70px;">'
+            + '<a id="removeImage" href="javascript:void(0)" style="color: #DD5A43!important;">'
+            + '<i class="fa fa-times"></i>'
+            + '</a>'
+            + '</div>');
+        $(fileInputDiv).parent().append(array.join(''));
+    },
+
+    deleteImage: function (baseroot, key) {
+        $('a#removeImage').one('click', function () {
+            var divParent = $(this).parent().parent();
+            var deletDiv = $(this).parent();
+            var data = new FormData();
+            data.append('baseroot', baseroot);
+            data.append('key', key);
+            $.ajax({
+                url:ContentFileInput.URL.deletePic(),
+                data:data,
+                type:'POST',
+                cache: false,
+                contentType: false,
+                processData: false,
+                success:function () {
+                    var fileInput = $(divParent).find('.imageInputFile');
+                    var img = $(divParent).find('img');
+                    $(fileInput).fileinput('refresh');
+                    $(img).remove();
+                    $(deletDiv).remove();
+                }
+            });
+        })
+    },
+
+    getBaseRootAndKey:function (pic) {
+        console.log(pic);
+        var arr = pic.split('/');
+        var size = arr.length;
+        var result = new Array();
+        var baseroot = '/'+arr[size-4]+'/'+arr[size-3]+'/'+arr[size-2]+'/';
+        var key = arr[size-1];
+        result.push(baseroot);
+        result.push(key);
+        console.log(result);
+        return result;
     }
-
-
 }

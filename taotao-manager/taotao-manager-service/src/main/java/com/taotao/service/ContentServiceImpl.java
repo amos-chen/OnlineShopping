@@ -231,4 +231,20 @@ public class ContentServiceImpl implements ContentService {
         List<TbContent> tbContents = tbContentMapper.queryListByCid(Long.parseLong(categoryId));
         return tbContents;
     }
+
+    @Override
+    public TbContent queryContentById(String id) throws DataNotFindException,TaotaoException {
+        try {
+            TbContent tbContent = tbContentMapper.selectByPrimaryKey(Long.parseLong(id));
+            if(tbContent ==null){
+                throw new DataNotFindException("未找到内容");
+            }
+            return tbContent;
+        }catch (DataNotFindException e){
+            throw e;
+        }catch (TaotaoException e){
+            logger.error(e.getMessage());
+            throw new TaotaoException("系统内部错误:" + e.getMessage());
+        }
+    }
 }

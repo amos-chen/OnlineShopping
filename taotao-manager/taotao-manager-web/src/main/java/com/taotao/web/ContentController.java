@@ -6,6 +6,7 @@ import com.taotao.dto.ExecuteItemsJsonResult;
 import com.taotao.dto.ExecuteJsonResult;
 import com.taotao.dto.JSTree;
 import com.taotao.exception.DataInsertFailException;
+import com.taotao.exception.DataNotFindException;
 import com.taotao.exception.DataUpdateFailException;
 import com.taotao.exception.TaotaoException;
 import com.taotao.pojo.TbContent;
@@ -137,5 +138,19 @@ public class ContentController {
 		return result;
 	}
 
+
+	@RequestMapping(value = "/get/{id}/content",method = RequestMethod.GET)
+	@ResponseBody
+	public ExecuteJsonResult<TbContent> queryTbcontentById(@PathVariable("id") String id){
+		ExecuteJsonResult<TbContent> result;
+		try {
+			TbContent tbContent = contentService.queryContentById(id);
+			return new ExecuteJsonResult<TbContent>(true,tbContent);
+		}catch (DataNotFindException e){
+			return new ExecuteJsonResult<TbContent>(false,e.getMessage());
+		}catch (TaotaoException e){
+			return new ExecuteJsonResult<TbContent>(false,e.getMessage());
+		}
+	}
 
 }

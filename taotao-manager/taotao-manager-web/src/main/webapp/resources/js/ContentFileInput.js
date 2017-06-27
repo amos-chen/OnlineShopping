@@ -56,7 +56,7 @@ var ContentFileInput = {
         });
 
     },
-
+    //上传成功后显示图片
     uploadSuccess: function (event, imageURL) {
         var fileInputDiv = $(event.currentTarget).parent().parent().parent().parent()[0];
         $(fileInputDiv).attr('hidden', 'hidden');

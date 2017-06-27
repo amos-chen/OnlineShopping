@@ -336,7 +336,7 @@
                                                     <label for="smallImage" class="col-sm-4 control-label">小图片:</label>
                                                     <div class="col-sm-6">
                                                         <input name="imageInputFile" class="imageInputFile"
-                                                               id="samallImageInputFile" type="file"
+                                                               id="smallImageInputFile" type="file"
                                                                data-show-preview="false"
                                                                class="file-loading">
                                                         <input type="hidden" id="smallImage" class="fileinputImange"
@@ -372,7 +372,6 @@
                                     </div><!-- /.modal-content -->
                                 </div><!-- /.modal-dialog -->
                             </div><!-- /.modal -->
-
                         </div>
                     </div>
                 </div>
@@ -436,8 +435,10 @@
     ContentFileInput.init();
     ContentSummernote.init();
     ContentValidate.init();
-
-
+    //图片加载失败，指定默认加载图片
+//    $('img').onerror(function () {
+//        $(this).attr('src', '/resources/images/picfail.svg');
+//    });
 </script>
 </body>
 </html>

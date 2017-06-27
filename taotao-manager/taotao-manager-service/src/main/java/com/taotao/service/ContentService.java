@@ -26,4 +26,6 @@ public interface ContentService {
 
     List<TbContent> queryContentList(String categoryId);
 
+    TbContent queryContentById(String id);
+
 }
