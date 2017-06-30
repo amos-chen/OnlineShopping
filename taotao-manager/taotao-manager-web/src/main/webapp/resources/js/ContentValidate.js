@@ -3,7 +3,6 @@ var ContentValidate = {
 
     init: function () {
 
-
         $('#contentForm').bootstrapValidator({
             // container: 'tooltip',
             message: 'This value is not valid',

@@ -325,7 +325,7 @@
                                                     <label for="bigImageInputFile"
                                                            class="col-sm-4 control-label">大图片:</label>
                                                     <div class="col-sm-6">
-                                                        <input name="bigImageInputFile" class="imageInputFile"
+                                                        <input name="imageInputFile" class="imageInputFile"
                                                                id="bigImageInputFile" type="file"
                                                                data-show-preview="false"
                                                                class="file-loading">
@@ -336,7 +336,7 @@
                                                     <label for="smallImageInputFile"
                                                            class="col-sm-4 control-label">小图片:</label>
                                                     <div class="col-sm-6">
-                                                        <input name="smallImageInputFile" class="imageInputFile"
+                                                        <input name="imageInputFile" class="imageInputFile"
                                                                id="smallImageInputFile" type="file"
                                                                data-show-preview="false"
                                                                class="file-loading">

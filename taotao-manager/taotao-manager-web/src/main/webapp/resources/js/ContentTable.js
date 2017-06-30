@@ -219,10 +219,20 @@ var ContentTable = {
             $('#btn-remove').unbind();
         });
 
+        //当modal隐藏时，销毁bootstrapvalidator，清除验证信息
+        $('#contentManager').on("hidden.bs.modal", function () {
+            $('#contentForm').bootstrapValidator('destroy');
+        });
+
         ContentTable.addContent();
         window.operationEvents = {
             //修改内容条目
             'click .edit': function (e, value, row, index) {
+
+                //清空form表单
+                ContentTable.refreshEditModal();
+                //初始化validator
+                ContentValidate.init();
                 $('.contentManagerTitle').text('修改内容');
                 // window.location.href = "taotao/manager/updateItem?id=" + row.id + "&&cid=" + row.cid;
                 //根据行编号获取内容信息，并同步到modal中
@@ -424,7 +434,11 @@ var ContentTable = {
     addContent: function () {
         $('#btn-add').on('click', function () {
             $('.contentManagerTitle').text('新增内容');
+            //清空form表单
             ContentTable.refreshEditModal();
+            //初始化validator
+            ContentValidate.init();
+
             $('#contentManager').modal('show');
         })
     },

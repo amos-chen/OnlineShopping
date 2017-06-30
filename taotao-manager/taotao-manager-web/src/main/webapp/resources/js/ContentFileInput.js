@@ -1,6 +1,6 @@
 var ContentFileInput = {
     URL: {
-        picture: function () {
+        picture : function () {
             //地址不能用双引号
             return '/taotao/manager/picture/upload';
         },
@@ -10,7 +10,7 @@ var ContentFileInput = {
     },
 
     init: function () {
-        $("input.imageInputFile").fileinput({
+        $('input.imageInputFile').fileinput({
             //ajax上传的地址
             uploadUrl: ContentFileInput.URL.picture(),
             uploadAsync: true,
@@ -30,8 +30,7 @@ var ContentFileInput = {
         //禁用进度条kv进度条
         // $('.kv-upload-progress').hide();
         //TODO 如果上传出现错误时，取消上传结束后的显示完成信息，
-        $('input.imageInputFile').on('fileuploaderror', function (event, data, msg) {
-            console.log("123");
+        $('.imageInputFile').on('fileuploaderror', function (event, data, msg) {
             // $(progressbar).hide();
             setTimeout(changeCompleteMsg, 200);
             // $(progressbar).show();
@@ -43,19 +42,19 @@ var ContentFileInput = {
                 }
             }
         });
+        //文件上传服务器成功后触发事件
         $("input.imageInputFile").on('fileuploaded', function (event, data) {
             var response = data.response;
             var initialPreviewConfig = response.initialPreviewConfig;
             var imageURL = initialPreviewConfig[0].extra.imageURL;
             var baseroot = initialPreviewConfig[0].extra.baseroot;
             var key = initialPreviewConfig[0].key;
-            ContentFileInput.uploadSuccess(event,imageURL);
-            ContentFileInput.deleteImage(event,baseroot,key);
+            ContentFileInput.uploadSuccess(event, imageURL);
+            ContentFileInput.deleteImage(event, baseroot, key);
         });
 
     },
 
-    //文件上传服务器成功后触发事件
 
     //上传成功后显示图片
     uploadSuccess: function (event, imageURL) {
@@ -81,13 +80,13 @@ var ContentFileInput = {
             data.append('baseroot', baseroot);
             data.append('key', key);
             $.ajax({
-                url:ContentFileInput.URL.deletePic(),
-                data:data,
-                type:'POST',
+                url: ContentFileInput.URL.deletePic(),
+                data: data,
+                type: 'POST',
                 cache: false,
                 contentType: false,
                 processData: false,
-                success:function () {
+                success: function () {
                     var fileInput = $(divParent).find('.imageInputFile');
                     var img = $(divParent).find('img');
                     $(fileInput).fileinput('refresh');
