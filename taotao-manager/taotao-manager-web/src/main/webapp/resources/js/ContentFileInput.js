@@ -43,8 +43,6 @@ var ContentFileInput = {
                 }
             }
         });
-
-        //文件上传服务器成功后触发事件
         $("input.imageInputFile").on('fileuploaded', function (event, data) {
             var response = data.response;
             var initialPreviewConfig = response.initialPreviewConfig;
@@ -52,10 +50,13 @@ var ContentFileInput = {
             var baseroot = initialPreviewConfig[0].extra.baseroot;
             var key = initialPreviewConfig[0].key;
             ContentFileInput.uploadSuccess(event,imageURL);
-            ContentFileInput.deleteImage(baseroot,key);
+            ContentFileInput.deleteImage(event,baseroot,key);
         });
 
     },
+
+    //文件上传服务器成功后触发事件
+
     //上传成功后显示图片
     uploadSuccess: function (event, imageURL) {
         var fileInputDiv = $(event.currentTarget).parent().parent().parent().parent()[0];
@@ -70,8 +71,10 @@ var ContentFileInput = {
         $(fileInputDiv).parent().append(array.join(''));
     },
 
-    deleteImage: function (baseroot, key) {
-        $('a#removeImage').one('click', function () {
+    deleteImage: function (event, baseroot, key) {
+        var colDiv = $(event.currentTarget).parent().parent().parent().parent().parent()[0];
+        var deleteIcon = $(colDiv).find('a#removeImage');
+        $(deleteIcon).one('click', function () {
             var divParent = $(this).parent().parent();
             var deletDiv = $(this).parent();
             var data = new FormData();
@@ -93,5 +96,7 @@ var ContentFileInput = {
                 }
             });
         })
-    }
+    },
+
+
 }

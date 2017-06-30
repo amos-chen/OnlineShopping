@@ -86,7 +86,7 @@ var select2 = {
                                     Content.initTree();
                                 } else {
                                     //如果插入失败，则提示错误信息
-                                    toastr.danger(result.error);
+                                    toastr.error(result.error);
                                 }
                             });
                     }
@@ -147,7 +147,7 @@ var select2 = {
                                     Content.initTree();
                                 } else {
                                     //如果更新失败，则提示错误信息
-                                    toastr.danger(result.error);
+                                    toastr.error(result.error);
                                 }
                             })
                     }
@@ -191,7 +191,7 @@ var select2 = {
                                                 Content.initTree();
                                             } else {
                                                 //如果删除失败，则提示错误信息
-                                                toastr.danger(result.error);
+                                                toastr.error(result.error);
                                             }
                                         })
                                     } else {
@@ -201,7 +201,7 @@ var select2 = {
                                     }
                                 } else {
                                     //如果删除失败，则提示错误信息
-                                    toastr.danger(result.error);
+                                    toastr.error(result.error);
                                 }
                             }
                         })

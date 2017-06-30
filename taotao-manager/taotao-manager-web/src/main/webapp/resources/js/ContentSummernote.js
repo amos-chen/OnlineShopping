@@ -1,4 +1,5 @@
 var ContentSummernote = {
+
     URL: {
         FileUpload: function () {
             return "/taotao/manager/HTMLEditor/Add/Image";
@@ -38,7 +39,7 @@ var ContentSummernote = {
                             data: data,
                             type: 'POST',
                             //储存文件的路径
-                            url: HTMLEditor.URL.FileUpload(),
+                            url: ContentSummernote.URL.FileUpload(),
                             cache: false,
                             contentType: false,
                             processData: false,
@@ -50,10 +51,10 @@ var ContentSummernote = {
                                         resultMap['url'], function ($image) {
                                             $image.attr('name', resultMap['filename']);
                                             $image.attr('data-extra', resultMap['extra']);
-                                            $image.attr('width', '100%');
+                                            $image.attr('width', '50%');
                                         })
                                 } else {
-                                    console.log(result);
+                                    toastr.error(result.error);
                                 }
                             }
 

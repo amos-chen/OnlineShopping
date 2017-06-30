@@ -51,10 +51,10 @@ var HTMLEditor = {
                                         resultMap['url'], function ($image) {
                                             $image.attr('name', resultMap['filename']);
                                             $image.attr('data-extra', resultMap['extra']);
-                                            $image.attr('width', '100%');
+                                            $image.attr('width', '50%');
                                         })
                                 } else {
-                                    console.log(result);
+                                    toastr.error(result.error);
                                 }
                             }
 

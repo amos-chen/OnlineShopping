@@ -276,7 +276,6 @@
                             </div><!-- /.modal -->
 
                             <%--内容新增/修改弹出框--%>
-                            <a class="btn btn-primary" data-toggle="modal" href="#contentManager">Trigger modal</a>
                             <div class="modal fade" id="contentManager">
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
@@ -284,7 +283,7 @@
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                                                 &times;
                                             </button>
-                                            <h4 class="contentManagerTitle"></h4>
+                                            <h3 class="contentManagerTitle"></h3>
                                         </div>
                                         <div class="modal-body">
                                             <form id="contentForm" class="form-horizontal" role="form">
@@ -323,24 +322,24 @@
 
                                                 <%--图片上传功能--%>
                                                 <div class="form-group">
-                                                    <label for="bigImage" class="col-sm-4 control-label">大图片:</label>
+                                                    <label for="bigImageInputFile"
+                                                           class="col-sm-4 control-label">大图片:</label>
                                                     <div class="col-sm-6">
-                                                        <input name="imageInputFile" class="imageInputFile" id="bigImageInputFile" type="file"
-                                                        data-show-preview="false"
-                                                        class="file-loading">
-                                                        <input type="hidden" id="bigImage" class="fileinputImange" name="bigImage"/>
+                                                        <input name="bigImageInputFile" class="imageInputFile"
+                                                               id="bigImageInputFile" type="file"
+                                                               data-show-preview="false"
+                                                               class="file-loading">
                                                     </div>
                                                 </div>
                                                 <%--图片上传功能--%>
                                                 <div class="form-group">
-                                                    <label for="smallImage" class="col-sm-4 control-label">小图片:</label>
+                                                    <label for="smallImageInputFile"
+                                                           class="col-sm-4 control-label">小图片:</label>
                                                     <div class="col-sm-6">
-                                                        <input name="imageInputFile" class="imageInputFile"
+                                                        <input name="smallImageInputFile" class="imageInputFile"
                                                                id="smallImageInputFile" type="file"
                                                                data-show-preview="false"
                                                                class="file-loading">
-                                                        <input type="hidden" id="smallImage" class="fileinputImange"
-                                                               name="smallImage"/>
                                                     </div>
                                                 </div>
                                                 <%--富文本编辑器--%>
@@ -367,7 +366,8 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">取消
                                             </button>
-                                            <button type="button" class="btn btn-primary">保存</button>
+                                            <button type="button" id="contentSaveConfirm" class="btn btn-primary">保存
+                                            </button>
                                         </div>
                                     </div><!-- /.modal-content -->
                                 </div><!-- /.modal-dialog -->
@@ -436,9 +436,9 @@
     ContentSummernote.init();
     ContentValidate.init();
     //图片加载失败，指定默认加载图片
-//    $('img').onerror(function () {
-//        $(this).attr('src', '/resources/images/picfail.svg');
-//    });
+    //    $('img').onerror(function () {
+    //        $(this).attr('src', '/resources/images/picfail.svg');
+    //    });
 </script>
 </body>
 </html>

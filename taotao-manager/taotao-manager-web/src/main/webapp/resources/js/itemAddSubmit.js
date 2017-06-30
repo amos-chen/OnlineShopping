@@ -10,7 +10,7 @@ var itemAddSubmit = {
             //提交前先进行表单验证
             $('#itemAddForm').bootstrapValidator('validate');
 
-            //同步summernote的内容到textarea中内
+            //同步summernote的内容到隐藏的input中内
             var summernoteText = $('#summernote').summernote('code');
             $('#descriptionValue').val(summernoteText);
 

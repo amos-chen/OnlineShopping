@@ -219,34 +219,40 @@ var ContentTable = {
             $('#btn-remove').unbind();
         });
 
+        ContentTable.addContent();
         window.operationEvents = {
             //修改内容条目
             'click .edit': function (e, value, row, index) {
+                $('.contentManagerTitle').text('修改内容');
                 // window.location.href = "taotao/manager/updateItem?id=" + row.id + "&&cid=" + row.cid;
                 //根据行编号获取内容信息，并同步到modal中
-                $.get(ContentTable.URL.getContent(row.id), function (result) {
-                    if (result && result['success']) {
-                        $('#title').val(result.data.title);
-                        $('#subTitle').val(result.data.subTitle);
-                        $('#titleDesc').val(result.data.titleDesc);
-                        $('#contentURL').val(result.data.url);
-                        ContentTable.querySuccess($('#bigImageInputFile'),result.data.pic);
-                        ContentTable.querySuccess($('#smallImageInputFile'),result.data.pic2);
-                        var arr1 = ContentTable.getBaseRootAndKey(result.data.pic);
-                        var arr2 = ContentTable.getBaseRootAndKey(result.data.pic2);
-                        var baseroot1 = arr1[0];
-                        var key1 = arr1[1];
-                        var baseroot2 = arr2[0];
-                        var key2 = arr2[1];
-                        ContentTable.deleteImage(baseroot1,key1);
-                        ContentTable.deleteImage(baseroot2,key2);
-                        //同步summernote的内容
-                        $('#summernote').summernote('insertText', result.data.content);
-                        $('#contentManager').modal('show');
-                    } else {
-                        toastr.danger(result.error);
+                if (row !== undefined && row.length !== 0 && row !== null) {
+                    ContentTable.refreshEditModal();
+                    $('#title').val(row.content);
+                    $('#subTitle').val(row.subTitle);
+                    $('#titleDesc').val(row.titleDesc);
+                    $('#contentURL').val(row.url);
+                    if (row.pic !== null && row.pic !== '') {
+                        ContentTable.querySuccess($('#bigImageInputFile'), row.pic);
+                        var baseroot1 = ContentTable.getBaseRootAndKey(row.pic)[0];
+                        var key1 = ContentTable.getBaseRootAndKey(row.pic)[1];
+                        var removeIcon = $('#bigImageInputFile').parent().parent().parent().parent().parent().find('a#removeImage');
+                        ContentTable.deleteImage(removeIcon, baseroot1, key1);
                     }
-                })
+                    if (row.pic2 !== null && row.pic2 !== '') {
+                        ContentTable.querySuccess($('#smallImageInputFile'), row.pic2);
+                        var baseroot2 = ContentTable.getBaseRootAndKey(row.pic2)[0];
+                        var key2 = ContentTable.getBaseRootAndKey(row.pic2)[1];
+                        var removeIcon = $('#smallImageInputFile').parent().parent().parent().parent().parent().find('a#removeImage');
+                        ContentTable.deleteImage(removeIcon, baseroot2, key2);
+                    }
+
+                    //同步summernote的内容
+                    $('#summernote').summernote('code', row.content);
+                    $('#contentManager').modal('show');
+                } else {
+                    toastr.error('系统错误');
+                }
             },
             //删除单个商品
             'click .remove': function (e, value, row, index) {
@@ -282,6 +288,9 @@ var ContentTable = {
 
             }
         });
+
+        //保存内容信息
+        ContentTable.contentSave();
     },
 
     queryParams: function (params) {
@@ -363,13 +372,10 @@ var ContentTable = {
 
     //查询成功后显示图片
     querySuccess: function (node, imageURL) {
-        console.log(node);
-        console.log(imageURL);
-        console.log(arguments);
         var fileInputDiv = $(node).parent().parent().parent().parent()[0];
         $(fileInputDiv).attr('hidden', 'hidden');
         var array = new Array();
-        array.push('<img class="" src="' + imageURL + '" style="width: 50px;height: auto;position: relative;">'
+        array.push('<img class="uploadedImage" src="' + imageURL + '" style="width: 50px;height: auto;position: relative;">'
             + '<div class="tools" style="position: absolute;top: 0;left: 70px;">'
             + '<a id="removeImage" href="javascript:void(0)" style="color: #DD5A43!important;">'
             + '<i class="fa fa-times"></i>'
@@ -378,21 +384,22 @@ var ContentTable = {
         $(fileInputDiv).parent().append(array.join(''));
     },
 
-    deleteImage: function (baseroot, key) {
-        $('a#removeImage').one('click', function () {
+    deleteImage: function (node, baseroot, key) {
+        var deleteIcon = $(node);
+        $(deleteIcon).one('click', function () {
             var divParent = $(this).parent().parent();
             var deletDiv = $(this).parent();
             var data = new FormData();
             data.append('baseroot', baseroot);
             data.append('key', key);
             $.ajax({
-                url:ContentFileInput.URL.deletePic(),
-                data:data,
-                type:'POST',
+                url: ContentFileInput.URL.deletePic(),
+                data: data,
+                type: 'POST',
                 cache: false,
                 contentType: false,
                 processData: false,
-                success:function () {
+                success: function () {
                     var fileInput = $(divParent).find('.imageInputFile');
                     var img = $(divParent).find('img');
                     $(fileInput).fileinput('refresh');
@@ -403,16 +410,56 @@ var ContentTable = {
         })
     },
 
-    getBaseRootAndKey:function (pic) {
-        console.log(pic);
+    getBaseRootAndKey: function (pic) {
         var arr = pic.split('/');
         var size = arr.length;
         var result = new Array();
-        var baseroot = '/'+arr[size-4]+'/'+arr[size-3]+'/'+arr[size-2]+'/';
-        var key = arr[size-1];
+        var baseroot = '/' + arr[size - 4] + '/' + arr[size - 3] + '/' + arr[size - 2] + '/';
+        var key = arr[size - 1];
         result.push(baseroot);
         result.push(key);
-        console.log(result);
         return result;
+    },
+
+    addContent: function () {
+        $('#btn-add').on('click', function () {
+            $('.contentManagerTitle').text('新增内容');
+            ContentTable.refreshEditModal();
+            $('#contentManager').modal('show');
+        })
+    },
+
+    refreshEditModal: function () {
+        //点击新增内容时，先清空modal里的内容
+        $('#title').val('');
+        $('#subTitle').val('');
+        $('#titleDesc').val('');
+        $('#contentURL').val('');
+        $('#summernote').summernote('code', '');
+        $('input.imageInputFile').fileinput('refresh');
+        $('div.tools').remove();
+        $('img.uploadedImage').remove();
+    },
+
+    contentSave: function () {
+        $('#contentSaveConfirm').on('click', function () {
+            //保存前先验证变淡
+            $('#contentForm').bootstrapValidator('validate');
+            var summernoteText = $('#summernote').summernote('code');
+            $('#descriptionValue').val(summernoteText);
+            if ($('#itemAddForm').data("bootstrapValidator").isValid()) {
+                if ($('.contentManagerTitle').text() === '新增内容') {
+                    if ($('.jstree-clicked').length > 1) {
+                        toastr.warning('请不要选择多个内容类目！')
+                    } else {
+                        var contantCatId = $('.jstree-clicked')[0].id.split('_')[0];
+                    }
+                } else if ($('.contentManagerTitle').text() === '修改内容') {
+
+                }
+            }
+
+
+        });
     }
 }
