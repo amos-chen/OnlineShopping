@@ -60,8 +60,9 @@ var ContentFileInput = {
     uploadSuccess: function (event, imageURL) {
         var fileInputDiv = $(event.currentTarget).parent().parent().parent().parent()[0];
         $(fileInputDiv).attr('hidden', 'hidden');
+        $(fileInputDiv).parent().find('input.picture').val(imageURL);
         var array = new Array();
-        array.push('<img class="" src="' + imageURL + '" style="width: 50px;height: auto;position: relative;">'
+        array.push('<img class="uploadedImage" src="' + imageURL + '" style="width: 50px;height: auto;position: relative;">'
             + '<div class="tools" style="position: absolute;top: 0;left: 70px;">'
             + '<a id="removeImage" href="javascript:void(0)" style="color: #DD5A43!important;">'
             + '<i class="fa fa-times"></i>'

@@ -56,6 +56,11 @@
     delete from tb_content
     where id = #{id,jdbcType=BIGINT}
   </delete>
+    <delete id="deleteByContentCid">
+        delete from tb_content
+    where category_id = #{cid}
+
+    </delete>
     <insert id="insert" parameterType="com.taotao.pojo.TbContent">
     insert into tb_content (id, category_id, title, 
       sub_title, title_desc, url, 

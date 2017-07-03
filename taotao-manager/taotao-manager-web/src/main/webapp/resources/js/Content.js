@@ -24,8 +24,11 @@ var Content = {
          'file':{'icon':'fa fa-file fw'}
          }
          });*/
-        $('#jstree').on("loaded.jstree", function () {
+        $('#jstree').on("loaded.jstree", function (e,data) {
             $('#jstree').jstree('open_all');
+            var inst = data.instance;
+            var obj = inst.get_node(e.target.firstChild.firstChild.lastChild.firstChild);
+            inst.select_node(obj);
         });
         $("#jstree").jstree({
             // 'plugins': ["checkbox"], //出现选择框

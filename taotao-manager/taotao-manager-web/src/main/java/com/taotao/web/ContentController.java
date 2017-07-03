@@ -5,10 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.taotao.dto.ExecuteItemsJsonResult;
 import com.taotao.dto.ExecuteJsonResult;
 import com.taotao.dto.JSTree;
-import com.taotao.exception.DataInsertFailException;
-import com.taotao.exception.DataNotFindException;
-import com.taotao.exception.DataUpdateFailException;
-import com.taotao.exception.TaotaoException;
+import com.taotao.exception.*;
 import com.taotao.pojo.TbContent;
 import com.taotao.pojo.TbContentCategory;
 import com.taotao.service.ContentService;
@@ -105,10 +102,10 @@ public class ContentController {
 	@RequestMapping(value = "/delete/{id}/contentCat", method = RequestMethod.POST,
 			produces = {"application/json;charset=utf-8"})
 	@ResponseBody
-	public ExecuteJsonResult<Integer> deleteContentCat(@PathVariable("id") String id) {
-		ExecuteJsonResult<Integer> result;
+	public ExecuteJsonResult<List<Integer>> deleteContentCat(@PathVariable("id") String id) {
+		ExecuteJsonResult<List<Integer>> result;
 		try {
-			int data = contentService.deleteContentCat(id);
+			List<Integer> data = contentService.deleteContentCat(id);
 			result = new ExecuteJsonResult<>(true, data);
 			return result;
 		} catch (DataUpdateFailException e) {
@@ -120,9 +117,9 @@ public class ContentController {
 		}
 	}
 
-	@RequestMapping(value = "/content/{id}/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/content/list", method = RequestMethod.GET)
 	@ResponseBody
-	public ExecuteItemsJsonResult<List<TbContent>> queryList(@PathVariable String id, Integer offset, Integer limit, String search, String sort,
+	public ExecuteItemsJsonResult<List<TbContent>> queryList(String id, Integer offset, Integer limit, String search, String sort,
 															 String order) {
 		ExecuteItemsJsonResult<List<TbContent>> result;
 		try {
@@ -151,6 +148,55 @@ public class ContentController {
 		}catch (TaotaoException e){
 			return new ExecuteJsonResult<TbContent>(false,e.getMessage());
 		}
+	}
+
+	@RequestMapping(value = "/add/{cid}/content",method = RequestMethod.POST,
+			produces = {"application/json;charset=utf-8"})
+	@ResponseBody
+	public ExecuteJsonResult<Integer> addContent(@PathVariable("cid") String cid,TbContent tbContent){
+		ExecuteJsonResult<Integer> result;
+		try {
+			int data = contentService.addContent(cid,tbContent);
+			result = new ExecuteJsonResult<>(true,data);
+			return result;
+		}catch (DataInsertFailException e){
+			return new ExecuteJsonResult<>(false,e.getMessage());
+		}catch (TaotaoException e){
+			return new ExecuteJsonResult<>(false,e.getMessage());
+		}
+	}
+
+	@RequestMapping(value = "/update/content",method = RequestMethod.POST,
+			produces = {"application/json;charset=utf-8"})
+	@ResponseBody
+	public ExecuteJsonResult<Integer> updateContent(TbContent tbContent){
+		ExecuteJsonResult<Integer> result;
+		try {
+			int data = contentService.updateContent(tbContent);
+			result = new ExecuteJsonResult<>(true,data);
+			return result;
+		}catch (DataUpdateFailException e){
+			return new ExecuteJsonResult<>(false,e.getMessage());
+		}catch (TaotaoException e){
+			return new ExecuteJsonResult<>(false,e.getMessage());
+		}
+	}
+
+	@RequestMapping(value = "/delete/content",method = RequestMethod.POST,
+	produces = {"application/json;charset=utf-8"})
+	@ResponseBody
+	public ExecuteJsonResult<List<Integer>> deleteContent(String[] contentIdList){
+		ExecuteJsonResult<List<Integer>> result;
+		try {
+			List data = contentService.deleteContent(contentIdList);
+			result = new ExecuteJsonResult<List<Integer>>(true,data);
+			return result;
+		}catch (DataDeleteFailException e){
+			return new ExecuteJsonResult<>(false,e.getMessage());
+		}catch (TaotaoException e){
+			return new ExecuteJsonResult<>(false,e.getMessage());
+		}
+
 	}
 
 }

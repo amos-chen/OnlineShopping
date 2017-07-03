@@ -20,4 +20,7 @@ public interface TbContentMapper {
     int updateByPrimaryKey(TbContent record);
 
     List<TbContent> queryListByCid(Long cid);
+
+    int deleteByContentCid(Long cid);
+
 }

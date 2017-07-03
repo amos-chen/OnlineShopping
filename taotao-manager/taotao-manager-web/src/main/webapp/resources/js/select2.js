@@ -39,7 +39,7 @@ var select2 = {
             $('#CatManageModalTitle').text('新增类目');
             //初始化父类目select
             if ($('#ParentId').html() === "" || $('#ParentId').length === 0 ||
-                $('#booleanLoadContentCat').val()==='true') {
+                $('#booleanLoadContentCat').val() === 'true') {
                 //先清空select里的内容
                 $('#ParentId').html('');
                 $.ajax({
@@ -52,7 +52,8 @@ var select2 = {
                     }
                 });
                 $('#booleanLoadContentCat').val('false');
-            };
+            }
+            ;
             $("#CatManage").modal('show');
             //保存类目
             $('#ContentCatSave').on('click', function () {
@@ -71,9 +72,9 @@ var select2 = {
                             function (result) {
                                 //如果插入成功，则提示成功信息，并且刷新类目树
                                 if (result && result['success']) {
-                                    if(result.data.length>1){
+                                    if (result.data.length > 1) {
                                         $('#booleanLoadContentCat').val('true');
-                                    }else {
+                                    } else {
                                         $('#booleanLoadContentCat').val('true');
                                     }
 
@@ -175,34 +176,31 @@ var select2 = {
                     $('#deleteModal').modal('show');
                     $('#deleteConfirm').on('click', function () {
                         $.post(select2.URL.deleteContentCat(id), function (result) {
-
+                            //如果删除成功，则提示成功信息，并且刷新类目树
                             if (result && result['success']) {
-                                //如果删除成功，则提示成功信息，并且刷新类目树
-                                if (result && result['success']) {
-                                    //如果子类目删除干净之后，把父类目也同时删除,先删除后刷新，所以当刷新前子节点
-                                    //只有一个的时候就可以删除父类目了
-                                    if ($(parent).find('li.jstree-leaf').length === 1) {
-                                        var parentId = parent[0].id;
-                                        $.post(select2.URL.deleteContentCat(parentId), function (result) {
-                                            if (result && result['success']) {
-                                                toastr.success('类目删除成功!');
-                                                $('#booleanLoadContentCat').val('true');
-                                                $("#deleteModal").modal('hide');
-                                                Content.initTree();
-                                            } else {
-                                                //如果删除失败，则提示错误信息
-                                                toastr.error(result.error);
-                                            }
-                                        })
-                                    } else {
-                                        toastr.success('类目删除成功!');
-                                        $("#deleteModal").modal('hide');
-                                        Content.initTree();
-                                    }
+                                //如果子类目删除干净之后，把父类目也同时删除,先删除后刷新，所以当刷新前子节点
+                                //只有一个的时候就可以删除父类目了
+                                if ($(parent).find('li.jstree-leaf').length === 1) {
+                                    var parentId = parent[0].id;
+                                    $.post(select2.URL.deleteContentCat(parentId), function (result) {
+                                        if (result && result['success']) {
+                                            toastr.success('类目删除成功!');
+                                            $('#booleanLoadContentCat').val('true');
+                                            $("#deleteModal").modal('hide');
+                                            Content.initTree();
+                                        } else {
+                                            //如果删除失败，则提示错误信息
+                                            toastr.error(result.error);
+                                        }
+                                    })
                                 } else {
-                                    //如果删除失败，则提示错误信息
-                                    toastr.error(result.error);
+                                    toastr.success('类目删除成功!');
+                                    $("#deleteModal").modal('hide');
+                                    Content.initTree();
                                 }
+                            } else {
+                                //如果删除失败，则提示错误信息
+                                toastr.error(result.error);
                             }
                         })
                     });

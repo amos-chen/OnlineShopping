@@ -113,9 +113,6 @@
                         <a href="#" aria-expanded="false">
                             <span class="fa fa-folder fa-fw"></span>网站内容管理<span class="fa arrow"></span></a>
                         <ul class="nav">
-                            <li><a href="/taotao/manager/contentCategory">&nbsp;&nbsp;&nbsp;&nbsp;<span
-                                    class="fa fa-th-list fa-fw"></span>内容分类管理</a>
-                            </li>
                             <li><a href="/taotao/manager/content">&nbsp;&nbsp;&nbsp;&nbsp;<span
                                     class="fa fa-book fa-fw"></span>内容管理</a></li>
                         </ul>

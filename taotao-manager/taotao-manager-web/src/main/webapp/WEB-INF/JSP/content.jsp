@@ -123,8 +123,6 @@
                         <a href="#" aria-expanded="true">
                             <span class="fa fa-folder fa-fw"></span>网站内容管理<span class="fa arrow"></span></a>
                         <ul class="nav">
-                            <li><a href="/taotao/manager/contentCategory">&nbsp;&nbsp;&nbsp;&nbsp;<span
-                                    class="fa fa-th-list fa-fw"></span>内容分类管理</a></li>
                             <li><a href="/taotao/manager/content">&nbsp;&nbsp;&nbsp;&nbsp;<span
                                     class="fa fa-book fa-fw"></span>内容管理</a></li>
                         </ul>
@@ -165,6 +163,7 @@
                                     </div>
                                     <hr>
                                     <div id="jstree"></div>
+                                    <input type="hidden" id="firstTimeLoaded" value="true"/>
 
                                     <%--当新增或删除父类节点时，需要重新加载select里的值--%>
                                     <input type="hidden" id="booleanLoadContentCat">
@@ -182,7 +181,7 @@
                                     </div>
 
                                     <div class="table-content">
-                                        <table id="Items-table"></table>
+                                        <table id="tbContent-table"></table>
                                     </div>
                                 </div>
                             </div>
@@ -244,6 +243,9 @@
                                         </div>
                                         <div class="modal-body">
                                             <h2 class="text-center text-danger">是否进行删除操作?</h2>
+                                            <h5 class="text-center text-danger"><span class="fa fa-warning fa-fw"></span>
+                                                删除类目会删除类目相关的所有内容！
+                                            </h5>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-success" data-dismiss="modal">取消
@@ -287,6 +289,9 @@
                                         </div>
                                         <div class="modal-body">
                                             <form id="contentForm" class="form-horizontal" role="form">
+
+                                                <input type="hidden" id="contentId" name="id"/>
+
                                                 <div class="form-group">
                                                     <label for="title" class="col-sm-4 control-label">内容标题<span
                                                             class="text-danger">*</span>:</label>
@@ -312,11 +317,11 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="contentURL" class="col-sm-4 control-label">类目地址<span
+                                                    <label for="url" class="col-sm-4 control-label">类目地址<span
                                                             class="text-danger">*</span>:</label>
                                                     <div class="col-sm-6">
-                                                        <input name="contentURL" class="form-control" type="text"
-                                                               id="contentURL"/>
+                                                        <input name="url" class="form-control" type="text"
+                                                               id="url"/>
                                                     </div>
                                                 </div>
 
@@ -329,6 +334,7 @@
                                                                id="bigImageInputFile" type="file"
                                                                data-show-preview="false"
                                                                class="file-loading">
+                                                        <input id="pic" name="pic" class="picture" type="hidden"/>
                                                     </div>
                                                 </div>
                                                 <%--图片上传功能--%>
@@ -340,21 +346,22 @@
                                                                id="smallImageInputFile" type="file"
                                                                data-show-preview="false"
                                                                class="file-loading">
+                                                        <input id="pic2" name="pic2" class="picture" type="hidden"/>
                                                     </div>
                                                 </div>
                                                 <%--富文本编辑器--%>
                                                 <div class="form-group" id="HTMLeditor">
-                                                    <label for="descriptionValue"
+                                                    <label for="contentDesc"
                                                            class="col-sm-4 control-label">内容详情:</label>
                                                     <div class="col-sm-6">
                                                         <div class="summernote" id="summernote"></div>
-                                                        <input hidden="hidden" name="description"
-                                                               id="descriptionValue"/>
+                                                        <input type="hidden" name="contentDesc"
+                                                               id="contentDesc"/>
                                                     </div>
                                                 </div>
 
-                                                <%--summernote提交表单用--%>
-                                                <input id="itemParameter" name="itemParameter" type="hidden">
+                                                <%--&lt;%&ndash;summernote提交表单用&ndash;%&gt;--%>
+                                                <%--<input id="contentDesc" name="contentDesc" type="hidden">--%>
 
                                                 <div class="form-group">
                                                     <div class="col-sm-6 col-sm-offset-4">
@@ -421,17 +428,19 @@
     });
     Content.initTree();
     select2.init();
+    /*
     $(document).ready(function () {
         //延时加载
         setTimeout(selectFirst, 200);
         function selectFirst() {
             $($('body').find('li.jstree-leaf')[0]).find('a.jstree-anchor').addClass('jstree-clicked');
             var id = $('.jstree-clicked')[0].id.split('_')[0];
-            ContentTable.showTabale({
-                id: id
-            });
+            ContentTable.showTabale();
         }
-    });
+    });*/
+    //ContentTable.showTabale()在ContentiniTree()中的树加载完成后执行
+
+    ContentTable.showTabale();
     ContentFileInput.init();
     ContentSummernote.init();
     ContentValidate.init();

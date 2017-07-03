@@ -27,7 +27,7 @@ var table = {
             //2.按照类名所处的列进行排序，无默认值
             sortClass: 'itemId',
             //3.height定义表格的高度
-            //height:Number
+            height: 600,
             //4.当数据为 undefined 时显示的字符
             //undefinedText:String
             //5.设置为 true 会有隔行变色效果,默认为false
@@ -60,37 +60,39 @@ var table = {
             }, {
                 field: 'cid',
                 title: '商品类目'
-            }, {
-                field: 'sellPoint',
-                title: '卖点'
-            }, {
-                field: 'price',
-                title: '价格'
-            }, {
-                field: 'num',
-                title: '库存数量'
-            }, {
-                field: 'barcode',
-                title: '条形码'
-            }, {
-                field: 'status',
-                title: '状态'
-            }, {
-                field: 'created',
-                title: '创建日期'
-            }, {
-                field: 'updated',
-                title: '更新日期'
-            }, {
-                field: 'operation',
-                title: '操作',
-                align: 'center',
-                valign: 'middle',
-                width: 50,
-                formatter: table.operationFormatter,
-                events: 'operationEvents',
+            },
+                //     {
+                //     field: 'sellPoint',
+                //     title: '卖点'
+                // },
+                {
+                    field: 'price',
+                    title: '价格'
+                }, {
+                    field: 'num',
+                    title: '库存数量'
+                }, {
+                    field: 'barcode',
+                    title: '条形码'
+                }, {
+                    field: 'status',
+                    title: '状态'
+                }, {
+                    field: 'created',
+                    title: '创建日期'
+                }, {
+                    field: 'updated',
+                    title: '更新日期'
+                }, {
+                    field: 'operation',
+                    title: '操作',
+                    align: 'center',
+                    valign: 'middle',
+                    width: 50,
+                    formatter: table.operationFormatter,
+                    events: 'operationEvents',
 
-            }],
+                }],
             //12.表单数据，json数据
             //data:Array
             //13.自定义ajax方法
@@ -218,7 +220,7 @@ var table = {
             exportDataType: 'basic'
         });
         //当modal隐藏时，移除btn-remove上绑定的事件
-        $('#modal-delete').on("hidden.bs.modal", function() {
+        $('#modal-delete').on("hidden.bs.modal", function () {
             $('#btn-remove').unbind();
         });
 
@@ -227,7 +229,7 @@ var table = {
 
             },
             'click .edit': function (e, value, row, index) {
-                window.location.href = "taotao/manager/updateItem?id="+row.id+"&&cid="+row.cid;
+                window.location.href = "taotao/manager/updateItem?id=" + row.id + "&&cid=" + row.cid;
             },
             //删除单个商品
             'click .remove': function (e, value, row, index) {
@@ -236,7 +238,7 @@ var table = {
                 var arr = new Array();
                 arr.push(row.id);
                 //用one事件，只绑定一次，不然会出现错误
-                $('#btn-remove').one('click',function () {
+                $('#btn-remove').on('click', function () {
                     table.deleteItems(arr);
                 });
                 //当modal隐藏时，移除btn-remove上绑定的事件
@@ -256,9 +258,10 @@ var table = {
                     arr.push($(this).attr('id'));
                 });
                 //用one事件，只绑定一次，不然会出现错误
-                $('#btn-remove').one('click',function () {
+                $('#btn-remove').one('click', function () {
                     table.deleteItems(arr);
-                })
+                });
+
             } else {
                 toastr.warning("请选择商品!");
 
@@ -314,18 +317,17 @@ var table = {
                     toastr.success("商品删除成功！");
                     $('#modal-delete').modal('hide');
                     $("#Items-table").bootstrapTable('refresh');
+                    //刷新数据，判断是否为最后一页，是的话，跳转回上一页
+                    $("#Items-table").one('load-success.bs.table', function (e, data) {
+                        if (data.total && !data.rows.length) {
+                            $("#Items-table").bootstrapTable('refresh');
+                        }
+
+                    });
                 } else {
                     //如果删除失败，关闭弹窗，显示失败信息
                     toastr.error(result['error']);
                     $('#modal-delete').modal('hide');
-                    //刷新数据，判断是否为最后一页，是的话，跳转回上一页
-                    $("#Items-table").on('load-success.bs.table', function (e, data) {
-                        if (data.total && !data.rows.length) {
-                            $("#Items-table").bootstrapTable('prevPage').bootstrapTable('refresh');
-                        } else {
-                            $("#Items-table").bootstrapTable('refresh');
-                        }
-                    });
                 }
             }
         })

@@ -10,7 +10,6 @@ import java.util.List;
  * Created by ${chenlunwei} on 2017/6/21.
  */
 public interface ContentService {
-    List<TbContent> queryContent();
 
     List<JSTree> queryJstreeNode();
 
@@ -22,10 +21,16 @@ public interface ContentService {
 
     int updateContentCat(String id,String name);
 
-    int deleteContentCat(String id);
+    List<Integer> deleteContentCat(String id);
 
     List<TbContent> queryContentList(String categoryId);
 
     TbContent queryContentById(String id);
+
+    int addContent(String cid,TbContent tbContent);
+
+    int updateContent(TbContent tbContent);
+
+    List<Integer> deleteContent(String[] contentIdList);
 
 }

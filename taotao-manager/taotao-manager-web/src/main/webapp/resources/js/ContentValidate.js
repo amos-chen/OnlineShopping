@@ -36,7 +36,7 @@ var ContentValidate = {
                         }
                     }
                 },
-                contentURL: {
+                url: {
                     message: '类目地址验证失败',
                     validators: {
                         notEmpty: {
