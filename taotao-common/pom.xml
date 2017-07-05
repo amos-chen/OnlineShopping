@@ -68,6 +68,11 @@
 			<groupId>com.dyuproject.protostuff</groupId>
 			<artifactId>protostuff-runtime</artifactId>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>4.2.9.RELEASE</version>
+        </dependency>
+    </dependencies>
 	<build />
 </project>

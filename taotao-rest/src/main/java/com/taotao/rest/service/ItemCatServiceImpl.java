@@ -4,9 +4,12 @@ import com.taotao.dao.TbItemCatMapper;
 import com.taotao.pojo.TbItemCat;
 import com.taotao.rest.pojo.CatNode;
 import com.taotao.rest.pojo.CatResult;
+import com.taotao.utils.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,12 +22,35 @@ public class ItemCatServiceImpl implements ItemCatService {
 	@Autowired
 	private TbItemCatMapper tbItemCatMapper;
 
+	@Resource(name = "singleton")
+	private JedisClient jedisClient;
+
+	@Value("${INDEX_CATFORM}")
+	private String INDEX_CATFORM;
 
 	@Override
 	public CatResult getCatResult() {
+		try {
+			String cacheString = jedisClient.get(INDEX_CATFORM);
+			if(cacheString!=null&&cacheString!=""){
+				CatResult catResult = JsonUtils.jsonToPojo(cacheString,CatResult.class);
+				return catResult;
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+
 		CatResult catResult = new CatResult();
 		long id = 0;
 		catResult.setData(getItem(id));
+
+		try {
+			String cacheString = JsonUtils.objectToJson(catResult);
+			jedisClient.set(INDEX_CATFORM,cacheString);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+
 		return catResult;
 	}
 
@@ -53,6 +79,7 @@ public class ItemCatServiceImpl implements ItemCatService {
 				itemList.add(name);
 			}
 		}
+
 		return itemList;
 	}
 }

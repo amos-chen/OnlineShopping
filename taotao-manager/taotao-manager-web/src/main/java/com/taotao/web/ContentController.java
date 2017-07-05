@@ -185,10 +185,10 @@ public class ContentController {
 	@RequestMapping(value = "/delete/content",method = RequestMethod.POST,
 	produces = {"application/json;charset=utf-8"})
 	@ResponseBody
-	public ExecuteJsonResult<List<Integer>> deleteContent(String[] contentIdList){
+	public ExecuteJsonResult<List<Integer>> deleteContent(String[] contentIdList,String cid){
 		ExecuteJsonResult<List<Integer>> result;
 		try {
-			List data = contentService.deleteContent(contentIdList);
+			List data = contentService.deleteContent(contentIdList,cid);
 			result = new ExecuteJsonResult<List<Integer>>(true,data);
 			return result;
 		}catch (DataDeleteFailException e){

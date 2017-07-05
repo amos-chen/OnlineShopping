@@ -6,10 +6,12 @@ import com.taotao.dto.JSTree;
 import com.taotao.exception.*;
 import com.taotao.pojo.TbContent;
 import com.taotao.pojo.TbContentCategory;
+import com.taotao.utils.HttpClientUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +32,11 @@ public class ContentServiceImpl implements ContentService {
 	@Autowired
 	private TbContentMapper tbContentMapper;
 
+	@Value("${BASE_URL}")
+	private String BASE_URL;
+
+	@Value("${SYNC_URL}")
+	private String SYNC_URL;
 
 	@Override
 	public List<JSTree> queryJstreeNode() {
@@ -218,6 +225,8 @@ public class ContentServiceImpl implements ContentService {
 			}
 			resultList.add(reslut);
 			resultList.add(data);
+			//同步redis缓存
+			HttpClientUtil.doGet(BASE_URL+SYNC_URL+id);
 			return resultList;
 		} catch (DataDeleteFailException e) {
 			throw e;
@@ -260,10 +269,15 @@ public class ContentServiceImpl implements ContentService {
 			if (data == 0) {
 				throw new DataInsertFailException("内容插入失败！");
 			}
+			//同步redis缓存
+			HttpClientUtil.doGet(BASE_URL+SYNC_URL+cid);
 			return data;
 		} catch (DataInsertFailException e) {
 			throw e;
 		} catch (TaotaoException e) {
+			logger.error(e.getMessage());
+			throw new TaotaoException("系统内部错误:" + e.getMessage());
+		}catch (Exception e){
 			logger.error(e.getMessage());
 			throw new TaotaoException("系统内部错误:" + e.getMessage());
 		}
@@ -278,6 +292,9 @@ public class ContentServiceImpl implements ContentService {
 			if (data == 0) {
 				throw new DataUpdateFailException("内容更新失败！");
 			}
+
+			//同步redis缓存
+			HttpClientUtil.doGet(BASE_URL+SYNC_URL+tbContent.getCategoryId());
 			return data;
 		} catch (DataInsertFailException e) {
 			throw e;
@@ -290,7 +307,7 @@ public class ContentServiceImpl implements ContentService {
 
 	@Override
 	@Transactional
-	public List<Integer> deleteContent(String[] contentIdList) throws DataDeleteFailException, TaotaoException {
+	public List<Integer> deleteContent(String[] contentIdList,String cid) throws DataDeleteFailException, TaotaoException {
 		try {
 			List<Integer> resultList = new ArrayList<>();
 			for (String str : contentIdList) {
@@ -302,6 +319,8 @@ public class ContentServiceImpl implements ContentService {
 				}
 			}
 			if (resultList != null && resultList.size() > 0 && !resultList.contains(0)) {
+				//同步redis缓存
+				HttpClientUtil.doGet(BASE_URL+SYNC_URL+cid);
 				return resultList;
 			} else {
 				throw new DataDeleteFailException("商品删除失败!");

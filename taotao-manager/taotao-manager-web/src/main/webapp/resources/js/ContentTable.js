@@ -248,7 +248,6 @@ var ContentTable = {
         window.operationEvents = {
             //修改内容条目
             'click .edit': function (e, value, row, index) {
-
                 //清空form表单
                 ContentTable.refreshEditModal();
                 //初始化validator
@@ -259,6 +258,7 @@ var ContentTable = {
                 if (row !== undefined && row.length !== 0 && row !== null) {
                     ContentTable.refreshEditModal();
                     $('#contentId').val(row.id);
+                    $('#contentCat').val(row.categoryId);
                     $('#title').val(row.title);
                     $('#subTitle').val(row.subTitle);
                     $('#titleDesc').val(row.titleDesc);
@@ -359,6 +359,7 @@ var ContentTable = {
         var contentCid = $('.jstree-clicked')[0].id.split('_')[0];
         var data = new FormData();
         data.append("contentIdList", arr);
+        data.append("cid",$('.jstree-clicked')[0].id.split('_')[0]);
         $.ajax({
             url: ContentTable.URL.deleteContent(),
             method: 'POST',

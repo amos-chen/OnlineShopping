@@ -46,6 +46,7 @@ public class HttpClientUtil {
 			e.printStackTrace();
 		}finally {
 			try {
+				httpClient.close();
 				response.close();
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -69,6 +70,7 @@ public class HttpClientUtil {
 			e.printStackTrace();
 		}finally {
 			try {
+				httpClient.close();
 				response.close();
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -102,6 +104,7 @@ public class HttpClientUtil {
 			e.printStackTrace();
 		}finally {
 			try {
+				httpClient.close();
 				response.close();
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -125,6 +128,7 @@ public class HttpClientUtil {
 			e.printStackTrace();
 		}finally {
 			try {
+				httpClient.close();
 				response.close();
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -151,6 +155,7 @@ public class HttpClientUtil {
 			e.printStackTrace();
 		}finally {
 			try {
+				httpClient.close();
 				response.close();
 			} catch (IOException e) {
 				e.printStackTrace();

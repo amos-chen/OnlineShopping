@@ -31,6 +31,6 @@ public interface ContentService {
 
     int updateContent(TbContent tbContent);
 
-    List<Integer> deleteContent(String[] contentIdList);
+    List<Integer> deleteContent(String[] contentIdList,String cid);
 
 }

@@ -291,6 +291,7 @@
                                             <form id="contentForm" class="form-horizontal" role="form">
 
                                                 <input type="hidden" id="contentId" name="id"/>
+                                                <input type="hidden" id="contentCat" name="categoryId"/>
 
                                                 <div class="form-group">
                                                     <label for="title" class="col-sm-4 control-label">内容标题<span
