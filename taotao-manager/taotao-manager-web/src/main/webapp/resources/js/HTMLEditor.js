@@ -16,6 +16,7 @@ var HTMLEditor = {
 
         $('#summernote').summernote({
             lang: 'zh-CN',
+            height: 200,
             minHeight: 200,
             placeholder: '请填写商品的详细信息...',
             //对话框功能

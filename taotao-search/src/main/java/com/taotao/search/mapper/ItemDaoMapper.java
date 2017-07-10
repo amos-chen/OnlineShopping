@@ -9,5 +9,7 @@ import java.util.List;
  */
 public interface ItemDaoMapper {
 
-	List<Item> queryItem();
+	List<Item> queryItemList();
+
+	Item queryItem(Long itemId);
 }

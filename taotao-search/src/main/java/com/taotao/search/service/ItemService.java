@@ -5,5 +5,9 @@ package com.taotao.search.service;
  */
 public interface ItemService {
 
-	Integer addDocument();
+	Long addDocument();
+
+	Long addAndUpdateDocument(String itemId);
+
+	Long deleteDocument(String itemIdList);
 }

@@ -11,9 +11,12 @@ import com.taotao.pojo.TbItemCat;
 import com.taotao.pojo.TbItemParam;
 import com.taotao.service.ItemsService;
 import com.taotao.dto.ExecuteJsonResult;
+import com.taotao.utils.HttpClientUtil;
+import com.taotao.utils.JsonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +24,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by chenlunwei on 2017/4/30.
@@ -29,8 +34,12 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/taotao/manager")
 public class ItemController {
-
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+	@Value("${SEARCH_BASE_URL}")
+	private String SEARCH_BASE_URL;
+	@Value("${IMPORT_URL}")
+	private String IMPORT_URL;
 
 	@Autowired
 	private ItemsService itemsService;
@@ -75,6 +84,9 @@ public class ItemController {
 		try {
 			int data = itemsService.insertItem(tbItem, description,itemParameter);
 			result = new ExecuteJsonResult<Integer>(true, data);
+
+			HttpClientUtil.doPost(SEARCH_BASE_URL + IMPORT_URL + "/" + tbItem.getId() + "/import");
+
 			return result;
 		} catch (DataInsertFailException e) {
 			result = new ExecuteJsonResult<Integer>(false, "商品信息插入失败！");
@@ -95,6 +107,13 @@ public class ItemController {
 		try {
 			List<Integer> data = itemsService.deleteItem(itemIdList);
 			result = new ExecuteJsonResult<List<Integer>>(true,data);
+
+			//调用httpClient，删除solr索引库里的信息
+			Map<String,String> params = new HashMap<>();
+			String itemListString = JsonUtils.objectToJson(itemIdList);
+			params.put("itemList", itemListString);
+			HttpClientUtil.doPost(SEARCH_BASE_URL + IMPORT_URL + "/delete",params);
+
 			return result;
 		}catch (DataInsertFailException e){
 			result = new ExecuteJsonResult<List<Integer>>(false,e.getMessage());
