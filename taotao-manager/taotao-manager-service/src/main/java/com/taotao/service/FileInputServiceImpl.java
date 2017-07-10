@@ -1,10 +1,10 @@
 package com.taotao.service;
 
-import com.taotao.dto.ExecuteJsonResult;
 import com.taotao.dto.FileConfiguration;
 import com.taotao.dto.FileInput;
 import com.taotao.utils.FtpUtil;
 import com.taotao.utils.IDUtils;
+import com.taotao.dto.ExecuteJsonResult;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

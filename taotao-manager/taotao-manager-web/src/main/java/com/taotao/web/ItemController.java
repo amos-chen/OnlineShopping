@@ -3,7 +3,6 @@ package com.taotao.web;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.taotao.dto.ExecuteItemsJsonResult;
-import com.taotao.dto.ExecuteJsonResult;
 import com.taotao.dto.JSTreeAjax;
 import com.taotao.exception.DataInsertFailException;
 import com.taotao.exception.TaotaoException;
@@ -11,6 +10,7 @@ import com.taotao.pojo.TbItem;
 import com.taotao.pojo.TbItemCat;
 import com.taotao.pojo.TbItemParam;
 import com.taotao.service.ItemsService;
+import com.taotao.dto.ExecuteJsonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +70,7 @@ public class ItemController {
 
 	@RequestMapping(value = "/add/item", method = RequestMethod.POST)
 	@ResponseBody
-	public ExecuteJsonResult<Integer> addItem(TbItem tbItem, String description,String itemParameter) {
+	public ExecuteJsonResult<Integer> addItem(TbItem tbItem, String description, String itemParameter) {
 		ExecuteJsonResult<Integer> result;
 		try {
 			int data = itemsService.insertItem(tbItem, description,itemParameter);
