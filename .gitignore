@@ -15,3 +15,7 @@ taotao-manager/taotao-manager-web/src/main/webapp/WEB-INF/JSP/common/header_offl
 taotao-common/src/main/java/com/taotao/utils/Test01.java
 
 taotao-manager/taotao-manager-web/src/main/resources/properties/FileInput.properties
+
+taotao-rest/src/main/resources/properties/resource.properties
+
+taotao-search/src/main/resources/properties/resource.properties

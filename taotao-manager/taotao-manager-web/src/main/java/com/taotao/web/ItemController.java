@@ -3,6 +3,7 @@ package com.taotao.web;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.taotao.dto.ExecuteItemsJsonResult;
+import com.taotao.dto.ExecuteJsonResult;
 import com.taotao.dto.JSTreeAjax;
 import com.taotao.exception.DataInsertFailException;
 import com.taotao.exception.TaotaoException;
@@ -10,7 +11,6 @@ import com.taotao.pojo.TbItem;
 import com.taotao.pojo.TbItemCat;
 import com.taotao.pojo.TbItemParam;
 import com.taotao.service.ItemsService;
-import com.taotao.dto.ExecuteJsonResult;
 import com.taotao.utils.HttpClientUtil;
 import com.taotao.utils.JsonUtils;
 import org.slf4j.Logger;
@@ -38,6 +38,7 @@ public class ItemController {
 
 	@Value("${SEARCH_BASE_URL}")
 	private String SEARCH_BASE_URL;
+
 	@Value("${IMPORT_URL}")
 	private String IMPORT_URL;
 
@@ -112,7 +113,9 @@ public class ItemController {
 			Map<String,String> params = new HashMap<>();
 			String itemListString = JsonUtils.objectToJson(itemIdList);
 			params.put("itemList", itemListString);
+
 			HttpClientUtil.doPost(SEARCH_BASE_URL + IMPORT_URL + "/delete",params);
+
 
 			return result;
 		}catch (DataInsertFailException e){

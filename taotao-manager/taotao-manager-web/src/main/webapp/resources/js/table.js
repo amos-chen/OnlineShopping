@@ -293,9 +293,9 @@ var table = {
             return '<li class="dropdown dropdown-edit dropup">' +
                 '<a style="color: black" class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="fa fa-edit fa-lg"></span></a>' +
                 '<ul class="dropdown-menu dropup-menu-caret" role="menu">' +
-                '<li><a href="#"><span class="fa fa-copy fa-fw"></span>复制</a></li>' +
-                '<li><a href="#"><span class="fa fa-pencil fa-fw"></span>修改</a></li>' +
-                '<li><a href="#"><span class="fa fa-trash fa-fw"></span>删除</a></li>' +
+                '<li><a class="copy" href="#"><span class="fa fa-copy fa-fw"></span>复制</a></li>' +
+                '<li><a class="edit" href="#"><span class="fa fa-pencil fa-fw"></span>修改</a></li>' +
+                '<li><a class="remove" href="#"><span class="fa fa-trash fa-fw"></span>删除</a></li>' +
                 '</ul></li>';
         }
     },

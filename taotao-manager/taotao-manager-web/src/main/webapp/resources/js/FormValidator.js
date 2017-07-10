@@ -79,22 +79,6 @@ var FormValidator = {
                             message: '库存数量不能为小于0',
                         }
                     }
-                },
-                barcode: {
-                    validators: {
-                        message: '条形码验证失败',
-                        notEmpty: {
-                            message: '条形码不能为空'
-                        },
-                        numeric: {
-                            message: '条形码只能为数字',
-                        },
-                        stringLength: {
-                            max: 13,
-                            min: 13,
-                            message: '条形码为13位数字'
-                        }
-                    }
                 }
 
             }

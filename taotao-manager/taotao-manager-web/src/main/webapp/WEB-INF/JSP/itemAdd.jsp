@@ -211,8 +211,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="barcode" class="col-sm-2 control-label">条形码<span
-                                            class="text-danger">*</span>:</label>
+                                    <label for="barcode" class="col-sm-2 control-label">条形码:</label>
                                     <div class="col-sm-4">
                                         <input name="barcode" class="form-control" type="text" id="barcode"/>
                                     </div>

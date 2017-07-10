@@ -1,13 +1,10 @@
 package com.taotao.service;
 
 import com.taotao.dao.*;
-import com.taotao.dto.JSTree;
 import com.taotao.dto.JSTreeAjax;
 import com.taotao.exception.*;
 import com.taotao.pojo.*;
-import com.taotao.utils.HttpClientUtil;
 import com.taotao.utils.IDUtils;
-import com.taotao.utils.JsonUtils;
 import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,13 +13,22 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by chenlunwei on 2017/4/30.
  */
 @Service
 public class ItemsServiceImpl implements ItemsService {
+
+
+    @Value("${SEARCH_BASE_URL}")
+    private String SEARCH_BASE_URL;
+    @Value("${IMPORT_URL}")
+    private String IMPORT_URL;
+
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -109,6 +115,7 @@ public class ItemsServiceImpl implements ItemsService {
 
                 //调用httpClient，更新solr索引库里的信息,不能再这里更新，因为有事务管理
                 //String out = HttpClientUtil.doPost(SEARCH_BASE_URL + IMPORT_URL + "/" + tbItem.getId() + "/import");
+                //HttpClientUtil.doPost(SEARCH_BASE_URL + IMPORT_URL + "/" + tbItem.getId() + "/import");
 
                 return data;
             } else {

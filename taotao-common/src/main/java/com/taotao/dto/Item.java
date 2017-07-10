@@ -80,4 +80,11 @@ public class Item {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public String[] getImages(){
+		if(image!=null && image!=""){
+			return image.split(";");
+		}
+		return null;
+	}
 }
