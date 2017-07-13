@@ -92,4 +92,18 @@ public class JedisClientSingletonImpl implements JedisClient{
         jedis.close();
         return result;
     }
+
+    @Override
+    public byte[] get(byte[] key) {
+        Jedis jedis = jedisPool.getResource();
+        byte[] result = jedis.get(key);
+        return result;
+    }
+
+    @Override
+    public String setex(byte[] key, Integer expireTime, byte[] value) {
+        Jedis jedis = jedisPool.getResource();
+        String result = jedis.setex(key,expireTime,value);
+        return result;
+    }
 }

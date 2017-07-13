@@ -13,7 +13,6 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
-import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,15 +41,11 @@ public class HttpClientUtil {
 			if (response.getStatusLine().getStatusCode() == 200) {
 				result = EntityUtils.toString(response.getEntity(), "utf-8");
 			}
+			response.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			try {
-				httpClient.close();
-				response.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		} finally {
+			colse(httpClient, response);
 		}
 		return result;
 	}
@@ -66,19 +61,14 @@ public class HttpClientUtil {
 			if (response.getStatusLine().getStatusCode() == 200) {
 				result = EntityUtils.toString(response.getEntity(), "utf-8");
 			}
+			response.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			try {
-				httpClient.close();
-				response.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		} finally {
+			colse(httpClient, response);
 		}
 		return result;
 	}
-
 
 
 	//带参数的post方法
@@ -100,15 +90,11 @@ public class HttpClientUtil {
 			if (response.getStatusLine().getStatusCode() == 200) {
 				result = EntityUtils.toString(response.getEntity(), "utf-8");
 			}
+			response.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			try {
-				httpClient.close();
-				response.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		} finally {
+			colse(httpClient, response);
 		}
 		return result;
 	}
@@ -124,15 +110,11 @@ public class HttpClientUtil {
 			if (response.getStatusLine().getStatusCode() == 200) {
 				result = EntityUtils.toString(response.getEntity(), "utf-8");
 			}
+			response.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			try {
-				httpClient.close();
-				response.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		} finally {
+			colse(httpClient, response);
 		}
 		return result;
 	}
@@ -151,17 +133,26 @@ public class HttpClientUtil {
 			if (response.getStatusLine().getStatusCode() == 200) {
 				result = EntityUtils.toString(response.getEntity(), "utf-8");
 			}
+			response.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			try {
-				httpClient.close();
-				response.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		} finally {
+			colse(httpClient, response);
 		}
 		return result;
+	}
+
+	public static void colse(CloseableHttpClient httpClient, CloseableHttpResponse response) {
+		try {
+			if (httpClient != null) {
+				httpClient.close();
+			}
+//			if (response != null) {
+//				response.close();
+//			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

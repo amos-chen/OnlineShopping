@@ -2,9 +2,7 @@ package com.taotao.rest.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisCluster;
-import redis.clients.jedis.JedisPool;
 
 /**
  * Created by ${chenlunwei} on 2017/7/4.
@@ -62,5 +60,17 @@ public class JedisClientClusterImpl implements JedisClient{
     @Override
     public Long ttl(String key) {
         return jedisCluster.ttl(key);
+    }
+
+    @Override
+    public byte[] get(byte[] key) {
+        byte[] result = jedisCluster.get(key);
+        return result;
+    }
+
+    @Override
+    public String setex(byte[] key, Integer expireTime, byte[] value) {
+        String result = jedisCluster.setex(key,expireTime,value);
+        return result;
     }
 }

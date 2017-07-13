@@ -11,6 +11,7 @@ public class Item {
 	private String image;
 	private String categoryName;
 	private String description;
+	private String[] images;
 
 	@Override
 	public String toString() {
@@ -86,5 +87,8 @@ public class Item {
 			return image.split(";");
 		}
 		return null;
+	}
+	public void setImages(String[] images) {
+		this.images = images;
 	}
 }

@@ -221,7 +221,7 @@
 					<b></b>如果您发现商品信息不准确，欢迎纠错
 				</div>
 				<div id="item-desc" class="detail-content">
-						${itemDesc.itemDesc }
+						<%--${itemDesc.itemDesc }--%>
 				</div>
 			</div>
 			<div class="mc hide" data-widget="tab-content" id="product-detail-2">
@@ -258,34 +258,11 @@
 <script type="text/javascript" src="/js/lib-v1.js"></script>
 <script type="text/javascript" src="/js/product.js"></script>
 <script type="text/javascript" src="/js/iplocation_server.js"></script>
+<script type="text/javascript" src="/js/taotao-v2.js"></script>
 <script type="text/javascript">
-	var itemControl = {
-			param:{
-				descUrl:"/item/desc/",
-				paramUrl:"/item/param/"
-			},
-			//请求商品描述
-			getItemDesc:function(itemId) {
-				$.get(itemControl.param.descUrl+itemId+".html", function(data){
-					//返回商品描述的html，直接显示到页面
-					$("#item-desc").append(data);
-				});
-			},
-			//参数请求flag
-			haveParam:false,
-			//请求规格参数
-			getItemParam:function(itemId) {
-				//如果没有查询过规格参数，就做请求
-				if (!itemControl.haveParam) {
-					$.get(itemControl.param.paramUrl+itemId+".html", function(data){
-						//返回商品规格的html，直接显示到页面
-						$("#product-detail-2").append(data);
-						//更改flag状态
-						itemControl.haveParam = true;
-					});
-				}
-			}
-	};
+	taotaoV2.init({
+		itemId:"${item.id}"
+	});
 	$(function(){
 		//取商品id
 		var itemId = "${item.id}";

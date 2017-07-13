@@ -25,4 +25,8 @@ public interface JedisClient {
     Long expire(String key, int second);
 
     Long ttl(String key);
+
+    byte[] get(byte[] key);
+
+    String setex(byte[] key,Integer expireTime,byte[] value);
 }
