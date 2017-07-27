@@ -1,4 +1,4 @@
-package com.taotao.rest.service;
+package com.taotao.sso.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +9,7 @@ import redis.clients.jedis.JedisPool;
  * Created by ${chenlunwei} on 2017/7/4.
  */
 @Service("singleton")
-public class JedisClientSingletonImpl implements JedisClient{
+public class JedisClientSingletonImpl implements JedisClient {
 
     //使用jedisPool的时候一定要colse，否则会导致无法获取资源链接redis
     @Autowired

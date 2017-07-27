@@ -11,7 +11,14 @@ public interface TbUserMapper {
 
     TbUser selectByPrimaryKey(Long id);
 
-    int updateByPrimaryKeySelective(TbUser record);
+    //根据用户名查询用户
+    TbUser selectByUsername(String username);
+
+    //根据手机号码查询用户
+    TbUser selectByPhoneNumber(String phoneNumber);
+
+    //根据Email查询用户
+    TbUser selectByEmail(String email);
 
     int updateByPrimaryKey(TbUser record);
 }

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <context:property-placeholder location="classpath:properties/*.properties"/>
+
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${jdbc.driverClass}"></property>
+        <property name="url" value="${jdbc.url}"></property>
+        <property name="username" value="${jdbc.userName}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+        <property name="initialSize" value="10"></property>
+        <property name="maxActive" value="30"></property>
+        <property name="maxWait" value="30000"></property>
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--mybatis配置文件位置-->
+        <property name="configLocation" value="classpath:mybatis/sqlMapConfig.xml"/>
+        <!--配置数据连接池-->
+        <property name="dataSource" ref="dataSource"/>
+        <!--配置mapper.xml地址-->
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <!--配置dao层地址-->
+        <property name="basePackage" value="com.taotao.dao"/>
+    </bean>
+
+
+    <!--Jedis相关配置-->
+    <bean class="redis.clients.jedis.JedisPool">
+        <constructor-arg name="host" value="${redis.ip}"></constructor-arg>
+        <constructor-arg name="port" value="6379"></constructor-arg>
+    </bean>
+
+
+    <bean class="redis.clients.jedis.JedisCluster">
+        <constructor-arg name="nodes">
+            <set>
+                <bean class="redis.clients.jedis.HostAndPort">
+                    <constructor-arg name="host" value="${redis.ip}"></constructor-arg>
+                    <constructor-arg name="port" value="7001"></constructor-arg>
+                </bean>
+                <bean class="redis.clients.jedis.HostAndPort">
+                    <constructor-arg name="host" value="${redis.ip}"></constructor-arg>
+                    <constructor-arg name="port" value="7002"></constructor-arg>
+                </bean>
+                <bean class="redis.clients.jedis.HostAndPort">
+                    <constructor-arg name="host" value="${redis.ip}"></constructor-arg>
+                    <constructor-arg name="port" value="7003"></constructor-arg>
+                </bean>
+                <bean class="redis.clients.jedis.HostAndPort">
+                    <constructor-arg name="host" value="${redis.ip}"></constructor-arg>
+                    <constructor-arg name="port" value="7004"></constructor-arg>
+                </bean>
+                <bean class="redis.clients.jedis.HostAndPort">
+                    <constructor-arg name="host" value="${redis.ip}"></constructor-arg>
+                    <constructor-arg name="port" value="7005"></constructor-arg>
+                </bean>
+                <bean class="redis.clients.jedis.HostAndPort">
+                    <constructor-arg name="host" value="${redis.ip}"></constructor-arg>
+                    <constructor-arg name="port" value="7006"></constructor-arg>
+                </bean>
+            </set>
+        </constructor-arg>
+    </bean>
+
+
+</beans>
