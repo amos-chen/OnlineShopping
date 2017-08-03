@@ -3,6 +3,7 @@ package com.taotao.sso.service;
 import com.taotao.dao.TbUserMapper;
 import com.taotao.dto.ExecuteJsonResult;
 import com.taotao.pojo.TbUser;
+import com.taotao.utils.CookieUtils;
 import com.taotao.utils.JsonUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.UUID;
 
@@ -55,7 +58,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public ExecuteJsonResult<String> login(String username,String password) {
+	public ExecuteJsonResult<String> login(String username, String password, HttpServletRequest request, HttpServletResponse response) {
 		TbUser user = tbUserMapper.selectByUsername(username);
 		if (user == null) {
 			return new ExecuteJsonResult<String>(false,"用户名或密码错误",null);
@@ -67,6 +70,10 @@ public class UserServiceImpl implements UserService {
 		user.setPassword(null);
 		jedisClient.set(REDIS_USER_SESSION_KEY + ":" + token, JsonUtils.objectToJson(user));
 		jedisClient.expire(REDIS_USER_SESSION_KEY + ":" + token, USER_SESSION_EXPIRE_TIME);
+
+		//设置cookie
+		CookieUtils.setCookie(request,response,"TT_TOKEN",token);
+
 		return new ExecuteJsonResult<String>(true,null,token);
 	}
 

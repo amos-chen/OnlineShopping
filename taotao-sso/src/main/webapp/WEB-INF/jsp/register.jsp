@@ -173,7 +173,7 @@
 		},
 		doSubmit:function() {
 			$.post("/user/register",$("#personRegForm").serialize(), function(data){
-				if(data.status == 200){
+				if(data.success){
 					alert('用户注册成功，请登录！');
 					REGISTER.login();
 				} else {

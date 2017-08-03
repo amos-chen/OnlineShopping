@@ -3,6 +3,7 @@ package com.taotao.sso.controller;
 import com.taotao.dto.ExecuteJsonResult;
 import com.taotao.pojo.TbUser;
 import com.taotao.sso.service.UserService;
+import com.taotao.utils.CookieUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.json.MappingJacksonValue;
@@ -11,6 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created by chenlunwei on 2017/8/2.
@@ -81,9 +85,11 @@ public class UserController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
-	public ExecuteJsonResult login(String username, String password) {
+	public ExecuteJsonResult<String> login(String username, String password,
+								   HttpServletRequest request,
+								   HttpServletResponse response) {
 		try {
-			ExecuteJsonResult result = userService.login(username, password);
+			ExecuteJsonResult<String> result = userService.login(username, password,request,response);
 			return result;
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -84,7 +84,7 @@
 							location.href = redirectUrl;
 						}
 					} else {
-						alert("登录失败，原因是：" + data.msg);
+						alert("登录失败，原因是：" + data.error);
 						$("#loginname").select();
 					}
 				});
