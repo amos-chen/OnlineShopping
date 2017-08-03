@@ -41,5 +41,15 @@
     </dependencies>
     <build>
         <finalName>taotao-sso</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <configuration>
+                    <port>8084</port>
+                    <path>/</path>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 </project>

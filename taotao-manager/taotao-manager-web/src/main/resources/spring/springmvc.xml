@@ -9,7 +9,7 @@
     <context:property-placeholder location="classpath:properties/*.properties"/>
 
     <mvc:annotation-driven/>
-    <!--加载静态资源-->
+    <!--加载静态资源,只能加载webapp下的静态资源，而不能加载webinf下的资源-->
     <mvc:default-servlet-handler/>
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/JSP/"/>

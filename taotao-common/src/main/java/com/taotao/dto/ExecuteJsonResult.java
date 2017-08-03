@@ -27,6 +27,12 @@ public class ExecuteJsonResult<T> {
 		this.data = data;
 	}
 
+	public ExecuteJsonResult(boolean success,String error, T data) {
+		this.success = success;
+		this.error =error;
+		this.data = data;
+	}
+
 	public boolean isSuccess() {
 
 		return success;

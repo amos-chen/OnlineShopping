@@ -7,9 +7,14 @@
 
     <mvc:annotation-driven/>
     <!--web.xml中拦截器连接的地址是/时会拦截静态资源，否则不拦截-->
-    <mvc:default-servlet-handler/>
+    <!--<mvc:default-servlet-handler/>-->
+    
+    <mvc:resources mapping="/css/**" location="/WEB-INF/css/"/>
+    <mvc:resources mapping="/js/**" location="/WEB-INF/js/"/>
+    <mvc:resources mapping="/images/**" location="/WEB-INF/images/"/>
+
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/JSP/"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
     
